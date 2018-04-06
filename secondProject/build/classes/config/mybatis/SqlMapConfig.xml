@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<properties resource ="config/mybatis/DB.properties"></properties>
+
+	<typeAliases>
+		<typeAlias alias="admin" type="kr.co.tripadvisor.admin.domain.Admin" />
+		<typeAlias alias="stastics" type="kr.co.tripadvisor.admin.domain.Stastics" />
+		<typeAlias alias="board" type="kr.co.tripadvisor.client.domain.Board" />
+		<typeAlias alias="comment" type="kr.co.tripadvisor.client.domain.Comment" />
+		<typeAlias alias="gallery" type="kr.co.tripadvisor.client.domain.Gallery" />
+		<typeAlias alias="naveruser" type="kr.co.tripadvisor.client.domain.NaverUser" />
+		<typeAlias alias="notice" type="kr.co.tripadvisor.client.domain.Notice" />
+		<typeAlias alias="scrap" type="kr.co.tripadvisor.client.domain.Scrap" />
+		<typeAlias alias="user" type="kr.co.tripadvisor.client.domain.User" />
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED"> 
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="config/sqlmap/oracle/Board.xml"/>
+		<mapper resource="config/sqlmap/oracle/Admin.xml"/>
+		<mapper resource="config/sqlmap/oracle/Comment.xml"/>
+		<mapper resource="config/sqlmap/oracle/Gallery.xml"/>
+		<mapper resource="config/sqlmap/oracle/Notice.xml"/>
+		<mapper resource="config/sqlmap/oracle/Scrap.xml"/>
+		<mapper resource="config/sqlmap/oracle/User.xml"/>
+	</mappers>
+</configuration>
