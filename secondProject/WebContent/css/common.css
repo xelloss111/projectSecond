@@ -1,0 +1,130 @@
+/* 웹폰트 */
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
+/* CSS 초기화 */
+	* {
+		margin:0px;
+		padding:0px;
+		border:0px;
+		font-size:100%;
+		vertical-align:baseline;
+		background:transparent;
+		list-style: none;
+		text-decoration: none;
+	   }
+	footer {
+		position: absolute;
+		top: 1700px;
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		}  
+	footer > span {
+		letter-spacing: 5px;
+		font-size: 14px;
+		font-weight: bold;
+		position: relative;
+		left: 78%;
+		overflow: hidden;
+	} 
+	header {
+		width: 100%;
+		height: 50px;
+		text-align: center;
+		z-index:555;
+
+		}
+	.nav_logo {
+		float: left;
+		position: absolute;
+		left: 1%;
+		top: 0px;
+		display: block;
+		height: 50px;
+		line-height: 50px;	
+		font-size: 1.5rem;
+		width: 10%;
+		font-family: 'Righteous', cursive; color: #000;
+	}
+	nav {
+		color: #fff;
+		width: 40%;
+		height: 50px;
+		float: left;
+		position: absolute;
+		left: 12%;
+		top: 0px;
+		line-height: 50px;
+		}	
+	.nav_ui{
+		float: left;
+		width: 20%;
+		height: 50px;
+		line-height: 50px;
+		font-size: 1rem;
+		letter-spacing: 2px;
+		position: relative;
+		}
+	.nav_ui a{
+		display: block;
+		width: 100%;
+		color: #fff;
+		}
+	.login_ui {	
+		float: left; width: 20%; position: absolute; 
+		right: 10px; top:0px; 
+		overflow: hidden; line-height: 50px;
+		}
+	.login_ui a {
+		border: 1px solid #fff;
+		padding: 5px 10px;
+		color: #fff;
+		letter-spacing: 2px;
+		font-size: 1rem;
+		}
+	label {
+		display: inline-block;
+		margin-bottom: 10px;
+		width: 200px;
+		}
+	input {
+		margin-left: 10px;
+		border: 1px solid #aaa;
+		}
+	.login_but {
+		box-sizing: border-box;
+		background: #aaa;
+		margin-top: 20px;
+		padding: 10px 20px;
+		float: right;
+		border: 0;
+		font-size: 0.8rem;
+		}
+/* Top and Bottom borders go out */
+	li.topBotomBordersOut a:before, li.topBotomBordersOut a:after
+		{
+  		position: absolute;
+   		 left: 0px;
+   		 width: 100%;
+   		 height: 2px;
+   		 background: #FFF;
+   		 content: "";
+   		 opacity: 0;
+   		 transition: all 0.3s;
+		}
+
+	li.topBotomBordersOut a:before {
+   		 top: 0px;
+   		 transform: translateY(10px);
+		}
+
+	li.topBotomBordersOut a:after {
+    	bottom: 0px;
+    	transform: translateY(-10px);
+ 		}
+
+	li.topBotomBordersOut a:hover:before, li.topBotomBordersOut a:hover:after
+		{
+   		 opacity: 1;
+   		 transform: translateY(0px);
+		}
