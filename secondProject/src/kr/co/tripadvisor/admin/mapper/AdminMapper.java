@@ -1,5 +1,7 @@
 package kr.co.tripadvisor.admin.mapper;
 
-public class AdminMapper {
+import kr.co.tripadvisor.admin.domain.Admin;
 
+public interface AdminMapper {
+	Admin selectAdminInfo(String... value);
 }
