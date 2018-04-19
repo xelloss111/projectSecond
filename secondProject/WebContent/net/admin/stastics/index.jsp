@@ -9,15 +9,18 @@
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
  	<!-- Bootstrap 3.3.7 -->
-	<link rel="stylesheet" href="../../css/admin/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../css/admin/bootstrap.min.css">
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="../../css/admin/font-awesome.min.css">
+	<link rel="stylesheet" href="../../../css/admin/font-awesome.min.css">
 	<!-- Ionicons -->
-	<link rel="stylesheet" href="../../css/admin/ionicons.min.css">
+	<link rel="stylesheet" href="../../../css/admin/ionicons.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" href="../../css/admin/AdminLTE.min.css">
+	<link rel="stylesheet" href="../../../css/admin/AdminLTE.min.css">
 	<!-- iCheck -->
-	<link rel="stylesheet" href="../../css/admin/blue.css">
+	<link rel="stylesheet" href="../../../css/admin/blue.css">
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="../../../css/admin/_all-skins.min.css">
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,137 +33,137 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-    <header class="main-header">
-    <!-- Logo -->
-  	<a href="index" class="logo">
-      <span class="logo-lg"><b>TripTip</b>Admin</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-    	<div class="col-md-10" style="padding-top: 6.5px">
-      		<button type="button" class="btn btn-info">Log-out</button>
-      	</div>
-      </div>
-    </nav>
-  	</header>
+	<div class="wrapper">
+		<header class="main-header">
+    	<!-- Logo -->
+			<a href="index" class="logo">
+			<span class="logo-lg"><b>TripTip</b>Admin</span>
+			</a>
+		<!-- Header Navbar: style can be found in header.less -->
+			<nav class="navbar navbar-static-top">
+				<div class="navbar-custom-menu">
+					<div class="col-md-10" style="padding-top: 6.5px">
+						<form method="post" action="${pageContext.request.contextPath}/net/admin/main/logout">
+							<button type="submit" class="btn btn-info">Log-out</button>
+						</form>
+					</div>
+				</div>
+			</nav>
+		</header>
 
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <section class="sidebar">
-    <ul class="sidebar-menu">
-        <li class="active treeview menu-open">
-          <a href="/net/admin/index">
-            <i class="fa fa-pie-chart"></i><span>통  계</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="manager_management.html">
-            <i class="fa fa-laptop"></i><span>매니저 관리</span>
-          </a>
-        </li>
-        <li>
-        <li class="treeview">
-          <a href="user_management.html">
-            <i class="fa fa-user-o"></i><span>회원 관리</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="noticelist.html">
-            <i class="fa fa-edit"></i><span>공지 관리</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="board_management.html">
-            <i class="fa fa-clipboard"></i><span>게시판 관리</span>
-          </a>
-      </ul>
-    </section>
-  </aside>
-  
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-                   사이트 통계
-        <small>- 주요 지표</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="index"><i class="fa fa-pie-chart"></i>Home</a></li>
-        <li class="active">stastics</li>
-      </ol>
-    </section>
- 
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-md-6">
-          <!-- AREA CHART -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Area Chart</h3>
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="main-sidebar">
+		<section class="sidebar">
+			<ul class="sidebar-menu">
+				<li class="active treeview menu-open">
+					<a href="${pageContext.request.contextPath}/net/admin/stastics/index">
+						<i class="fa fa-pie-chart"></i><span>통  계</span>
+					</a>
+				</li>
+				<li class="treeview">
+					<a href="${pageContext.request.contextPath}/net/admin/management/index">
+						<i class="fa fa-laptop"></i><span>매니저 관리</span>
+					</a>
+				</li>
+				<li>
+    				<li class="treeview">
+        				<a href="user_management.html">
+							<i class="fa fa-user-o"></i><span>회원 관리</span>
+						</a>
+					</li>
+				<li class="treeview">
+					<a href="noticelist.html">
+						<i class="fa fa-edit"></i><span>공지 관리</span>
+					</a>
+				</li>
+				<li class="treeview">
+					<a href="board_management.html">
+						<i class="fa fa-clipboard"></i><span>게시판 관리</span>
+					</a>
+			</ul>
+		</section>
+	</aside>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <canvas id="areaChart" style="height:250px"></canvas>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-          <!-- BAR CHART -->
-          <div class="box box-success">
-            <div class="box-header with-border">
-              <h3 class="box-title">Bar Chart</h3>
+	<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>사이트 통계
+			<small>- 주요 지표</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="index"><i class="fa fa-pie-chart"></i>Home</a></li>
+				<li class="active">stastics</li>
+			</ol>
+		</section>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <canvas id="barChart" style="height:230px"></canvas>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col (LEFT) -->
-      
-        <div class="col-md-6">
-          <!-- LINE CHART -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Line Chart</h3>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-md-6">
+      		<!-- AREA CHART -->
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Area Chart</h3>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+      					</button>
+      					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+					</div>
+				</div>
+			<div class="box-body">
+				<div class="chart">
+					<canvas id="areaChart" style="height:250px"></canvas>
+				</div>
+			</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+<!-- BAR CHART -->
+<div class="box box-success">
+  <div class="box-header with-border">
+    <h3 class="box-title">Bar Chart</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <canvas id="lineChart" style="height:250px"></canvas>
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col (RIGHT) -->
-      </div>
-      <!-- /.row -->
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="chart">
+      <canvas id="barChart" style="height:230px"></canvas>
+  </div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+<!-- /.col (LEFT) -->
+
+<div class="col-md-6">
+  <!-- LINE CHART -->
+<div class="box box-info">
+  <div class="box-header with-border">
+    <h3 class="box-title">Line Chart</h3>
+
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="chart">
+      <canvas id="lineChart" style="height:250px"></canvas>
+  </div>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+<!-- /.col (RIGHT) -->
+</div>
+<!-- /.row -->
     </section>
   </div>
 </div>
@@ -170,26 +173,24 @@
 
 
 <!-- jQuery 3 -->
-<script src="../../js/admin/jquery.min.js"></script>
+<script src="../../../js/admin/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../js/admin/bootstrap.min.js"></script>
+<script src="../../../js/admin/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src="../../js/admin/fastclick.js"></script>
+<script src="../../../js/admin/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../js/admin/adminlte.min.js"></script>
+<script src="../../../js/admin/adminlte.min.js"></script>
 <!-- Sparkline -->
-<script src="../../js/admin/jquery.sparkline.min.js"></script>
+<script src="../../../js/admin/jquery.sparkline.min.js"></script>
 <!-- jvectormap  -->
-<script src="../../js/admin/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="../../js/admin/jquery-jvectormap-world-mill-en.js"></script>
+<script src="../../../js/admin/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="../../../js/admin/jquery-jvectormap-world-mill-en.js"></script>
 <!-- SlimScroll -->
-<script src="../../js/admin/jquery.slimscroll.min.js"></script>
+<script src="../../../js/admin/jquery.slimscroll.min.js"></script>
 <!-- ChartJS -->
-<script src="../../js/admin/Chart.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../../js/admin/dashboard2.js"></script>
+<script src="../../../js/admin/Chart.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../js/admin/demo.js"></script>
+<script src="../../../js/admin/demo.js"></script>
 <script>
   $(function () {
     /* ChartJS
@@ -264,7 +265,7 @@
       //Boolean - Whether to fill the dataset with a color
       datasetFill             : true,
       //String - A legend template
-<%--       legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>', --%>
+      <%-- legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>', --%>
       //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
       maintainAspectRatio     : true,
       //Boolean - whether to make the chart responsive to window resizing
@@ -314,7 +315,7 @@
       //Number - Spacing between data sets within X values
       barDatasetSpacing       : 1,
       //String - A legend template
-<%--       legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>', --%>
+      <%-- legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>', --%>
       //Boolean - whether to make the chart responsive
       responsive              : true,
       maintainAspectRatio     : true

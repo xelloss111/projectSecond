@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "kr.co.tripadvisor.repository.mapper.PagingMapper">
+	<resultMap type="admin" id="adminMap">
+		<result column="no" property="no" />
+		<result column="id" property="id" />
+		<result column="pass" property="pass" />
+		<result column="name" property="name" />
+		<result column="board_auth" property="boardAuth" />
+		<result column="gallery_auth" property="galleryAuth" />
+		<result column="notice_auth" property="noticeAuth" />
+		<result column="user_auth" property="userAuth" />
+	</resultMap>
+	
+	
+	<select id="totalAdminCount" resultType="int">
+		select count(*)
+		  from tb_admin
+	</select>
+
+	<!-- 해당 쿼리 결과는 화면에서 처리하도록 작업 -->
+	<select id="listAdminAccountAll" parameterType="paging" resultMap="adminMap">
+		select X.*
+		  from ( 
+    		    select rownum as rnum, A.*
+    			  from (
+        		        select *
+        				  from tb_admin
+        				 order by no desc
+        			   ) A
+                 where <![CDATA[rownum <= #{endCount}]]>
+                ) X
+         where <![CDATA[X.rnum >= #{startCount}]]>
+	</select>		
+</mapper>
