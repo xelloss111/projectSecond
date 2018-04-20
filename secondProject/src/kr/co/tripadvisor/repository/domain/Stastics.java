@@ -3,54 +3,61 @@ package kr.co.tripadvisor.repository.domain;
 import java.util.Date;
 
 public class Stastics {
-	private int boardCount;
-	private int galleryCount;
-	private int noticeCount;
-	private int userCount;
-	private int boardCommentCount;
-	private int galleryCommentCount;
-	private Date statDate;
+	private Integer boardCount;
+	private Integer galleryCount;
+	private Integer noticeCount;
+	private Integer userCount;
+	private Integer boardCommentCount;
+	private Integer galleryCommentCount;
+	private Integer scrapCount;
+	private Date stasticsDate;
 	
-	public int getBoardCount() {
-		return boardCount;
+	public Integer getBoardCount() {
+	    return boardCount;
 	}
-	public void setBoardCount(int boardCount) {
-		this.boardCount = boardCount;
+	public void setBoardCount(Integer boardCount) {
+	    this.boardCount = boardCount;
 	}
-	public int getGalleryCount() {
-		return galleryCount;
+	public Integer getGalleryCount() {
+	    return galleryCount;
 	}
-	public void setGalleryCount(int galleryCount) {
-		this.galleryCount = galleryCount;
+	public void setGalleryCount(Integer galleryCount) {
+	    this.galleryCount = galleryCount;
 	}
-	public int getUserCount() {
-		return userCount;
+	public Integer getNoticeCount() {
+	    return noticeCount;
 	}
-	public void setUserCount(int userCount) {
-		this.userCount = userCount;
+	public void setNoticeCount(Integer noticeCount) {
+	    this.noticeCount = noticeCount;
 	}
-	public int getBoardCommentCount() {
-		return boardCommentCount;
+	public Integer getUserCount() {
+	    return userCount;
 	}
-	public void setBoardCommentCount(int boardCommentCount) {
-		this.boardCommentCount = boardCommentCount;
+	public void setUserCount(Integer userCount) {
+	    this.userCount = userCount;
 	}
-	public int getGalleryCommentCount() {
-		return galleryCommentCount;
+	public Integer getBoardCommentCount() {
+	    return boardCommentCount;
 	}
-	public void setGalleryCommentCount(int galleryCommentCount) {
-		this.galleryCommentCount = galleryCommentCount;
+	public void setBoardCommentCount(Integer boardCommentCount) {
+	    this.boardCommentCount = boardCommentCount;
 	}
-	public Date getStatDate() {
-		return statDate;
+	public Integer getGalleryCommentCount() {
+	    return galleryCommentCount;
 	}
-	public void setStatDate(Date statDate) {
-		this.statDate = statDate;
+	public void setGalleryCommentCount(Integer galleryCommentCount) {
+	    this.galleryCommentCount = galleryCommentCount;
 	}
-	public int getNoticeCount() {
-		return noticeCount;
+	public Integer getScrapCount() {
+	    return scrapCount;
 	}
-	public void setNoticeCount(int noticeCount) {
-		this.noticeCount = noticeCount;
+	public void setScrapCount(Integer scrapCount) {
+	    this.scrapCount = scrapCount;
+	}
+	public Date getStasticsDate() {
+	    return stasticsDate;
+	}
+	public void setStasticsDate(Date stasticsDate) {
+	    this.stasticsDate = stasticsDate;
 	}
 }

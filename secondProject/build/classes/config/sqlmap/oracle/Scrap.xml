@@ -2,3 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<mapper namespace = "kr.co.tripadvisor.repository.mapper.ScrapMapper">
+	<resultMap type="scrap" id="scrapMap">
+		<result column="code_no" property="codeNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="scrap_no" property="scrapNo" />
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+
+	<insert id="insertScrap" parameterType="scrapMap">
+		insert into scrap (
+			code_no, board_no, scrap_no
+		) values (
+			#{codeNo},
+			#{boardNo},
+			#{scrapNo}
+		)
+	</insert>
+	
+	<select id="selectScrapById" parameterMap="string" resultMap="scrapMap">
+		select *
+		  from scrap
+		 where id = #{id}
+	</select>
+	
+	<select id="selectScrapByNo" parameterType="int" resultMap="board">
+		select *
+		  from board
+		 where board_no = (
+		 					select board_no
+		 					  from scrap
+		 					 where scrap_no = #{scrapNo}
+		 				  )
+	</select>
+	
+	<delete id="deleteScrap" parameterType="int">
+		delete
+		  from
+		 where scrap_no = #{scrapNo}
+	</delete>
+
+</mapper>

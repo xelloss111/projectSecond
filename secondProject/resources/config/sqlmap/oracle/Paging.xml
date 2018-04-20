@@ -3,6 +3,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "kr.co.tripadvisor.repository.mapper.PagingMapper">
+	
+	<select id="totalAdminCount" resultType="int">
+		select count(*)
+		  from tb_admin
+	</select>
+	
 	<resultMap type="admin" id="adminMap">
 		<result column="no" property="no" />
 		<result column="id" property="id" />
@@ -13,15 +19,8 @@
 		<result column="notice_auth" property="noticeAuth" />
 		<result column="user_auth" property="userAuth" />
 	</resultMap>
-	
-	
-	<select id="totalAdminCount" resultType="int">
-		select count(*)
-		  from tb_admin
-	</select>
 
-	<!-- 해당 쿼리 결과는 화면에서 처리하도록 작업 -->
-	<select id="listAdminAccountAll" parameterType="paging" resultMap="adminMap">
+	<select id="adminAccountListUp" parameterType="paging" resultMap="adminMap">
 		select X.*
 		  from ( 
     		    select rownum as rnum, A.*
@@ -29,6 +28,142 @@
         		        select *
         				  from tb_admin
         				 order by no desc
+        			   ) A
+                 where <![CDATA[rownum <= #{endCount}]]>
+                ) X
+         where <![CDATA[X.rnum >= #{startCount}]]>
+	</select>	
+
+
+<!-- 공지 페이징 쿼리 -->
+	<select id="totalNoticeCount" resultType="int">
+		select count(*)
+		  from notice
+	</select>
+	
+	<resultMap type="notice" id="noticeMap">
+		<result column="code_no" property="codeNo" />
+		<result column="no" property="no" />
+		<result column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="reg_date" property="regDate" />
+		<result column="mod_date" property="modDate" />
+	</resultMap>
+		
+	<select id="noticeListUp" parameterType="paging" resultMap="noticeMap">
+		select X.*
+		  from ( 
+    		    select rownum as rnum, A.*
+    			  from (
+        		        select *
+        				  from notice
+        				 where code_no = '3004'
+        				 order by no desc
+        			   ) A
+                 where <![CDATA[rownum <= #{endCount}]]>
+                ) X
+         where <![CDATA[X.rnum >= #{startCount}]]>
+	</select>		
+
+<!-- 유저 페이징 쿼리 (관리자 페이지용) -->
+	<select id="totalUserCount" resultType="int">
+		select count(*)
+		  from user
+	</select>
+	  
+	<resultMap type="user" id="userMap">
+		<result column="no" property="no" />
+		<result column="id" property="id" />
+		<result column="pass" property="pass" />
+		<result column="name" property="name" />
+		<result column="birth" property="birth" />
+		<result column="email" property="email" />
+		<result column="sex" property="sex" />
+		<result column="board_auth" property="boardAuth" />
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+		
+	<select id="userListUp" parameterType="paging" resultMap="userMap">
+		select X.*
+		  from ( 
+    		    select rownum as rnum, A.*
+    			  from (
+        		        select *
+        				  from user
+        				 order by reg_date desc
+        			   ) A
+                 where <![CDATA[rownum <= #{endCount}]]>
+                ) X
+         where <![CDATA[X.rnum >= #{startCount}]]>
+	</select>	
+		
+<!-- 자유게시판 페이징 쿼리 -->
+	<select id="totalBoardCount" resultType="int">
+		select count(*)
+		  from user
+	</select>
+	  
+	<!--  board 타입 resultMap 적용 예정 -->
+			
+	<select id="boardListUp" parameterType="paging" resultMap="boardMap">
+		select X.*
+		  from ( 
+    		    select rownum as rnum, A.*
+    			  from (
+        		        select *
+        				  from board
+        				 where code_no = '3001'
+        				 order by board_no desc
+        			   ) A
+                 where <![CDATA[rownum <= #{endCount}]]>
+                ) X
+         where <![CDATA[X.rnum >= #{startCount}]]>
+	</select>
+			
+<!-- 갤러리 페이징 쿼리 -->
+	<select id="totalGalleryCount" resultType="int">
+		select count(*)
+		  from user
+	</select>
+	  
+	<!--  board 타입 resultMap 적용 예정 -->
+			
+	<select id="galleryListUp" parameterType="paging" resultMap="boardMap">
+		select X.*
+		  from ( 
+    		    select rownum as rnum, A.*
+    			  from (
+        		        select *
+        				  from board
+        				 where code_no = '3002'
+        				 order by board_no desc
+        			   ) A
+                 where <![CDATA[rownum <= #{endCount}]]>
+                ) X
+         where <![CDATA[X.rnum >= #{startCount}]]>
+	</select>
+			
+<!-- 스크랩 페이징 쿼리 -->
+	<select id="totalScrapCount" resultType="int">
+		select count(*)
+		  from user
+	</select>
+	  
+	<resultMap type="scrap" id="scrapMap">
+		<result column="code_no" property="codeNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="scrap_no" property="scrapNo" />
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+			
+	<select id="scrapListUp" parameterType="paging" resultMap="scrapMap">
+		select X.*
+		  from ( 
+    		    select rownum as rnum, A.*
+    			  from (
+        		        select *
+        				  from scrap
+        				 order by scrap_no desc
         			   ) A
                  where <![CDATA[rownum <= #{endCount}]]>
                 ) X

@@ -39,7 +39,7 @@ public class ListManagerController extends HttpServlet {
 		System.out.println(paging.getStartPage());
 		System.out.println(paging.getEndPage());
 		
-		List<Admin> list = mapper.listAdminAccountAll(paging);
+		List<Admin> list = mapper.adminAccountListUp(paging);
 
 		request.setAttribute("adminList", list);
 		request.setAttribute("paging", paging);

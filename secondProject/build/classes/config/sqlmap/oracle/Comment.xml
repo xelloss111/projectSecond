@@ -2,3 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<mapper namespace = "kr.co.tripadvisor.repository.mapper.CommentMapper">
+	<resultMap type="comment" id="commentMap">
+		<result column="comment_no" property="commentNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+	
+	
+	<insert id="insertComment" parameterType="comment">
+		insert into comment (
+			comment_no, board_no, id, content
+		) values (
+			s_comment_no.nextval,
+			#{boardNo},
+			#{id},
+			#{content}
+		)
+	</insert>
+	
+	<select id="selectCommentByNo" parameterType="int" resultMap="commentMap">
+		select *
+		  from comment
+		 where board_no = #{boardNo}
+	</select>
+	
+	<update id="updateComment" parameterType="comment">
+		update comment
+		   set content = #{content}
+		 where comment_no = #{commentNo}
+	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete
+		  from comment
+		 where comment_no = #{commentNo}
+	</delete>
+</mapper>
