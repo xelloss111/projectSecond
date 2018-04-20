@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "kr.co.tripadvisor.client.mapper.CodeMapper">
+	<resultMap id="codeMap" type="code">
+			<result column="code_no" property="codeNo" />
+			<result column="code_name" property="codeName" />
+			<result column="code_type" property="codeType" />
+			<result column="use_type" property="useType" />
+	</resultMap>
+	
+	<select id="selectCodeList" parameterType="int" resultMap="codeMap">
+		select *
+		  from code
+		 where use_type = 'T'
+		   and code_type = #{codeType}
+		 order by
+	</select>
+	
+</mapper>
