@@ -3,5 +3,84 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "kr.co.tripadvisor.repository.mapper.StasticsMapper">
+	<resultMap type="stastics" id="stasticsMap">
+		<result column="board_count" property="boardCount" />
+		<result column="gallery_count" property="galleryCount" />
+		<result column="notice_count" property="noticeCount" />
+		<result column="scrap_count" property="scrapCount" />
+		<result column="board_comment_count" property="boardCommentCount" />
+		<result column="gallery_comment_count" property="galleryCommentCount" />
+		<result column="user_count" property="userCount" />
+		<result column="stastics_date" property="stasticsDate" />
+	</resultMap>
 
+<!-- 통계 테이블 입력 쿼리 -->
+	<insert id="insertStastics" parameterType="stastics">
+		insert into stastics (
+			board_count, gallery_count, notice_count, board_comment_count, gallery_comment_count, scrap_count, user_count
+		) values (
+			#{boardCount}, #{galleryCount}, #{noticeCount}, #{boardCommentCount}, #{galleryCommentCount}, #{scrapCount}, #{userCount}
+		)
+	</insert>
+	
+<!-- 현재일부터 7주일 이전까지의 통계 정보를 불러오는 쿼리 -->
+	<select id="selectStastics" parameterType="string" resultMap="stasticsMap">
+		select *
+		  from stastics
+		 <![CDATA[where to_date(reg_date,'yy/MM/dd') <= to_date(#{regDate}, 'yy/MM/dd')]]>
+		 <![CDATA[and to_date(reg_date,'yy/MM/dd') > to_date(#{regDate}, 'yy/MM/dd') - 7]]>
+	</select>
+
+
+<!-- 각각의 게시판 및 댓글 테이블에서 일일 총 카운트를 구하는 쿼리 -->
+
+	<select id="boardCount" parameterType="string" resultType="int">
+		select count(*) boardCnt
+		  from board
+		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
+		 <![CDATA[and code_no='3001']]>
+	</select>
+	
+	<select id="galleryCount" parameterType="string" resultType="int">
+		select count(*) galleryCnt
+		  from board
+		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
+		 <![CDATA[and code_no='3002']]>
+	</select>
+	
+	<select id="scrapCount" parameterType="string" resultType="int">
+		select count(*) scrapCnt
+		  from board
+		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
+		 <![CDATA[and code_no='3003']]>
+	</select>
+	
+	<select id="noticeCount" parameterType="string" resultType="int">
+		select count(*) scrapCnt
+		  from notice
+		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
+		 <![CDATA[and code_no='3004']]>
+	</select>
+	
+	<select id="boardCommentCount" parameterType="string" resultType="int">
+		select count(*) bCommentCnt
+		  from board_comment
+		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
+		 <![CDATA[and code_no='3001']]>
+	</select>
+	
+	<select id="galleryCommentCount" parameterType="string" resultType="int">
+		select count(*) gCommentCnt
+		  from board_comment
+		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
+		 <![CDATA[and code_no='3002']]>
+	</select>
+	
+	<select id="userCount" parameterType="string" resultType="int">
+		select count(*) userCnt
+		  from user
+		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
+	</select>
+	
+	
 </mapper>

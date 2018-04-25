@@ -10,7 +10,9 @@
 		<typeAlias alias="admin" type="kr.co.tripadvisor.repository.domain.Admin" />
 		<typeAlias alias="stastics" type="kr.co.tripadvisor.repository.domain.Stastics" />
 		<typeAlias alias="board" type="kr.co.tripadvisor.repository.domain.Board" />
-		<typeAlias alias="comment" type="kr.co.tripadvisor.repository.domain.Comment" />
+		<typeAlias alias="boardImage" type="kr.co.tripadvisor.repository.domain.BoardImage" />
+		<typeAlias alias="boardSearch" type="kr.co.tripadvisor.repository.domain.BoardSearch" />
+		<typeAlias alias="comment" type="kr.co.tripadvisor.repository.domain.BoardComment" />
 		<typeAlias alias="naveruser" type="kr.co.tripadvisor.repository.domain.NaverUser" />
 		<typeAlias alias="notice" type="kr.co.tripadvisor.repository.domain.Notice" />
 		<typeAlias alias="scrap" type="kr.co.tripadvisor.repository.domain.Scrap" />
@@ -32,13 +34,13 @@
 	</environments>
 
 	<mappers>
-<!-- 		<mapper resource="config/sqlmap/oracle/Board.xml"/> -->
+ 		<mapper resource="config/sqlmap/oracle/Board.xml"/>
 		<mapper resource="config/sqlmap/oracle/Admin.xml"/>
-		<mapper resource="config/sqlmap/oracle/Paging.xml"/>
+<!-- 		<mapper resource="config/sqlmap/oracle/Paging.xml"/> -->
 <!-- 		<mapper resource="config/sqlmap/oracle/Comment.xml"/> -->
 <!-- 		<mapper resource="config/sqlmap/oracle/Notice.xml"/> -->
 <!-- 		<mapper resource="config/sqlmap/oracle/Scrap.xml"/> -->
 <!-- 		<mapper resource="config/sqlmap/oracle/User.xml"/> -->
-<!-- 		<mapper resource="config/sqlmap/oracle/Stastics.xml"/> -->
+<!-- 		<mapper resource="config/sqlmap/oracle/Stastics.xml"/>  -->
 	</mappers>
 </configuration>

@@ -2,101 +2,100 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "kr.co.tripadvisor.client.mapper.BoardMapper">
+<mapper namespace="kr.co.tripadvisor.repository.mapper.BoardMapper">
 	<resultMap id="boardMap" type="board">
-		<result column="board_type" property="boardType" />
+		<result column="code_no" property="codeNo" />
 		<result column="board_no" property="boardNo" />
 		<result column="title" property="title" />
 		<result column="id" property="id" />
-		<result column="content" property="content" />
+		<result column="editordata" property="editordata" />
 		<result column="area" property="area" />
 		<result column="attract" property="attract" />
 		<result column="reg_date" property="regDate" />
 		<result column="mod_date" property="modDate" />
 		<result column="view_cnt" property="viewCnt" />
 	</resultMap>
-	
+
 	<!-- 리스트 -->
-	<select id="selectBoard" parameterType="boardSearch" resultMap="boardMap"> 
-		select a.*
-		  from board a
-		 where board_type = #{boardType}
-		   and attract in ()	
-		   and area in ()
-			<where>
-				<!-- 다중조건 choose 단일 조건은 if. when test="" 조건 -->
-				<choose>
-					<when test="searchType == 'email' ">
-						 email like '%' || #{searchWord} || '%'
-					</when>
-					<when test="searchType == 'addr' ">
-						 addr like '%' || #{searchWord} || '%'
-					</when>
-					<otherwise>
-						 name like '%' || #{searchWord} || '%'
-					</otherwise>
-				</choose>
-			</where>
-	  order by board_no desc
-	</select>
+<!-- 	<select id="selectBoard" parameterType="boardSearch" resultMap="boardMap">  -->
+	<select id="selectBoard"  resultMap="boardMap"> 
+		select * 
+		from tb_board
+		where code_no='3001'
+		order by board_no desc
+	</select> 
 
 	<!-- 게시물 쓰기 -->
 	<insert id="insertBoard" parameterType="board">
-		insert into board(
-		board_type,
+		insert into tb_board(
+		code_No,
 		board_no,
 		title,
 		id,
-		content,
+		editordata,
 		area,
-		attract 
+		attract
 		) values (
-		#{board_type},
-		#{board_no},
+		#{codeNo},
+		s_board_no.nextval,
 		#{title},
 		#{id},
-		#{content},
+		#{editordata},
 		#{area},
 		#{attract}
 		)
 	</insert>
 	
-	<!-- 자유게시판 수정-->
-	<update id="updateBoard" parameterType="board">
-		update board
-		   set title = #{title}
-		   	   content = #{content}
-		   	   area = #{area}
-		   	   attract = #{attract}
-		 where board_no = #{board_no}
-	</update>
-	
-	<delete id="deleteBoard" parameterType="int">
-		delete
-		  from board
-		 where board_no = #{board_no}
-	</delete>
-	
-	<update id="uddateBoardViewCnt" parameterType="int">
-		update board
-		   set view_cnt = view_cnt + 1
-		 where board_no = #{board_no}
-	</update>
-	
-	<!-- comment -->
-	
-	<resultMap type="commentMap" id="comment">
-		<result column="board_type" property="boardType" />
-		<result column="comment_no" property="commentNo" />
+	<!-- 상세 글 보기 -->
+	<select id="selectBoardByNo" parameterType="int" resultMap="boardMap">
+    	select *
+    	  from tb_board
+    	 where board_no = #{boardNo} 
+    </select>
+    
+    <!-- 조회수 -->
+    <update id="updateBoardViewCnt" parameterType="int">
+    	update tb_board
+    	   set view_cnt = view_cnt + 1
+    	 where board_no = #{boardNo}
+    </update>
+    
+	<!-- 첨부파일 파트 -->
+
+	<resultMap id="boardImageMap" type="boardImage">
+		<result column="image_no" property="imageNo" />
 		<result column="board_no" property="boardNo" />
-		<result column="id" property="id" />
-		<result column="content" property="content" />
-		<result column="reg_date" property="regDate" />
+		<result column="path" property="path" />
+		<result column="ori_name" property="oriName" />
+		<result column="sys_name" property="sysName" />
+		<result column="file_size" property="fileSize" />
 	</resultMap>
 	
-	<select id="selectCommentByNo" parameterType="int" resultMap="commentMap">
-		select *
-		  from comment
-		 where board_no = #{board_no}
-	</select>
+	<insert id="insertBoardImage" parameterType="boardImage">
+		insert into tb_board_image (
+			image_no, 
+			board_no, 
+			path, 
+			ori_name, 
+			sys_name, 
+			file_size
+		) values (
+			s_image_no.nextval, 
+			#{boardNo}, 
+			#{path}, 
+			#{oriName}, 
+			#{sysName}, 
+			#{fileSize}		
+		)
+	</insert>
+		
+
+    
+	<!-- 자유게시판 수정 -->
+	<!-- <update id="updateBoard" parameterType="board"> update board set title 
+		= #{title} content = #{content} area = #{area} attract = #{attract} where 
+		board_no = #{board_no} </update> <delete id="deleteBoard" parameterType="int"> 
+		delete from board where board_no = #{board_no} </delete> <update id="uddateBoardViewCnt" 
+		parameterType="int"> update board set view_cnt = view_cnt + 1 where board_no 
+		= #{board_no} </update> -->
 </mapper>

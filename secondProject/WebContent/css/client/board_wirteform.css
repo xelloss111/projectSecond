@@ -1,0 +1,180 @@
+@charset "UTF-8";
+.wrap {
+	width: 100%;
+	height: 100%;
+}
+
+aside {
+	box-sizing: border-box;
+	width: 10%;
+	height: 100%;
+	position: relative;
+	margin-left: 10%;
+	letter-spacing: 2px;
+	float: left;
+	padding-top: 30px;
+}
+
+.accordion_navi {
+	float: left;
+	width: 100%;
+	color: #444;
+	margin: 10px;
+}
+
+.accordion_navi h3 {
+	height: 50px;
+	line-height: 50px;
+	text-indent: 12px;
+	color: #000;
+}
+
+.accordion_navi h3.over {
+	cursor: pointer;
+} /* 마우스 오버 스타일*/
+.accordion_navi h3.selected {
+	cursor: default;
+} /* 선택 스타일*/
+.accordion_navi>div>ul {
+	text-indent: 1rem;
+}
+
+.accordion_navi>div>ul li a {
+	display: block;
+	color: #444;
+}
+
+.accordion_navi>div>ul li a:hover {
+	color: skyblue;
+	text-decoration: none;
+}
+
+article {
+	padding-top: 30px;
+	width: 60%;
+	height: auto;
+	margin-right: 10%;
+	float: left;
+	position: relative;
+	padding: 5%;
+}
+
+.top_sel {
+	width: 100%;
+	height: 50px;
+}
+
+.sel_1 {
+	width: 16%;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+}
+
+.sel_2 {
+	width: 16%;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+}
+
+.b_title {
+	width: 56%;
+	float: left;
+}
+
+.b_title>h2 {
+	display: inline-block;
+}
+
+.b_title_input {
+	width: 90%;
+	background-color: white;
+	border: thin solid #ddd;
+	border-radius: 4px;
+	display: inline-block;
+	line-height: 1.5em;
+	padding: 0.5em 3.5em 0.5em 1em;
+	/* reset */
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+input:focus {
+	border-color: skyblue;
+	outline: 0;
+}
+
+.btn {
+	margin: 2% 0%;
+	float: right;
+	padding: 6px 12px;
+	cursor: pointer;
+	border: 1px solid transparent; /* 부모색상 동일 */
+	border-radius: 4px;
+	font-family: 'Righteous', cursive;
+}
+
+.btn:active {
+	box-shadow: 0 3px 5px rgba(0, 0, 0, .125) inset;
+}
+
+.btn:focus, .btn:hover {
+	color: #333;
+	text-decoration: none;
+}
+/* Button 3e */
+.b_write_but {
+	color: #fff;
+	background-color: #87ceeb;
+}
+
+.btn-b_write_but:active, .btn-b_write_but:focus, .btn-b_write_but:hover
+	{
+	color: #fff;
+	background-color: #2980b9;
+}
+
+select {
+	/* styling */
+	background-color: white;
+	border: thin solid #ddd;
+	border-radius: 4px;
+	display: inline-block;
+	font: inherit;
+	line-height: 1.5em;
+	padding: 0.5em 3.5em 0.5em 1em;
+	/* reset */
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+select.round {
+	background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+		linear-gradient(135deg, gray 50%, transparent 50%),
+		radial-gradient(#ddd 70%, transparent 72%);
+	background-position: calc(100% - 20px) calc(1em + 2px),
+		calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
+	background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+	background-repeat: no-repeat;
+}
+
+select.round:focus {
+	background-image: linear-gradient(45deg, white 50%, transparent 50%),
+		linear-gradient(135deg, transparent 50%, white 50%),
+		radial-gradient(gray 70%, transparent 72%);
+	background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
+		calc(100% - .5em) .5em;
+	background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+	background-repeat: no-repeat;
+	border-color: skyblue;
+	outline: 0;
+}

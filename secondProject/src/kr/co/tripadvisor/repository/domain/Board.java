@@ -1,86 +1,79 @@
 package kr.co.tripadvisor.repository.domain;
 
 import java.util.Date;
-import java.util.List;
 
 public class Board {
 
-	int codeNo;
+	String codeNo;
 	int boardNo;
 	String title;
 	String id;
-	String content;
+	String editordata;
 	String area;
 	String attract;
 	Date regDate;
-	Date ModDate;
-	// List<BoardImage> imgList;
-
-	public int getCodeNo() {
+	Date modDate;
+	int viewCnt;
+	
+	public String getCodeNo() {
 		return codeNo;
 	}
-
-	public void setCodeNo(int codeNo) {
+	public void setCodeNo(String codeNo) {
 		this.codeNo = codeNo;
 	}
-
 	public int getBoardNo() {
 		return boardNo;
 	}
-
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
-
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public String getContent() {
-		return content;
+	public String getEditordata() {
+		return editordata;
 	}
-
-	public void setContent(String content) {
-		this.content = content;
+	public void setEditordata(String editordata) {
+		this.editordata = editordata;
 	}
-
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public String getAttract() {
+		return attract;
+	}
+	public void setAttract(String attract) {
+		this.attract = attract;
+	}
 	public Date getRegDate() {
 		return regDate;
 	}
-
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-
 	public Date getModDate() {
 		return modDate;
 	}
-
 	public void setModDate(Date modDate) {
 		this.modDate = modDate;
 	}
-
 	public int getViewCnt() {
 		return viewCnt;
 	}
-
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-
-	Date modDate;
-	int viewCnt;
 
 }

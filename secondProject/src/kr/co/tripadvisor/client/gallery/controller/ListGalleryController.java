@@ -33,7 +33,7 @@ public class ListGalleryController extends HttpServlet {
 		
 		BoardMapper boardMapper = null;
 		
-		boardMapper.selectBoard(search);
+		boardMapper.selectBoard();
 	}
 	
 }

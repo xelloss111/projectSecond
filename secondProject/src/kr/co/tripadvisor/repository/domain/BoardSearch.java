@@ -7,13 +7,20 @@ public class BoardSearch {
 	private List<String> areaList;
 	private String searchType;
 	private String searchWord;
-	private int boardType;
+	private String [] areas;
+	private String [] attracts;
 	
-	public int getBoardType() {
-		return boardType;
+	public String[] getAttracts() {
+		return attracts;
 	}
-	public void setBoardType(int boardType) {
-		this.boardType = boardType;
+	public void setAttracts(String[] attracts) {
+		this.attracts = attracts;
+	}
+	public String[] getAreas() {
+		return areas;
+	}
+	public void setAreas(String[] areas) {
+		this.areas = areas;
 	}
 	public List<String> getAttrList() {
 		return attrList;

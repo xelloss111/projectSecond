@@ -6,7 +6,7 @@ public class BoardImage {
     private String path;
     private String oriName;
     private String sysName;
-    private Integer fileSize;
+    private long fileSize;
 
     public Integer getImageNo() {
         return imageNo;
@@ -38,10 +38,11 @@ public class BoardImage {
     public void setSysName(String sysName) {
         this.sysName = sysName;
     }
-    public Integer getFileSize() {
-        return fileSize;
-    }
-    public void setFileSize(Integer fileSize) {
-        this.fileSize = fileSize;
-    }
+	public long getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+
 }
