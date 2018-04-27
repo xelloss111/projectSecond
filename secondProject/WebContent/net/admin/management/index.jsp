@@ -73,7 +73,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="noticelist.html">
+              <a href="${pageContext.request.contextPath}/net/admin/notice/list">
                 <i class="fa fa-edit"></i><span>공지 관리</span>
               </a>
             </li>
@@ -124,12 +124,12 @@
               	  <c:choose>
               	    <c:when test="${admin.noticeAuth == 't' }">
               	      <label class="checkbox-inline">
-                      <input type="checkbox" checked data-toggle="toggle" value="1"> 공지
+                      <input name="auth" type="checkbox" checked data-toggle="toggle" value="1"> 공지
                       </label>
               	    </c:when>
               	    <c:otherwise>
               	      <label class="checkbox-inline">
-                      <input type="checkbox" data-toggle="toggle" value="1"> 공지
+                      <input name="auth" type="checkbox" data-toggle="toggle" value="1"> 공지
                       </label>
               	    </c:otherwise>
                	  </c:choose>
@@ -137,12 +137,12 @@
                	  <c:choose>
               	    <c:when test="${admin.boardAuth == 't' }">
           	    	  <label class="checkbox-inline">
-                      <input type="checkbox" checked data-toggle="toggle" value="2"> 자유게시판
+                      <input name="auth" type="checkbox" checked data-toggle="toggle" value="2"> 자유게시판
                       </label>
               	    </c:when>
               	    <c:otherwise>
            	    	  <label class="checkbox-inline">
-                      <input type="checkbox" data-toggle="toggle" value="2"> 자유게시판
+                      <input name="auth" type="checkbox" data-toggle="toggle" value="2"> 자유게시판
                       </label>
               	    </c:otherwise>
                	  </c:choose>
@@ -150,12 +150,12 @@
                	  <c:choose>
               	    <c:when test="${admin.galleryAuth == 't' }">
            	    	  <label class="checkbox-inline">
-                      <input type="checkbox" checked data-toggle="toggle" value="3"> 갤러리
+                      <input name="auth" type="checkbox" checked data-toggle="toggle" value="3"> 갤러리
                       </label>
               	    </c:when>
                     <c:otherwise>
            	          <label class="checkbox-inline">
-                      <input type="checkbox" data-toggle="toggle" value="3"> 갤러리
+                      <input name="auth" type="checkbox" data-toggle="toggle" value="3"> 갤러리
                       </label>
               	    </c:otherwise>
                	  </c:choose>
@@ -163,12 +163,12 @@
                	  <c:choose>
               	    <c:when test="${admin.userAuth == 't' }">
            	    	  <label class="checkbox-inline">
-                      <input type="checkbox" checked data-toggle="toggle" value="4"> 유저
+                      <input name="auth" type="checkbox" checked data-toggle="toggle" value="4"> 유저
                       </label>
               	    </c:when>
               	    <c:otherwise>
           	    	  <label class="checkbox-inline">
-                      <input type="checkbox" data-toggle="toggle" value="4"> 유저
+                      <input name="auth" type="checkbox" data-toggle="toggle" value="4"> 유저
                       </label>
               	    </c:otherwise>
                	  </c:choose>
@@ -184,31 +184,40 @@
           </table>
         </div>
       <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10" align="center">
-        	<c:if test="${paging.pageNo > 1}">
-        		<a href="${pageContext.request.contextPath}/net/admin/management/index?pageNo=${paging.pageNo - 1}">◀</a>
-        	</c:if>
-        	<c:forEach var="iContent" begin="${paging.startPage}" end="${paging.endPage}">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" align="center">
+       	  <nav>
+			<ul class="pagination">
+  	          <c:if test="${paging.pageNo > 1}">
+			    <li>
+			      <a href="${pageContext.request.contextPath}/net/admin/management/index?pageNo=${paging.pageNo - 1}" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			  </c:if>
+			  <c:forEach var="iContent" begin="${paging.startPage}" end="${paging.endPage}">
         		<c:choose>
         			<c:when test="${iContent == paging.pageNo}">
-        				<a href="${pageContext.request.contextPath}/net/admin/management/index?pageNo=${iContent}"><b>[${iContent}]</b></a>
+        				<li class="active">
+        					<a href="#1">${iContent}</a>
+        				</li>
         			</c:when>
         			<c:otherwise>
-        				<a href="${pageContext.request.contextPath}/net/admin/management/index?pageNo=${iContent}">[${iContent}]</a>
+        				<li>
+        					<a href="${pageContext.request.contextPath}/net/admin/management/index?pageNo=${iContent}">${iContent}</a>
+        				</li>
         			</c:otherwise>
         		</c:choose>
         	</c:forEach>
         	<c:if test="${paging.pageNo < paging.totalPage}">
-        		<a href="${pageContext.request.contextPath}/net/admin/management/index?pageNo=${paging.pageNo + 1}">▶</a>
-        	</c:if>
-<!--           <a href="#">◀</a> -->
-<!--           <a href="#">[1]</a> -->
-<!--           <a href="#">[2]</a> -->
-<!--           <a href="#">[3]</a> -->
-<!--           <a href="#">[4]</a> -->
-<!--           <a href="#">[5]</a> -->
-<!--           <a href="#">▶</a> -->
+        	  <li>
+			    <a href="${pageContext.request.contextPath}/net/admin/management/index?pageNo=${paging.pageNo + 1}" aria-label="Next">
+			      <span aria-hidden="true">&raquo;</span>
+			    </a>
+			  </li>
+			 </c:if>
+			</ul>
+		 </nav>
         </div>
         </div>
       </div>
@@ -236,16 +245,16 @@
    			<p>권한</p>
     			<div class="form-group has-feedback">
      			<label class="checkbox-inline">
-  				<input type="checkbox" data-toggle="toggle" name="auth" value="1"> 공지
+  				<input name="registAuth" type="checkbox" data-toggle="toggle" value="1"> 공지
 				</label>
 				<label class="checkbox-inline">
-  				<input type="checkbox" data-toggle="toggle" name="auth" value="2"> 자유게시판
+  				<input name="registAuth" type="checkbox" data-toggle="toggle" value="2"> 자유게시판
 				</label>
 				<label class="checkbox-inline">
-				<input type="checkbox" data-toggle="toggle" name="auth" value="3"> 갤러리
+				<input name="registAuth" type="checkbox" data-toggle="toggle" value="3"> 갤러리
 				</label>
 				<label class="checkbox-inline">
-				<input type="checkbox" data-toggle="toggle" name="auth" value="4"> 회원 관리
+				<input name="registAuth" type="checkbox" data-toggle="toggle" value="4"> 회원 관리
 				</label>
     			</div>
 	       <div class="modal-footer">
@@ -282,7 +291,7 @@
 <script src="../../../js/admin/demo.js"></script>
 <script src="../../../js/admin/bootstrap-toggle.min.js"></script>
 <script>
-function deleteAdmin() {
+function deleteAdmin(id) {
 	
 	function getContextPath() { // contextPath 가져오는 방법
 		var hostIndex = location.href.indexOf( location.host ) + location.host.length;

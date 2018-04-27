@@ -72,7 +72,7 @@
 						</a>
 					</li>
 				<li class="treeview">
-					<a href="noticelist.html">
+					<a href="${pageContext.request.contextPath}/net/admin/notice/list">
 						<i class="fa fa-edit"></i><span>공지 관리</span>
 					</a>
 				</li>

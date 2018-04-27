@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +21,10 @@
 	<link rel="stylesheet" href="../../../css/admin/_all-skins.min.css">
 	<link rel="stylesheet" href="../../../css/admin/bootstrap-toggle.min.css">
 	
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="../../../css/client/summernote-lite.css">
+<!-- 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet"> -->
+	
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +37,8 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body>
-  <body class="hold-transition skin-blue sidebar-mini">
+
+ <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
       <header class="main-header">
       <!-- Logo -->
@@ -89,91 +92,41 @@
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>매니저 관리</h1>
+    <h1>공지 등록 페이지</h1>
     <ol class="breadcrumb">
       <li><a href="index.html"><i class="fa fa-edit"></i>Home</a></li>
       <li class="active">Notice</li>
     </ol>
   </section>
+
   <section class="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10" align="right">
-	        <button type="button" class="btn btn-success" onclick="moveWriteForm()">게시글 등록</button>
-        </div>
-      </div>
-      <p>
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-          <table class="table table-bordered table-hover table-condensed">
-            <thead>
-              <tr>
-                <th>번호</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회수</th><th></th>
-              </tr>
-            </thead>
-              <c:forEach var="notice" items="${noticeList}">
-                <tr>
-              	  <td style="width:80px;">${notice.no}</td>
-              	  <td style="width:640px;"><a href="detail?no=${notice.no}"><c:out value="${notice.title}" /></a></td>
-              	  <td style="width:80px;"><c:out value="${notice.id}" /></td>
-              	  <td style="width:120px;"><fmt:formatDate value='${notice.regDate}' pattern="yyyy-MM-dd" /></td>       
-              	  <td style="width:70px">${notice.viewCnt}</td>       	  
-               	  <td align="center">
-              	  	<%--
-              	  	<button class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/net/admin/management/adminDelete?id=${admin.id}'">삭제</button>
-              	  	 --%>
-              	  	<button class="btn btn-danger" onclick="javascript:deleteNotice('${notice.no}');">삭제</button>
-              	  </td>
-                </tr>
-              </c:forEach>
-          </table>
-        </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8" align="center">
-       	  <nav>
-			<ul class="pagination">
-  	          <c:if test="${paging.pageNo > 1}">
-			    <li>
-			      <a href="${pageContext.request.contextPath}/net/admin/notice/list?pageNo=${paging.pageNo - 1}" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			  </c:if>
-			  <c:forEach var="iContent" begin="${paging.startPage}" end="${paging.endPage}">
-        		<c:choose>
-        			<c:when test="${iContent == paging.pageNo}">
-        				<li class="active">
-        					<a href="${pageContext.request.contextPath}/net/admin/notice/list?pageNo=${iContent}">${iContent}</a>
-        				</li>
-        			</c:when>
-        			<c:otherwise>
-        				<li>
-        					<a href="${pageContext.request.contextPath}/net/admin/notice/list?pageNo=${iContent}">${iContent}</a>
-        				</li>
-        			</c:otherwise>
-        		</c:choose>
-        	</c:forEach>
-        	<c:if test="${paging.pageNo < paging.totalPage}">
-        	  <li>
-			    <a href="${pageContext.request.contextPath}/net/admin/notice/list?pageNo=${paging.pageNo + 1}" aria-label="Next">
-			      <span aria-hidden="true">&raquo;</span>
-			    </a>
-			  </li>
-			 </c:if>
-			</ul>
-		 </nav>
-        </div>
-        </div>
-      </div>
-    </div>
- </section>
- </div>
+   	  <form method="post" action="write">
+ 	  	 <input type="hidden" name="codeNo" value="3004" />
+   	  	 <input type="hidden" name="id" value='admin' />
+	     <div class="row">
+    	    <div class="col-md-1"></div>
+    	    <div class="col-md-10"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" /><p></div>
+		 </div>
+	     <div class="row">
+    	    <div class="col-md-1"></div>
+    	    <div class="col-md-10"><textarea id="summernote" name="editordata"></textarea><p></div>
+		 </div>
+		 <div class="row">
+	  		<div class="col-md-1"></div>
+	  		<div class="col-md-10" align="right"><button type="submit" class="btn btn-success">등록</button></div>
+		 </div>
+	  </form>
+     </div>
+   </section>
+  </div>
 </div>
 
+
+
+
 <!-- jQuery 3 -->
+<script src="../../../js/admin/jquery.js"></script>
 <script src="../../../js/admin/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../../../js/admin/bootstrap.min.js"></script>
@@ -188,34 +141,82 @@
 <script src="../../../js/admin/jquery-jvectormap-world-mill-en.js"></script>
 <!-- SlimScroll -->
 <script src="../../../js/admin/jquery.slimscroll.min.js"></script>
-<!-- ChartJS -->
-<script src="../../../js/admin/Chart.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../../js/admin/demo.js"></script>
-<script src="../../../js/admin/bootstrap-toggle.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<script src="../../../js/client/summernote-lite.js"></script>
 <script>
-function moveWriteForm(){
+	$(document).ready(function() {
+		$('#summernote').summernote({
+			height: 350,
+			minHeight: null,
+			maxHeight: null,
+			focus: false,
+			callbacks: {
+			onImageUpload: function(files, editor, welEditable) {
+				for (var i = files.length - 1; i >= 0; i--) {
+					sendFile(files[i], this);
+					}
+				},
+			onMediaDelete : function(target) {
+				alert(target[0].src);
+				deleteFile(target[0].src);
+				}
+			},
+			
+			
+			dialogsFade: true,
+			fontNames: ['Roboto Light', 'Roboto Regular', 'Roboto Bold'],
+			toolbar: [
+			['fontname', ['fontname']],
+			['fontsize', ['fontsize']],
+			['font', ['style','bold', 'italic', 'underline', 'clear']],
+			['color', ['color']],
+			['para', ['ul', 'ol', 'paragraph']],
+			//['height', ['height']],
+			['table', ['table']],
+			['insert', ['picture','link']],
+			['view', ['fullscreen', 'codeview']],
+			//['misc', ['undo','redo']]
+			]
+		});
+	});
+	
 	var contextPath = getContextPath();
 	
-	location.href = contextPath + "/net/admin/notice/writeForm";
-}
-
-function getContextPath() { // contextPath 가져오는 방법
-	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-}
-
-function deleteNotice(no) {
-	var contextPath = getContextPath();
+	function sendFile(file, el) {
+		var form_data = new FormData();
+		form_data.append('file', file);
+		$.ajax({
+			data: form_data,
+			type: "POST",
+			url: contextPath + "/fileUpload",
+			cache: false,
+			contentType: false,
+// 			enctype: 'multipart/form-data',
+			processData: false,
+			success: function(url) {
+				console.log(url);
+// 				editor.insertImage(url);
+				$(el).summernote("editor.insertImage", "http://localhost:8000" + contextPath+ "/down?path=" + url);
+			}
+		});
+	}
 	
-	if(confirm("정말 삭제하시겠습니까?")){
-		// location.replace=`${pageContext.request.contextPath}`; // 기존 페이지를 새로운 페이지로 변경
-		location.href = contextPath + "/net/admin/notice/noticeDelete?no=" + no;
-		// document.form.submit; /* form 영역의 내용을 submit하겠다는 명령 */
-	} else {
-		return;
-	};
-}
+	function deleteFile(src) {
+	    $.ajax({
+	        data: {src : src},
+	        type: "POST",
+	        url: contextPath + "/fileDelete", // replace with your url
+	        cache: false,
+	        success: function(resp) {
+	            console.log(resp);
+	        }
+	    });
+	}
+    
+    function getContextPath() { // contextPath 가져오는 방법
+    	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+    	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+    }
 </script>
 </body>
 </html>

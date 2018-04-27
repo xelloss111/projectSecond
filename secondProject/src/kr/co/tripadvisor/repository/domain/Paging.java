@@ -66,16 +66,16 @@ public class Paging {
 		this.endCount = endCount;
 	}
 	
-	public Paging(int totalCnt, int pageNum) {
+	public Paging(int totalCnt, int pageNum, int cntList, int cntPage) {
 		this.totalCount = totalCnt;
 		this.pageNo = pageNum;
+		this.countList = cntList;
+		this.countPage = cntPage; 
 		paging();
 	}
 	
 	
 	public void paging() {
-		countList = 10;
-		countPage = 10;
 		
 		totalPage = totalCount / countList;
 		
@@ -87,7 +87,7 @@ public class Paging {
 			pageNo = totalPage;
 		}
 		
-		startPage = ((pageNo - 1) / 10) * 10 + 1;
+		startPage = ((pageNo - 1) / countList) * countList + 1;
 		
 		endPage = startPage + countPage - 1;
 		
@@ -95,8 +95,8 @@ public class Paging {
 			endPage = totalPage;
 		}
 		
-		startCount = (pageNo -1 ) * countPage + 1;
-		endCount = pageNo * countPage;
+		startCount = (pageNo -1 ) * countList + 1;
+		endCount = pageNo * countList;
 		
 		/*
 		if (startPage > 1) {

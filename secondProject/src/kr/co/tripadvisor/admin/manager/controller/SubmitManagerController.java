@@ -28,7 +28,7 @@ public class SubmitManagerController extends HttpServlet {
 		String galleryAuth = "f";
 		String userAuth = "f";
 		
-		String[] authList = request.getParameterValues("auth");
+		String[] authList = request.getParameterValues("registAuth");
 		
 		for (String s : authList) {
 			if ("1".equals(s)) noticeAuth = "t";

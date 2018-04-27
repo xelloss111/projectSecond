@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "kr.co.tripadvisor.repository.mapper.ImageMapper">
+	<resultMap type="noticeImage" id="nImageMap">
+		<result column="image_no" property="imageNo" />
+		<result column="no" property="no" />
+		<result column="default_path" property="defaultPath" />
+		<result column="detail_path" property="detailPath" />
+		<result column="ori_name" property="oriName" />
+		<result column="sys_name" property="sysName" />
+		<result column="file_size" property="fileSize" />
+	</resultMap>
+	
+	<insert id="insertFileInfo" parameterType="noticeImage">
+		insert into notice_image (
+			image_no, no, default_path, detail_path, ori_name, sys_name, file_size
+		) values (
+			s_notice_image_no.nextval,
+			#{no},
+			#{defaultPath},
+			#{detailPath},
+			#{oriName},
+			#{sysName},
+			#{fileSize}
+		)
+	</insert>
+	
+	<delete id="deleteFileInfo" parameterType="string">
+		delete
+		  from notice_image
+		 where sys_name = #{sysName}
+	</delete>
+
+</mapper>

@@ -11,16 +11,18 @@
 		<result column="content" property="content" />
 		<result column="reg_date" property="regDate" />
 		<result column="mod_date" property="modDate" />
+		<result column="view_cnt" property="viewCnt" />
 	</resultMap>
 
 
 	<insert id="insertNotice" parameterType="notice">
 		insert into notice (
-			code_no, no, id, content
+			code_no, no, id, title, content
 		) values (
-			'3004',
+			#{codeNo},
 			s_notice_no.nextval,
 			#{id},
+			#{title},
 			#{content}
 		)
 	</insert>
