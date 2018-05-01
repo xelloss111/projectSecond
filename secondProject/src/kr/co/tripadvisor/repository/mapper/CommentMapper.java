@@ -1,10 +1,14 @@
 package kr.co.tripadvisor.repository.mapper;
 
-import kr.co.tripadvisor.repository.domain.BoardComment;
+import java.util.List;
+
+import kr.co.tripadvisor.repository.domain.Comment;
 
 public interface CommentMapper {
-	void insertComment(BoardComment comment);
-	BoardComment selectCommentByNo(int no);
-	void updateComment(BoardComment comment);
+	
+	//혜리_갤러리
+	void insertComment(Comment comment);
+	List<Comment> selectCommentByNo(int no);
+	void updateComment(Comment comment);
 	void deleteComment(int no);
 }

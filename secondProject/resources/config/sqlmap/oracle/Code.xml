@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "kr.co.tripadvisor.client.mapper.CodeMapper">
+<mapper namespace = "kr.co.tripadvisor.repository.mapper.CodeMapper">
 	<resultMap id="codeMap" type="code">
 			<result column="code_no" property="codeNo" />
 			<result column="code_name" property="codeName" />
@@ -12,10 +12,16 @@
 	
 	<select id="selectCodeList" parameterType="int" resultMap="codeMap">
 		select *
-		  from code
-		 where use_type = 'T'
+		  from tb_code
+		 where use_type = 't'
 		   and code_type = #{codeType}
-		 order by
+		 order by code_no desc
+	</select>
+	
+	<select id="selectCodeName" parameterType="string" resultType="string">
+		select code_name
+		  from tb_code
+		 where code_no = #{codeNo}
 	</select>
 	
 </mapper>

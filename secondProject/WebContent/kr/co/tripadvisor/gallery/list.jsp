@@ -1,4 +1,6 @@
+
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +8,9 @@
 	<title>Gallery</title>
 	<meta charset="UTF-8">
 	<!-- common css -->
-	<link rel="stylesheet" type="text/css" href="../../../../css/client/common.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../../../../css/common.css" media="all">
 	<!-- modal css -->
-	<link rel="stylesheet" type="text/css" href="../../../../css/client/jquery.modal.min.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../../../../css/jquery.modal.min.css" media="all">
 	<!-- Remember to include jQuery :) -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js" type="text/javascript"></script>
 	<!-- jQuery Modal -->
@@ -16,6 +18,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js" type="text/javascript"></script>
 	<!-- web font -->
 	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="../css/client/thumbnail-gallery.css">
+
+
+
 
 	<script type="text/javascript">
 	$(function(){// jQuery 시작 / 메뉴 마우스 오버 효과
@@ -197,15 +208,13 @@ article {
 	font-size: 12px;
 	margin: 2%;
 }
-
-
-
 </style>
 </head>
-
-
 <body>
+
 	<div class='wrap'>
+	
+		
 		<!-- 메뉴  -->
 		<aside>
 			<div class="accordion_navi">
@@ -227,11 +236,11 @@ article {
 				</div>
 			</div><!-- accordion_navi 끝 -->
 		</aside>
+		
 		<!-- 본문 -->
 		<article>
-			
 			<div class="search_area">
-				<form action="" method="">
+				<form action="/secondProject/gallery/index" method="POST">
 					<div class="search_ctn">
 						<div class="search_div1">
 							<ul>
@@ -239,13 +248,13 @@ article {
 									주제 :
 								</li>
 								<li class="check_li">
-									<input type="checkbox" id="s1" name="subject" value="1" /><label for="s1">맛집</label> 
+									<input type="checkbox" id="t1" name="attract" value="1001" /><label for="t1">맛집</label> 
 								</li>
 								<li class="check_li">
-									<input type="checkbox" id="s2" name="subject" value="2" /><label for="s2">숙소</label>
+									<input type="checkbox" id="t2" name="attract" value="1002" /><label for="t2">명소</label>
 								</li>
 								<li class="check_li">
-									<input type="checkbox" id="s3" name="subject" value="3" /><label for="s3">명소</label>
+									<input type="checkbox" id="t3" name="attract" value="1003" /><label for="t3">숙소</label>
 								</li>
 							</ul>
 						</div>
@@ -258,136 +267,114 @@ article {
 							</ul>
 							<ul>
 								<li>
-									<input type="checkbox" id="r1" name="region" value="1" /> <label for="r1">서울</label>
+									<input type="checkbox" id="r1" name="area" value="2001" /> <label for="r1">서울</label>
 								</li>
 								<li> 
-								    <input type="checkbox" id="r2" name="region" value="2" /> <label for="r2">인천</label> 
+								    <input type="checkbox" id="r2" name="area" value="2002" /> <label for="r2">인천</label> 
 						        </li>
 						        <li>
-								    <input type="checkbox" id="r3" name="region" value="3" /> <label for="r3">대전</label> 
+								    <input type="checkbox" id="r3" name="area" value="2003" /> <label for="r3">대전</label> 
 								</li>
 							</ul>
 							<ul>
 								<li>
-								    <input type="checkbox" id="r4" name="region" value="4" /> <label for="r4">광주</label> 
+								    <input type="checkbox" id="r4" name="area" value="2004" /> <label for="r4">광주</label> 
 								</li>
 								<li>
-								    <input type="checkbox" id="r5" name="region" value="5" /> <label for="r5">부산</label> 
+								    <input type="checkbox" id="r5" name="area" value="2005" /> <label for="r5">부산</label> 
 								</li>
 								<li>
-								    <input type="checkbox" id="r6" name="region" value="6" /> <label for="r6">대구</label>
+								    <input type="checkbox" id="r6" name="area" value="2006" /> <label for="r6">대구</label>
 							 	 </li>
 							 </ul>
 							 <ul>
 								 <li> 
-									<input type="checkbox" id="r7" name="region" value="7" /> <label for="r7">경기</label> 
+									<input type="checkbox" id="r7" name="area" value="2007" /> <label for="r7">경기</label> 
 								</li>
 								<li>
-									<input type="checkbox" id="r8" name="region" value="8" /> <label for="r8">강원</label> 
+									<input type="checkbox" id="r8" name="area" value="2008" /> <label for="r8">강원</label> 
 								</li>
 								<li>
-									<input type="checkbox" id="r9" name="region" value="9" /> <label for="r9">충청</label> 
+									<input type="checkbox" id="r9" name="area" value="2009" /> <label for="r9">충청</label> 
 								</li>
 							</ul>
 							<ul>
 								<li>
-									<input type="checkbox" id="r10" name="region" value="10" /> <label for="r10">호남</label>
+									<input type="checkbox" id="r10" name="area" value="2010" /> <label for="r10">호남</label>
 								</li>
 								<li> 
-									<input type="checkbox" id="r11" name="region" value="11" /> <label for="r11">영남</label>
+									<input type="checkbox" id="r11" name="area" value="2011" /> <label for="r11">영남</label>
 								</li>
 								<li> 
-									<input type="checkbox" id="r12" name="region" value="12" /> <label for="r12">제주</label>
+									<input type="checkbox" id="r12" name="area" value="2012" /> <label for="r12">제주</label>
 								</li>
 							</ul>
 						</div>
 
 					</div><!-- search_ctn END -->
+					
+					
 					<div class="sc_submit">
 						<button>SEARCH</button>
 					</div>
-				</form>
-
 
 
 				<div class="search_box">
-					<select name="search">
+					<select name="searchType">
 						<option value="">선택</option>
 						<option value="1">ID</option>
 						<option value="2">제목</option>
 					</select>
-					<input type="text" class="searchbox" />
+					<input type="text" class="searchbox" name="searchWord" />
 					<button class="btn" type="submit">
 						<i class="fas fa-search-plus" style="color: skyblue"></i>
 					</button>
+				</form>
 				</div><!-- search_box -->
-
-
-			</div><!-- search_area END -->
-
-			<div class='board_list'>
-				<ul>
-					<li>
-						<figure>
-							<a href="#"><div class="fi_div"><img src="images/trip_1.png"></div></a>
-						</figure>
-						<div>
-							<h5>Title</h5>
-							<span>주제 : 맛집 / 지역 : 서울 </span>
-							<span>2018-03-30 20:11</span>
-							<span>mini kim</span>
-						</div>
-					</li>
-					<li>
-						<figure>
-							<a href="#"><div class="fi_div"><img src="images/trip_2.png"></div></a>
-						</figure>
-						<div>
-							<h5>Title</h5>
-							<span>주제 : 숙소 / 지역 : 호남 </span>
-							<span>2018-03-30 23:25</span>
-							<span>lama</span>
-						</div>
-					</li>
-					<li>
-						<figure>
-							<a href="#"><div class="fi_div"><img src="images/trip_3.png"></div></a>
-						</figure>
-						<div>
-							<h5>Title</h5>
-							<span>주제 : 맛집 / 지역 : 강원 </span>
-							<span>2018-03-30 23:26</span>
-							<span>hr kim</span>
-						</div>
-					</li>
-					<li>
-						<figure>
-							<a href="#"><div class="fi_div"><img src="images/trip_4.png"></div></a>
-						</figure>
-						<div>
-							<h5>Title</h5>
-							<span>주제 : 맛집 / 지역 : 서울 </span>
-							<span>2018-03-30 20:11</span>
-							<span>mini kim</span>
-						</div>
-					</li>
-					<li>
-						<figure>
-							<a href="#"><div class="fi_div"><img src="images/trip_1.png"></div></a>
-						</figure>
-						<div>
-							<h5>Title</h5>
-							<span>주제 : 맛집 / 지역 : 서울 </span>
-							<span>2018-03-30 20:11</span>
-							<span>mini kim</span>
-						</div>
-					</li>
-				</ul>
-		<div class="sc_submit">
-			<button>WRITE</button>
+</div><!-- search_area END -->
+		
+<div class="container gallery-container">
+	<div class="tz-gallery">
+		<div class="row">
+		<c:forEach var="board" items="${boardList}">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                
+                <c:set var="loop_flag" value="false" />
+                <c:forEach var="image" items="${imageList}">
+                <c:if test="${not loop_flag }">
+                <c:if test="${board.boardNo == image.boardNo}">
+                    <a class="lightbox" href="/secondProject/galleryImg${image.path}/${image.sysName}">
+                        <img src="/secondProject/thumb/${image.sysName}">
+                    </a>
+                     <c:set var="loop_flag" value="true" />
+                </c:if>
+                   </c:if>
+                </c:forEach>   
+                    
+                <div class="caption">
+                    <h4>${board.title}</h4>
+                    <p>${board.editordata}</p>
+                    <p>photo by ${board.id}</p>
+                </div>
+                </div>
+            </div>
+        </c:forEach>
 		</div>
-		</article>
-			</div><!-- search_area -->
-	</div><!-- wrap END -->
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+            
+<div class="sc_submit">
+	<button onclick="location.href ='writeForm'">WRITE</button>
+</div>
+</article>
+
+
+</div><!-- wrap END -->
 </body>
 </html>

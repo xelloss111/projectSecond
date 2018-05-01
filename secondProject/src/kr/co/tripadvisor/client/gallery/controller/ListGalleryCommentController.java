@@ -13,25 +13,19 @@ import com.google.gson.Gson;
 
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.mapper.CommentMapper;
-
-@WebServlet("/gallery/deleteComment")
-public class DeleteGalleryCommentController extends HttpServlet {
-
+@WebServlet("/gallery/commentList")
+public class ListGalleryCommentController extends HttpServlet {
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		CommentMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(CommentMapper.class);
-
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+	public void service(
+		HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		mapper.deleteComment(commentNo);
+		CommentMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(CommentMapper.class);
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
 		response.setContentType("application/json; charset=utf-8"); 
 		PrintWriter out = response.getWriter();
 		
 		out.println(new Gson().toJson(mapper.selectCommentByNo(boardNo)));
 	}
-	
 }
-

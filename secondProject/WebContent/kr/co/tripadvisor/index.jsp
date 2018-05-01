@@ -154,6 +154,15 @@
 			opacity: 0.5;
 			margin-right: 10px;
 		}
+		.email_but {
+		    box-sizing: border-box;
+	 	    color: white; 
+		    background: #aaa;
+		    border: 0;
+	 		padding: 5px 10px; 
+			float: right;
+			font-size: 0.8rem;
+		}
 
 	</style>
 </head>

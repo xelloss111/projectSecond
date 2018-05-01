@@ -16,8 +16,8 @@
 	</resultMap>
 
 	<insert id="insertUser" parameterType="user">
-		insert into user(
-			no, id, pass, name, birth, email, sex, board_auth
+		insert into tb_user(
+			no, id, pass, name, birth, email, sex
 		) values (
 			s_user_no.nextval,
 			#{id},
@@ -25,32 +25,31 @@
 			#{name},
 			#{birth},
 			#{email},
-			#{sex},
-			#{boardAuth}
+			#{sex}
 		)
 	</insert>
 
 	<select id="selectUser" resultMap="userMap">
 		select *
-		  from user
+		  from tb_user
 		 order by reg_date desc
 	</select>
 
 	<select id="selectUserById" parameterType="string" resultMap="userMap">
 		select *
-		  from user
+		  from tb_user
 		 where id = #{id}
 	</select>
 	
 	<update id="updateUser" parameterType="user">
-		update user
+		update tb_user
 		   set pass = #{pass}, email = #{email}
 		 where id = #{id}	
 	</update>
 
 	<delete id="deleteUser" parameterType="string">
 		delete
-		  from user
+		  from tb_user
 		 where id = #{id}
 	</delete>
 

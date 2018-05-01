@@ -3,11 +3,11 @@ package kr.co.tripadvisor.repository.domain;
 import java.util.Date;
 
 public class User {
-	private Integer no;
+	private int no;
     private String id;
     private String pass;
     private String name;
-    private Integer birth;
+    private int birth;
     private String email;
     private String sex;
     private String boardAuth;
