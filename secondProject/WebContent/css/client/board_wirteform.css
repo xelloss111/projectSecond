@@ -1,7 +1,8 @@
-@charset "UTF-8";
+/secondProject@charset "UTF-8";
 .wrap {
 	width: 100%;
 	height: 100%;
+	padding-top: 50px;
 }
 
 aside {
@@ -31,10 +32,10 @@ aside {
 
 .accordion_navi h3.over {
 	cursor: pointer;
-} /* ë§ˆìš°ìŠ¤ ì˜¤ë²„ ìŠ¤íƒ€ì¼*/
+} /* ¸¶¿ì½º ¿À¹ö ½ºÅ¸ÀÏ*/
 .accordion_navi h3.selected {
 	cursor: default;
-} /* ì„ íƒ ìŠ¤íƒ€ì¼*/
+} /* ¼±ÅÃ ½ºÅ¸ÀÏ*/
 .accordion_navi>div>ul {
 	text-indent: 1rem;
 }
@@ -48,7 +49,9 @@ aside {
 	color: skyblue;
 	text-decoration: none;
 }
-
+.accordion_navi > h3 > a {
+	display:block; color:#000;
+}
 article {
 	padding-top: 30px;
 	width: 60%;
@@ -114,7 +117,7 @@ input:focus {
 	float: right;
 	padding: 6px 12px;
 	cursor: pointer;
-	border: 1px solid transparent; /* ë¶€ëª¨ìƒ‰ìƒ ë™ì¼ */
+	border: 1px solid transparent; /* ºÎ¸ğ»ö»ó µ¿ÀÏ */
 	border-radius: 4px;
 	font-family: 'Righteous', cursive;
 }

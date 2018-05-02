@@ -17,6 +17,9 @@ public interface BoardMapper {
 	Board selectBoardByNo(int boardNo);
 	int updateBoard(Board board);
 	int deleteBoardByNo(int boardNo);
+	void deleteBoard(int no);
 	void updateBoardViewCnt(int boardno);
+	//index list
+	List<Board> selectIndex();	
 
 }

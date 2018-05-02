@@ -17,49 +17,71 @@
 	</resultMap>
 
 	<!-- 리스트 -->
-<!-- 	<select id="selectBoard" parameterType="boardSearch" resultMap="boardMap">  -->
-	<select id="selectBoard"  resultMap="boardMap"> 
-		select * 
+	<!-- <select id="selectBoard" parameterType="boardSearch" resultMap="boardMap"> -->
+	<select id="selectBoard" resultMap="boardMap">
+		select *
 		from tb_board
 		where code_no='3001'
 		order by board_no desc
-	</select> 
+	</select>
+
+	<!-- 인덱스 최신 게시물 -->
+	<select id="selectIndex" resultMap="boardMap">
+		select *
+		from tb_board
+		order by reg_date desc
+	</select>
+
+	<!-- 게시판/갤러리 리스트 -->
+	<select id="selectBoardByCode" parameterType="string" resultMap="boardMap">
+		select *
+		from tb_board
+		where code_no = #{codeNo}
+		order by board_no desc
+	</select>
 
 	<!-- 게시물 쓰기 -->
 	<insert id="insertBoard" parameterType="board">
-		insert into tb_board(
-		code_No,
-		board_no,
-		title,
-		id,
-		editordata,
-		area,
-		attract
-		) values (
-		#{codeNo},
-		s_board_no.nextval,
-		#{title},
-		#{id},
-		#{editordata},
-		#{area},
-		#{attract}
-		)
+		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+			select s_board_no.nextval from dual
+		</selectKey>
+		insert into tb_board ( board_no, code_no, title, id, editordata, area,
+		attract)
+		values ( #{boardNo}, #{codeNo}, #{title}, #{id}, #{editordata}, #{area},
+		#{attract})
 	</insert>
-	
+
 	<!-- 상세 글 보기 -->
 	<select id="selectBoardByNo" parameterType="int" resultMap="boardMap">
-    	select *
-    	  from tb_board
-    	 where board_no = #{boardNo} 
-    </select>
-    
-    <!-- 조회수 -->
-    <update id="updateBoardViewCnt" parameterType="int">
-    	update tb_board
-    	   set view_cnt = view_cnt + 1
-    	 where board_no = #{boardNo}
-    </update>
-    
+		select *
+		from tb_board
+		where board_no = #{boardNo}
+	</select>
+
+	<!-- 조회수 -->
+	<update id="updateBoardViewCnt" parameterType="int">
+		update tb_board
+		set view_cnt = view_cnt + 1
+		where board_no = #{boardNo}
+	</update>
+
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="board">
+		update tb_board
+		set title = #{title},
+		editordata = #{editordata},
+		area = #{area},
+		attract = #{attract}
+		where board_no = #{boardNo}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoardByNo" parameterType="int">
+		delete
+		from tb_board
+		where board_no = #{boardNo}
+	</delete>
+
 	<!-- 첨부파일 파트 -->
 
 	<resultMap id="boardImageMap" type="boardImage">
@@ -70,27 +92,28 @@
 		<result column="sys_name" property="sysName" />
 		<result column="file_size" property="fileSize" />
 	</resultMap>
-	
+
 	<insert id="insertBoardImage" parameterType="boardImage">
-		insert into tb_board_image (
-			image_no, 
-			board_no, 
-			path, 
-			ori_name, 
-			sys_name, 
-			file_size
+		insert into
+		tb_board_image (
+		image_no,
+		board_no,
+		path,
+		ori_name,
+		sys_name,
+		file_size
 		) values (
-			s_image_no.nextval, 
-			#{boardNo}, 
-			#{path}, 
-			#{oriName}, 
-			#{sysName}, 
-			#{fileSize}		
+		s_image_no.nextval,
+		#{boardNo},
+		#{path},
+		#{oriName},
+		#{sysName},
+		#{fileSize}
 		)
 	</insert>
-		
 
-    
+
+
 	<!-- 자유게시판 수정 -->
 	<!-- <update id="updateBoard" parameterType="board"> update board set title 
 		= #{title} content = #{content} area = #{area} attract = #{attract} where 

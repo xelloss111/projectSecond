@@ -11,16 +11,21 @@
 		<result column="content" property="content" />
 		<result column="reg_date" property="regDate" />
 		<result column="mod_date" property="modDate" />
+		<result column="view_cnt" property="viewCnt" />
 	</resultMap>
 
 
 	<insert id="insertNotice" parameterType="notice">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select s_notice_no.nextval from dual
+		</selectKey>
 		insert into notice (
-			code_no, no, id, content
+			code_no, no, id, title, content
 		) values (
-			'3004',
-			s_notice_no.nextval,
+			#{codeNo},
+			#{no},
 			#{id},
+			#{title},
 			#{content}
 		)
 	</insert>

@@ -8,57 +8,11 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <title>tripadvisor</title>
-<!-- common css -->
-<link rel="stylesheet" type="text/css" href="../../../../css/client/common.css"
-	media="all">
-<!-- board_list css -->
-<link rel="stylesheet" type="text/css" href="../../../../css/client/board_list.css"
-	media="all">
-<!-- modal css -->
-<link rel="stylesheet" type="text/css"
-	href="../../../../css/client/jquery.modal.min.css" media="all">
-<!-- Remember to include jQuery :) -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"
-	type="text/javascript"></script>
-<!-- jQuery Modal -->
-<script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"
-	type="text/javascript"></script>
-<!-- web font -->
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
-	integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
-	crossorigin="anonymous"></script>
 </head>
 
 
 <body>
 	<div class='wrap'>
-<!-- 		<header class='header' style="background-color: skyblue;"> -->
-
-<!-- 			<a href="index.jsp" class='nav_logo'><span>tripadvisor</span></a> -->
-
-<!-- 			<nav> -->
-<!-- 				<ul> -->
-<!-- 					<li class="nav_ui topBotomBordersOut"><a href="#"> <i -->
-<!-- 							class="fas fa-paper-plane"></i> Tip Board -->
-<!-- 					</a></li> -->
-<!-- 					<li class="nav_ui topBotomBordersOut"><a href="#"> <i -->
-<!-- 							class="fas fa-camera-retro"></i> Gallery -->
-<!-- 					</a></li> -->
-<!-- 					<li class="nav_ui topBotomBordersOut"><a href="#"> <i -->
-<!-- 							class="fas fa-check-circle"></i> Notice -->
-<!-- 					</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</nav> -->
-
-<!-- 			<div class='login_ui'> -->
-<!-- 				<a href="#ex1" rel="modal:open">LOGIN</a> &nbsp; &nbsp; <a -->
-<!-- 					href="#ex2" rel="modal:open">SIGN UP</a> -->
-<!-- 			</div> -->
-<!-- 		</header> -->
 		<!-- 메뉴  -->
 		<aside>
 			<div class="accordion_navi">
@@ -67,7 +21,8 @@
 				</h3>
 				<div>
 					<ul>
-						<li><a href="/secondProject/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
+						<li><a
+							href="/secondProject/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
 					</ul>
 				</div>
 				<h3>
@@ -78,6 +33,18 @@
 						<li><a href="#">- 사진 올리기</a></li>
 					</ul>
 				</div>
+				<h3 id="menuScrap">
+					<a href="/kr/co/tripadvisor/client/scrapList">
+						<i class="fas fa-tags"></i>
+						스크랩
+					</a>
+				</h3>
+				<h3>
+					<a href="#">
+						<i class="far fa-smile"></i>
+						회원정보
+					</a>
+				</h3>
 			</div>
 			<!-- accordion_navi 끝 -->
 		</aside>
@@ -91,11 +58,11 @@
 							<ul>
 								<li class="search_li">주제 :</li>
 								<li class="check_li"><input type="checkbox" id="s1"
-									name="subject" value="1" /><label for="s1">맛집</label></li>
+									name="subject" value="1001" /><label for="s1">맛집</label></li>
 								<li class="check_li"><input type="checkbox" id="s2"
-									name="subject" value="2" /><label for="s2">숙소</label></li>
+									name="subject" value="1003" /><label for="s2">숙소</label></li>
 								<li class="check_li"><input type="checkbox" id="s3"
-									name="subject" value="3" /><label for="s3">명소</label></li>
+									name="subject" value="1002" /><label for="s3">명소</label></li>
 							</ul>
 						</div>
 
@@ -104,45 +71,45 @@
 								<li class="search_li">지역 :</li>
 							</ul>
 							<ul>
-								<li><input type="checkbox" id="r1" name="region" value="1" />
-									<label for="r1">서울</label></li>
-								<li><input type="checkbox" id="r2" name="region" value="2" />
-									<label for="r2">인천</label></li>
-								<li><input type="checkbox" id="r3" name="region" value="3" />
-									<label for="r3">대전</label></li>
+								<li><input type="checkbox" id="r1" name="region"
+									value="2001" /> <label for="r1">서울</label></li>
+								<li><input type="checkbox" id="r2" name="region"
+									value="2005" /> <label for="r2">인천</label></li>
+								<li><input type="checkbox" id="r3" name="region"
+									value="2009" /> <label for="r3">대전</label></li>
 							</ul>
 							<ul>
-								<li><input type="checkbox" id="r4" name="region" value="4" />
-									<label for="r4">광주</label></li>
-								<li><input type="checkbox" id="r5" name="region" value="5" />
-									<label for="r5">부산</label></li>
-								<li><input type="checkbox" id="r6" name="region" value="6" />
-									<label for="r6">대구</label></li>
+								<li><input type="checkbox" id="r4" name="region"
+									value="2002" /> <label for="r4">광주</label></li>
+								<li><input type="checkbox" id="r5" name="region"
+									value="2006" /> <label for="r5">부산</label></li>
+								<li><input type="checkbox" id="r6" name="region"
+									value="2010" /> <label for="r6">대구</label></li>
 							</ul>
 							<ul>
-								<li><input type="checkbox" id="r7" name="region" value="7" />
-									<label for="r7">경기</label></li>
-								<li><input type="checkbox" id="r8" name="region" value="8" />
-									<label for="r8">강원</label></li>
-								<li><input type="checkbox" id="r9" name="region" value="9" />
-									<label for="r9">충청</label></li>
+								<li><input type="checkbox" id="r7" name="region"
+									value="2003" /> <label for="r7">경기</label></li>
+								<li><input type="checkbox" id="r8" name="region"
+									value="2007" /> <label for="r8">강원</label></li>
+								<li><input type="checkbox" id="r9" name="region"
+									value="2011" /> <label for="r9">충청</label></li>
 							</ul>
 							<ul>
 								<li><input type="checkbox" id="r10" name="region"
-									value="10" /> <label for="r10">호남</label></li>
+									value="2004" /> <label for="r10">호남</label></li>
 								<li><input type="checkbox" id="r11" name="region"
-									value="11" /> <label for="r11">영남</label></li>
+									value="2008" /> <label for="r11">영남</label></li>
 								<li><input type="checkbox" id="r12" name="region"
-									value="12" /> <label for="r12">제주</label></li>
+									value="2012" /> <label for="r12">제주</label></li>
 							</ul>
 						</div>
 					</div>
 					<!-- search_ctn END -->
 					<div class="search_box">
-						<select name="search">
-							<option value="">선택</option>
-							<option value="1">ID</option>
-							<option value="2">제목</option>
+						<select name="searchType">
+							<option>선택</option>
+							<option value="id">ID</option>
+							<option value="title">제목</option>
 						</select> <input type="text" class="searchbox" />
 						<button class="btn" type="submit">
 							<i class="fas fa-search-plus" style="color: skyblue"></i>
@@ -155,79 +122,97 @@
 
 			<div class='board_list'>
 				<ul>
-					<c:forEach var='b' items="${list}" >
+					<c:if test="${empty list}">
+						<li>
+							<h1>입력된 게시물이 아직 없어요!</h1>
+						</li>
+					</c:if>
+					<c:forEach var='b' items="${list}">
+
 						<li>
 							<figure>
-								<a href='detail?boardNo=${b.boardNo}'><div class="fi_div">
+								<a
+									href='detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}'><div class="fi_div">
 										<img src="../../../../images/trip_1.png">
 									</div></a>
 							</figure>
 							<div>
+
 								<h5>
-									<a href='detail?boardNo=${b.boardNo}'>${b.title}</a>
+									<a
+										href='detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}'>${b.title}</a>
 								</h5>
-								<span>주제 : ${b.attract} / 지역 : ${b.area}  </span> 
-								<span><fmt:formatDate value="${b.regDate}" pattern="yyyy-MM-dd HH:mm" /></span> 
-								<span>${b.id}</span>
-								<span>조회수 : ${b.viewCnt}</span>
+								<span id="sel_${b.boardNo}">지역 : ${b.area} </span>
+
+								<script type="text/javascript">
+								var result = ""
+								switch("${b.area}") {
+									case "2001" : result = "서울"; break;
+									case "2002" : result= "광주"; break;
+									case "2003" : result= "경기"; break;
+									case "2004" : result= "호남"; break;
+									case "2005" : result= "인천"; break;
+									case "2006" : result= "부산"; break;
+									case "2007" : result= "강원"; break;
+									case "2008" : result= "영남"; break;
+									case "2009" : result= "대전"; break;
+									case "2010" : result= "대구"; break;
+									case "2011" : result= "충청"; break;
+									case "2012" : result= "제주"; break;
+									
+								};
+								$("#sel_${b.boardNo}").text("지역 : "+result);
+								</script>
+
+								<span id="sel2_${b.boardNo}">주제 : ${b.attract} </span>
+
+								<script type="text/javascript">
+									var count = 1;
+									var result = ""
+									switch("${b.attract}") {
+										case "1001" : result = "맛집"; count++; break;
+										case "1002" : result = "명소"; count++; break;
+										case "1003" : result = "숙소"; count++; break;
+									};
+									$("#sel2_${b.boardNo}").text("주제 : "+result);
+								</script>
+
+								<span><fmt:formatDate value="${b.regDate}"
+										pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>${b.id}</span> <span>조회수
+									: ${b.viewCnt}</span>
 							</div>
 						</li>
 					</c:forEach>
 				</ul>
 			</div>
+			<div>
+				<nav class="paging_area">
+				  <ul class="pagination">
+				    <li class="disabled">
+				      <span>
+				        <span aria-hidden="true">&laquo;</span>
+				      </span>
+				    </li>
+				    <li class="active">
+				      <span>1 <span class="sr-only">(current)</span></span>
+				    </li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+			</div>
 			<!-- search_area -->
 		</article>
-
-<!-- 		<!-- Modal HTML embedded directly into document --> -->
-<!-- 		<form action="" class="login_form modal" id="ex1" -->
-<!-- 			style="display: none;"> -->
-<!-- 			<h1>LOGIN</h1> -->
-<!-- 			<br> -->
-<!-- 			<br> -->
-<!-- 			<p> -->
-<!-- 				<label>ID</label><input type="text" /> -->
-<!-- 			</p> -->
-<!-- 			<p> -->
-<!-- 				<label>Password</label><input type="password" /> -->
-<!-- 			</p> -->
-<!-- 			<p> -->
-<!-- 				<input type="submit" value="LOGIN" class="login_but" /> -->
-<!-- 			</p> -->
-<!-- 		</form> -->
-<!-- 		<!-- Modal HTML embedded directly into document --> -->
-<!-- 		<form action="" class="login_form modal" id="ex2" -->
-<!-- 			style="display: none;"> -->
-<!-- 			<h1>SIGN UP</h1> -->
-<!-- 			<br> -->
-<!-- 			<br> -->
-<!-- 			<p> -->
-<!-- 				<label>ID</label><input type="text" /> -->
-<!-- 			</p> -->
-<!-- 			<p> -->
-<!-- 				<label>Password</label><input type="password" /> -->
-<!-- 			</p> -->
-<!-- 			<p> -->
-<!-- 				<label>PasswordCheck</label><input type="password" /> -->
-<!-- 			</p> -->
-<!-- 			<p> -->
-<!-- 				<label>Email</label><input type="text" /> -->
-<!-- 			</p> -->
-<!-- 			<p> -->
-<!-- 				<label>Name</label><input type="text" /> -->
-<!-- 			</p> -->
-<!-- 			<p> -->
-<!-- 				<label>Gender</label> <label for="male">&nbsp;&nbsp;male<input -->
-<!-- 					type="radio" id="male" name="gender" value="1" /></label> <label -->
-<!-- 					for="female">&nbsp;&nbsp;female<input type="radio" -->
-<!-- 					id="female" name="gender" value="2" /></label> -->
-<!-- 			</p> -->
-<!-- 			<p> -->
-<!-- 				<input type="submit" value="SIGN UP" class="login_but" /> -->
-<!-- 			</p> -->
-<!-- 		</form> -->
-<!-- 	</div> -->
-	<!-- wrap END -->
+	</div>
 	
+	<!-- script 영역 -->
 	<script type="text/javascript">
 	$(function() {// jQuery 시작 / 메뉴 마우스 오버 효과
 		$(".accordion_navi > div").hide();
@@ -241,6 +226,8 @@
 		})
 
 	}); //jQuery 종결
+
+
 </script>
 </body>
 </html>

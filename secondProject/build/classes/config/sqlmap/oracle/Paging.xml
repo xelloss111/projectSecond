@@ -57,7 +57,6 @@
     			  from (
         		        select *
         				  from notice
-        				 where code_no = '3004'
         				 order by no desc
         			   ) A
                  where <![CDATA[rownum <= #{endCount}]]>
@@ -103,8 +102,20 @@
 		  from user
 	</select>
 	  
-	<!--  board 타입 resultMap 적용 예정 -->
-			
+	<resultMap id="boardMap" type="board">
+		<result column="code_no" property="codeNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="title" property="title" />
+		<result column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="area" property="area" />
+		<result column="attract" property="attract" />
+		<result column="reg_date" property="regDate" />
+		<result column="mod_date" property="modDate" />
+		<result column="view_cnt" property="viewCnt" />
+	</resultMap>  
+	  
+	  
 	<select id="boardListUp" parameterType="paging" resultMap="boardMap">
 		select X.*
 		  from ( 
@@ -126,8 +137,6 @@
 		  from user
 	</select>
 	  
-	<!--  board 타입 resultMap 적용 예정 -->
-			
 	<select id="galleryListUp" parameterType="paging" resultMap="boardMap">
 		select X.*
 		  from ( 

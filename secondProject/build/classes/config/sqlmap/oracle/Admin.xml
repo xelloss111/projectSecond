@@ -47,5 +47,14 @@
 		  from tb_admin
 		 where id = #{id}
 	</delete>
+	
+	<update id="updateAdmin" parameterType="admin">
+		update tb_admin
+		   set board_auth = #{boardAuth},
+		       notice_auth = #{noticeAuth},
+		       gallery_auth = #{galleryAuth},
+		       user_auth = #{userAuth}
+		 where no = #{no}
+	</update>
 
 </mapper>

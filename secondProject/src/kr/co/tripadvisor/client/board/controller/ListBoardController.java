@@ -20,7 +20,7 @@ public class ListBoardController extends HttpServlet{
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(BoardMapper.class);
-
+		
 		List<Board> list = mapper.selectBoard();
 		request.setAttribute("list", list);
 		

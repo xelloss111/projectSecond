@@ -3,35 +3,56 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "kr.co.tripadvisor.repository.mapper.ScrapMapper">
-	<resultMap type="scrap" id="scrapMap">
+<!-- scrap map -->
+	<resultMap id="scrapMap" type="scrap" >
+		<result column="id" property="id" />
 		<result column="code_no" property="codeNo" />
 		<result column="board_no" property="boardNo" />
 		<result column="scrap_no" property="scrapNo" />
 		<result column="reg_date" property="regDate" />
 	</resultMap>
 
-	<insert id="insertScrap" parameterType="scrapMap">
-		insert into scrap (
-			code_no, board_no, scrap_no
+<!-- association	 -->
+<!-- 	<resultMap id="scrapMap2" type="scrap" > -->
+<!-- 		<association property="boardMap" column="id" javaType="board" select="selectBoard" /> -->
+<!-- 	</resultMap> -->
+	
+	<insert id="insertScrap" parameterType="scrap">
+		insert into tb_scrap (
+			id, code_no, board_no, scrap_no
 		) values (
+			#{id},
 			#{codeNo},
 			#{boardNo},
-			#{scrapNo}
+			s_scrap_no.nextval
 		)
 	</insert>
 	
-	<select id="selectScrapById" parameterMap="string" resultMap="scrapMap">
-		select *
-		  from scrap
-		 where id = #{id}
-	</select>
+	<!-- scrap list --> 
+
 	
-	<select id="selectScrapByNo" parameterType="int" resultMap="board">
+<!-- 	<select id="selectScrapBoard" resultMap="scrapMap2" parameterType="string"> -->
+<!-- 		select * -->
+<!-- 		from tb_scrap -->
+<!-- 		where id='tester' -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="selectBoard" resultMap="boardMap" parameterType="string"> -->
+<!-- 		select * -->
+<!-- 		  from tb_board -->
+<!-- 		 where id = 'tester' -->
+<!-- 	</select> -->
+	
+	
+	<!--  -->
+	
+	
+	<select id="selectScrapByNo" parameterType="int" resultType="board">
 		select *
-		  from board
+		  from tb_board
 		 where board_no = (
 		 					select board_no
-		 					  from scrap
+		 					  from tb_scrap
 		 					 where scrap_no = #{scrapNo}
 		 				  )
 	</select>

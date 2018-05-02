@@ -8,10 +8,13 @@ import kr.co.tripadvisor.repository.domain.NoticeImage;
 public interface ImageMapper {
 	void insertFileInfo(NoticeImage nImage);
 	void deleteFileInfo(String sysName);
+	void updateFileInfo(NoticeImage nImage);
 	
 	//혜리_갤러리
 	void insertImageFile(BoardImage image);
 	List<BoardImage> selectImageAll();
 	List<BoardImage> selectImageFile(int BoardNo);
+	
+	
 
 }

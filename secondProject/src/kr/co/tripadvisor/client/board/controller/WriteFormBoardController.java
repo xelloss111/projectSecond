@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 public class WriteFormBoardController extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/kr/co/tripadvisor/board/writeform.jsp");
 		rd.forward(request, response);
 	}

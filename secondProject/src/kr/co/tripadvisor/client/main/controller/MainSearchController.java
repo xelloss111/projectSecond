@@ -1,5 +1,8 @@
 package kr.co.tripadvisor.client.main.controller;
 
-public class MainSearchController {
+import javax.servlet.http.HttpServlet;
+
+public class MainSearchController extends HttpServlet{
+
 
 }

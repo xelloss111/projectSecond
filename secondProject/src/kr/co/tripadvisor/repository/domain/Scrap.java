@@ -3,11 +3,18 @@ package kr.co.tripadvisor.repository.domain;
 import java.util.Date;
 
 public class Scrap {
+	private String id;
 	private String codeNo;
     private Integer boardNo;
     private Integer scrapNo;
     private Date regDate;
-
+    
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
     public String getCodeNo() {
         return codeNo;
     }

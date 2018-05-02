@@ -13,7 +13,7 @@
 	
 	
 	<insert id="insertComment" parameterType="comment">
-		insert into comment (
+		insert into tb_comment (
 			comment_no, board_no, id, content
 		) values (
 			s_comment_no.nextval,
@@ -25,19 +25,19 @@
 	
 	<select id="selectCommentByNo" parameterType="int" resultMap="commentMap">
 		select *
-		  from comment
+		  from tb_comment
 		 where board_no = #{boardNo}
 	</select>
 	
 	<update id="updateComment" parameterType="comment">
-		update comment
+		update tb_comment
 		   set content = #{content}
 		 where comment_no = #{commentNo}
 	</update>
 	
 	<delete id="deleteComment" parameterType="int">
 		delete
-		  from comment
+		  from tb_comment
 		 where comment_no = #{commentNo}
 	</delete>
 </mapper>
