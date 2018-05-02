@@ -21,6 +21,9 @@
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="../../../css/admin/_all-skins.min.css">
+
+	<!--  Google chart -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -99,78 +102,24 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-6">
-      		<!-- AREA CHART -->
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">Area Chart</h3>
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      					</button>
-      					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-					</div>
-				</div>
-			<div class="box-body">
-				<div class="chart">
-					<canvas id="areaChart" style="height:250px"></canvas>
-				</div>
+			<div class="col-md-1">
+				<form id="mForm" action="${pageContext.request.contextPath}/net/admin/stastics/search" method="POST">
+					<input type="date" name="date">
+					<button id="stastic" type="button">검색</button>
+				</form>
 			</div>
-<!-- /.box-body -->
-</div>
-<!-- /.box -->
-<!-- BAR CHART -->
-<div class="box box-success">
-  <div class="box-header with-border">
-    <h3 class="box-title">Bar Chart</h3>
-
-    <div class="box-tools pull-right">
-      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      </button>
-      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-    </div>
-  </div>
-  <div class="box-body">
-    <div class="chart">
-      <canvas id="barChart" style="height:230px"></canvas>
-  </div>
-</div>
-<!-- /.box-body -->
-</div>
-<!-- /.box -->
-</div>
-<!-- /.col (LEFT) -->
-
-<div class="col-md-6">
-  <!-- LINE CHART -->
-<div class="box box-info">
-  <div class="box-header with-border">
-    <h3 class="box-title">Line Chart</h3>
-
-    <div class="box-tools pull-right">
-      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-      </button>
-      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-    </div>
-  </div>
-  <div class="box-body">
-    <div class="chart">
-      <canvas id="lineChart" style="height:250px"></canvas>
-  </div>
-</div>
-<!-- /.box-body -->
-</div>
-<!-- /.box -->
-</div>
-<!-- /.col (RIGHT) -->
-</div>
-<!-- /.row -->
+		</div>
+			
+		<div class="row">
+			<div class="col-md-1"></div>
+   		    <div class="col-md-10" align='center'>
+        		<div class="chart" id='revenue-chart'></div>
+			</div>
+		</div>
     </section>
+    <!-- /.content -->
   </div>
 </div>
-	
-
-
-
 
 <!-- jQuery 3 -->
 <script src="../../../js/admin/jquery.min.js"></script>
@@ -187,143 +136,77 @@
 <script src="../../../js/admin/jquery-jvectormap-world-mill-en.js"></script>
 <!-- SlimScroll -->
 <script src="../../../js/admin/jquery.slimscroll.min.js"></script>
-<!-- ChartJS -->
-<script src="../../../js/admin/Chart.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../../js/admin/demo.js"></script>
 <script>
-  $(function () {
-    /* ChartJS
-     * -------
-     * Here we will create a few charts using ChartJS
-     */
+function getContextPath() { // contextPath 가져오는 방법
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+}
 
-    //--------------
-    //- AREA CHART -
-    //--------------
+var contextPath = getContextPath();
 
-    // Get context with jQuery - using jQuery's .get() method.
-    var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-    // This will get the first returned node in the jQuery collection.
-    var areaChart       = new Chart(areaChartCanvas)
+$("#stastic").click(function() {
+	var form = $("#mForm").serialize();
+	var info = [];
+	var options = {	title: "지표별 통계", seriesType: 'bars', height: 400};
+	info.push(['집계일자', '자유게시판', '갤러리', '공지', '유저', '게시판 댓글', '갤러리 댓글', '스크랩']);
+	$.ajax({
+// 		type: "POST",
+		data: form,
+// 		dataType: "json",
+		url: "search",
+		success: function(data) {
+			// 얼럿 메시지는 배열 타입이 아니기 때문에
+			// 인덱스 요소에 대괄호가 있는지 검사 
+			if (data.indexOf('[') == -1) {
+				alert(data);
+				return;
+			}
+			
+			// 문자열을 JSON 타입으로 파싱
+			var value = JSON.parse(data);
+						
+			for (let i = 0; i < value.length; i++) {
+				var val = [];
+				// 문자열로 된 날짜를 다시 날짜 형식 객체로 생성
+				var d = new Date(value[i].stasticsDate);
+				// 날짜 포맷을 변경한 수 배열에 저장
+				val.push(getFormattedDate(d));
+				val.push(value[i].boardCount);
+				val.push(value[i].galleryCount);
+				val.push(value[i].noticeCount);
+				val.push(value[i].userCount);
+				val.push(value[i].boardCommentCount);
+				val.push(value[i].galleryCommentCount);
+				val.push(value[i].scrapCount);
+				info.push(val);
+			}
+			
+			// 구글 차트 버전 최신으로 세팅
+			google.charts.load('current', {'packages':['corechart']});
 
-    var areaChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label               : 'Electronics',
-          fillColor           : 'rgba(210, 214, 222, 1)',
-          strokeColor         : 'rgba(210, 214, 222, 1)',
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label               : 'Digital Goods',
-          fillColor           : 'rgba(60,141,188,0.9)',
-          strokeColor         : 'rgba(60,141,188,0.8)',
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        }
-      ]
-    }
+			// 콜백 함수 호출
+			google.charts.setOnLoadCallback(function() {
+				var chart = new google.visualization.ComboChart(document.querySelector('#revenue-chart'));
+				chart.draw(google.visualization.arrayToDataTable(info), options);
+			});
+		}
+	});
+});
 
-    var areaChartOptions = {
-      //Boolean - If we should show the scale at all
-      showScale               : true,
-      //Boolean - Whether grid lines are shown across the chart
-      scaleShowGridLines      : false,
-      //String - Colour of the grid lines
-      scaleGridLineColor      : 'rgba(0,0,0,.05)',
-      //Number - Width of the grid lines
-      scaleGridLineWidth      : 1,
-      //Boolean - Whether to show horizontal lines (except X axis)
-      scaleShowHorizontalLines: true,
-      //Boolean - Whether to show vertical lines (except Y axis)
-      scaleShowVerticalLines  : true,
-      //Boolean - Whether the line is curved between points
-      bezierCurve             : true,
-      //Number - Tension of the bezier curve between points
-      bezierCurveTension      : 0.3,
-      //Boolean - Whether to show a dot for each point
-      pointDot                : false,
-      //Number - Radius of each point dot in pixels
-      pointDotRadius          : 4,
-      //Number - Pixel width of point dot stroke
-      pointDotStrokeWidth     : 1,
-      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-      pointHitDetectionRadius : 20,
-      //Boolean - Whether to show a stroke for datasets
-      datasetStroke           : true,
-      //Number - Pixel width of dataset stroke
-      datasetStrokeWidth      : 2,
-      //Boolean - Whether to fill the dataset with a color
-      datasetFill             : true,
-      //String - A legend template
-      <%-- legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].lineColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>', --%>
-      //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-      maintainAspectRatio     : true,
-      //Boolean - whether to make the chart responsive to window resizing
-      responsive              : true
-    }
+// 날짜 데이터 포맷 변환 함수
+function getFormattedDate(date) {
+	var year = date.getFullYear();
 
-    //Create the line chart
-    areaChart.Line(areaChartData, areaChartOptions)
-
-    //-------------
-    //- LINE CHART -
-    //--------------
-    var lineChartCanvas          = $('#lineChart').get(0).getContext('2d')
-    var lineChart                = new Chart(lineChartCanvas)
-    var lineChartOptions         = areaChartOptions
-    lineChartOptions.datasetFill = false
-    lineChart.Line(areaChartData, lineChartOptions)
-
-    //-------------
-    //- BAR CHART -
-    //-------------
-    var barChartCanvas                   = $('#barChart').get(0).getContext('2d')
-    var barChart                         = new Chart(barChartCanvas)
-    var barChartData                     = areaChartData
-    barChartData.datasets[1].fillColor   = '#00a65a'
-    barChartData.datasets[1].strokeColor = '#00a65a'
-    barChartData.datasets[1].pointColor  = '#00a65a'
-    var barChartOptions                  = {
-      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-      scaleBeginAtZero        : true,
-      //Boolean - Whether grid lines are shown across the chart
-      scaleShowGridLines      : true,
-      //String - Colour of the grid lines
-      scaleGridLineColor      : 'rgba(0,0,0,.05)',
-      //Number - Width of the grid lines
-      scaleGridLineWidth      : 1,
-      //Boolean - Whether to show horizontal lines (except X axis)
-      scaleShowHorizontalLines: true,
-      //Boolean - Whether to show vertical lines (except Y axis)
-      scaleShowVerticalLines  : true,
-      //Boolean - If there is a stroke on each bar
-      barShowStroke           : true,
-      //Number - Pixel width of the bar stroke
-      barStrokeWidth          : 2,
-      //Number - Spacing between each of the X value sets
-      barValueSpacing         : 5,
-      //Number - Spacing between data sets within X values
-      barDatasetSpacing       : 1,
-      //String - A legend template
-      <%-- legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>', --%>
-      //Boolean - whether to make the chart responsive
-      responsive              : true,
-      maintainAspectRatio     : true
-    }
-
-    barChartOptions.datasetFill = false
-    barChart.Bar(barChartData, barChartOptions)
-  })
+	var month = (1 + date.getMonth()).toString();
+	month = month.length > 1 ? month : '0' + month;
+	
+	var day = date.getDate().toString();
+	day = day.length > 1 ? day : '0' + day;
+		
+	return year + '-' + month + '-' + day;
+}
 </script>
 </body>
 </html>

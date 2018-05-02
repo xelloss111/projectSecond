@@ -104,9 +104,10 @@
    	  <form method="post" action="noticeUpdate">
    	  	 <input type="hidden" name="codeNo" value="${notice.codeNo}" />
    	  	 <input type="hidden" name="id" value="${notice.id}" />
+   	  	 <input type="hidden" name="no" value="${notice.no}" />
       <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-10"><input type="text" class="form-control" placeholder="${notice.title}" name="title" readonly="readonly" /><p></div>
+        <div class="col-md-10"><input type="text" class="form-control" placeholder="${notice.title}" name="title" /><p></div>
 	  </div>
       <div class="row">
         <div class="col-md-1"></div>

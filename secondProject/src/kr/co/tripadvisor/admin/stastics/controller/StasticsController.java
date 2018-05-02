@@ -1,20 +1,76 @@
 package kr.co.tripadvisor.admin.stastics.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/net/admin/stastics/index")
+import com.google.gson.Gson;
+
+import kr.co.tripadvisor.common.db.MyAppSqlConfig;
+import kr.co.tripadvisor.repository.domain.Stastics;
+import kr.co.tripadvisor.repository.mapper.StasticsMapper;
+
+@WebServlet("/net/admin/stastics/search")
 public class StasticsController extends HttpServlet {
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-		rd.forward(request, response);
+		StasticsMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(StasticsMapper.class);
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		
+		List<Stastics> list = null;
+		String date = request.getParameter("date");
+		
+		if (date == null) {
+			return;
+		}
+
+		try {
+			// 파라미터로 불러온 날짜가 오늘 날짜보다 큰 경우
+			// alert 출력을 위한 메시지를 포함해서 리턴
+			Date today = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date targetDate = sdf.parse(date);
+			if (targetDate.getTime() > today.getTime()) {
+				out.print("오늘 날짜 또는 이전 날짜를 선택해 주세요");
+				out.close();
+				return;
+			}
+		} catch (ParseException e) {
+		}
+		
+//		System.out.println(date);
+		
+		int noticeCount = mapper.noticeCount(date);
+		int userCount = mapper.userCount(date);
+		int boardCount = mapper.boardCount(date);
+		int galleryCount = mapper.galleryCount(date);
+		
+		if (mapper.selectStasticsCheck(date) == 0) {
+			Stastics stastics = new Stastics();
+			stastics.setBoardCount(boardCount);
+			stastics.setNoticeCount(noticeCount);
+			stastics.setGalleryCount(galleryCount);
+			stastics.setUserCount(userCount);
+			stastics.setBoardCommentCount(20);
+			stastics.setGalleryCommentCount(15);
+			stastics.setScrapCount(40);
+			mapper.insertStastics(stastics);
+		}
+		
+		list = mapper.selectStastics(date);
+		
+		out.print(new Gson().toJson(list));
+		out.close();
 	}
 }

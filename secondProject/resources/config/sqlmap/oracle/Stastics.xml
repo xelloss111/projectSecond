@@ -27,30 +27,37 @@
 	<select id="selectStastics" parameterType="string" resultMap="stasticsMap">
 		select *
 		  from stastics
-		 <![CDATA[where to_date(reg_date,'yy/MM/dd') <= to_date(#{regDate}, 'yy/MM/dd')]]>
-		 <![CDATA[and to_date(reg_date,'yy/MM/dd') > to_date(#{regDate}, 'yy/MM/dd') - 7]]>
+		 <![CDATA[where to_date(stastics_date,'yy/MM/dd') <= to_date(#{regDate}, 'yy/MM/dd')]]>
+		 <![CDATA[and to_date(stastics_date,'yy/MM/dd') > to_date(#{regDate}, 'yy/MM/dd') - 7]]>
+		 order by stastics_date asc
 	</select>
-
+	
+<!-- 하루에 한개만 값이 존재해야 하니 체크용 쿼리 -->	
+	<select id="selectStasticsCheck" parameterType="string" resultType="int">
+		select count(*)
+		  from stastics
+		 where to_char(stastics_date,'yyyy-MM-dd') = #{regDate}
+	</select>
 
 <!-- 각각의 게시판 및 댓글 테이블에서 일일 총 카운트를 구하는 쿼리 -->
 
 	<select id="boardCount" parameterType="string" resultType="int">
 		select count(*) boardCnt
-		  from board
+		  from tb_board
 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
 		 <![CDATA[and code_no='3001']]>
 	</select>
 	
 	<select id="galleryCount" parameterType="string" resultType="int">
 		select count(*) galleryCnt
-		  from board
+		  from tb_board
 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
 		 <![CDATA[and code_no='3002']]>
 	</select>
 	
 	<select id="scrapCount" parameterType="string" resultType="int">
 		select count(*) scrapCnt
-		  from board
+		  from tb_scrap
 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
 		 <![CDATA[and code_no='3003']]>
 	</select>
@@ -64,21 +71,21 @@
 	
 	<select id="boardCommentCount" parameterType="string" resultType="int">
 		select count(*) bCommentCnt
-		  from board_comment
+		  from tb_comment
 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
 		 <![CDATA[and code_no='3001']]>
 	</select>
 	
 	<select id="galleryCommentCount" parameterType="string" resultType="int">
 		select count(*) gCommentCnt
-		  from board_comment
+		  from tb_comment
 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
 		 <![CDATA[and code_no='3002']]>
 	</select>
 	
 	<select id="userCount" parameterType="string" resultType="int">
 		select count(*) userCnt
-		  from user
+		  from tb_user
 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
 	</select>
 	

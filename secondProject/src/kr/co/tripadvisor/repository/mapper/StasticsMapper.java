@@ -1,10 +1,13 @@
 package kr.co.tripadvisor.repository.mapper;
 
+import java.util.List;
+
 import kr.co.tripadvisor.repository.domain.Stastics;
 
 public interface StasticsMapper {
 	void insertStastics(Stastics stastics);
-	Stastics selectStastics(String date);
+	List<Stastics> selectStastics(String date);
+	int selectStasticsCheck(String date);
 	int boardCount(String date);
 	int galleryCount(String date);
 	int noticeCount(String date);

@@ -5,11 +5,13 @@ public class Paging {
 	private int totalCount;	// DB에서 불러온 ROW 총 개수
 	private int countList;	// 한 페이지에 출력할 게시글의 개수
 	private int totalPage;	// 총 페이지 수
-	private int countPage; 	// 한 화면에 출력될 페이지 수
+	private int blockSize; 	// 한 화면에 출력될 페이지 수
 	private int startPage;  // 시작 페이지
 	private int endPage;	// 끝 페이지
 	private int startCount; // 한 페이지에 출력할 게시물 시작 번호
 	private int endCount;	// 한 페이지에 출력할 게시물 끝 번호
+	private boolean prev;
+	private boolean next;
 	
 	public int getPageNo() {
 		return pageNo;
@@ -35,11 +37,11 @@ public class Paging {
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-	public int getCountPage() {
-		return countPage;
+	public int getBlockSize() {
+		return blockSize;
 	}
-	public void setCountPage(int countPage) {
-		this.countPage = countPage;
+	public void setBlockSize(int blockSize) {
+		this.blockSize = blockSize;
 	}
 	public int getStartPage() {
 		return startPage;
@@ -65,38 +67,44 @@ public class Paging {
 	public void setEndCount(int endCount) {
 		this.endCount = endCount;
 	}
+	public boolean isPrev() {
+		return prev;
+	}
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+	public boolean isNext() {
+		return next;
+	}
+	public void setNext(boolean next) {
+		this.next = next;
+	}
 	
-	public Paging(int totalCnt, int pageNum, int cntList, int cntPage) {
-		this.totalCount = totalCnt;
-		this.pageNo = pageNum;
-		this.countList = cntList;
-		this.countPage = cntPage; 
+	// 총 게시글 수, 페이지번호, 페이지 당 게시글 출력 개수, 페이지 번호 개수
+	public Paging(int totalCount, int pageNo, int countList, int blockSize) {
+		this.totalCount = totalCount;
+		this.pageNo = pageNo;
+		this.countList = countList;
+		this.blockSize = blockSize; 
 		paging();
 	}
 	
-	
 	public void paging() {
 		
-		totalPage = totalCount / countList;
+		// 총 페이지 수 구하기
+		totalPage = (int)Math.ceil(totalCount / (double)countList);
 		
-		if (totalCount % countList > 0) {
-			totalPage++;
-		}
-		
-		if (totalPage < pageNo) {
-			pageNo = totalPage;
-		}
-		
-		startPage = ((pageNo - 1) / countList) * countList + 1;
-		
-		endPage = startPage + countPage - 1;
-		
-		if (endPage > totalPage) {
-			endPage = totalPage;
-		}
-		
-		startCount = (pageNo -1 ) * countList + 1;
+		// 페이지 블록
+		int currBlock = (pageNo - 1) / blockSize + 1;
+		startPage = (currBlock - 1) * blockSize + 1;
+		endPage = (currBlock * blockSize < totalPage) ? (currBlock * blockSize) : totalPage;
+					
+		// 각각의 페이지에 출력할 게시글 시작 및 끝 번호
+		startCount = (pageNo - 1) * countList + 1;
 		endCount = pageNo * countList;
+	
+		prev = startPage != 1;
+		next = endPage != totalPage;
 		
 		/*
 		if (startPage > 1) {

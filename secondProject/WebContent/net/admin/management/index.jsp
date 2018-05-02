@@ -102,7 +102,7 @@
         <div class="col-md-10" align="right">
 	    <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-backdrop="static">매니저 추가</button>
-          <button type="button" class="btn btn-success" >Success</button>
+          <button id="vallist" type="button" class="btn btn-success" >일괄수정</button>
         </div>
       </div>
       <p>
@@ -112,11 +112,16 @@
           <table class="table table-bordered table-hover table-condensed">
             <thead>
               <tr>
+                <th>
+                	<input type="checkbox" name="all" id="all">
+                </th>
                 <th>번호</th><th>ID</th><th>이름</th><th colspan="2">권한</th>
               </tr>
             </thead>
+            <tbody>
               <c:forEach var="admin" items="${adminList}">
                 <tr>
+                  <td><input type="checkbox" name="chklist" id="${admin.no}">
               	  <td>${admin.no}</td>
               	  <td><c:out value="${admin.id}" /></td>
               	  <td><c:out value="${admin.name}" /></td>
@@ -124,51 +129,48 @@
               	  <c:choose>
               	    <c:when test="${admin.noticeAuth == 't' }">
               	      <label class="checkbox-inline">
-                      <input name="auth" type="checkbox" checked data-toggle="toggle" value="1"> 공지
+                      <input id="noticeAuth" name="auth" type="checkbox" checked data-toggle="toggle" value="1"> 공지
                       </label>
               	    </c:when>
               	    <c:otherwise>
               	      <label class="checkbox-inline">
-                      <input name="auth" type="checkbox" data-toggle="toggle" value="1"> 공지
+                      <input id="noticeAuth" name="auth" type="checkbox" data-toggle="toggle" value="1"> 공지
                       </label>
               	    </c:otherwise>
                	  </c:choose>
-               	  
                	  <c:choose>
               	    <c:when test="${admin.boardAuth == 't' }">
           	    	  <label class="checkbox-inline">
-                      <input name="auth" type="checkbox" checked data-toggle="toggle" value="2"> 자유게시판
+                      <input id="boardAuth" name="auth" type="checkbox" checked data-toggle="toggle" value="2"> 자유게시판
                       </label>
               	    </c:when>
               	    <c:otherwise>
            	    	  <label class="checkbox-inline">
-                      <input name="auth" type="checkbox" data-toggle="toggle" value="2"> 자유게시판
+                      <input id="boardAuth" name="auth" type="checkbox" data-toggle="toggle" value="2"> 자유게시판
                       </label>
               	    </c:otherwise>
                	  </c:choose>
-               	  
                	  <c:choose>
               	    <c:when test="${admin.galleryAuth == 't' }">
            	    	  <label class="checkbox-inline">
-                      <input name="auth" type="checkbox" checked data-toggle="toggle" value="3"> 갤러리
+                      <input id="galleryAuth" name="auth" type="checkbox" checked data-toggle="toggle" value="3"> 갤러리
                       </label>
               	    </c:when>
                     <c:otherwise>
            	          <label class="checkbox-inline">
-                      <input name="auth" type="checkbox" data-toggle="toggle" value="3"> 갤러리
+                      <input id="galleryAuth" name="auth" type="checkbox" data-toggle="toggle" value="3"> 갤러리
                       </label>
               	    </c:otherwise>
                	  </c:choose>
-               	  
                	  <c:choose>
               	    <c:when test="${admin.userAuth == 't' }">
            	    	  <label class="checkbox-inline">
-                      <input name="auth" type="checkbox" checked data-toggle="toggle" value="4"> 유저
+                      <input id="userAuth" name="auth" type="checkbox" checked data-toggle="toggle" value="4"> 유저
                       </label>
               	    </c:when>
               	    <c:otherwise>
           	    	  <label class="checkbox-inline">
-                      <input name="auth" type="checkbox" data-toggle="toggle" value="4"> 유저
+                      <input id="userAuth" name="auth" type="checkbox" data-toggle="toggle" value="4"> 유저
                       </label>
               	    </c:otherwise>
                	  </c:choose>
@@ -181,6 +183,7 @@
               	  </td>
                 </tr>
               </c:forEach>
+            </tbody>
           </table>
         </div>
       <div class="row">
@@ -291,14 +294,85 @@
 <script src="../../../js/admin/demo.js"></script>
 <script src="../../../js/admin/bootstrap-toggle.min.js"></script>
 <script>
+	// 체크박스 클릭 시 prop 옵션을 변경
+	// 조건이 선택한 체크박스의 prop 옵션에 따라 달라짐 (true, false);
+	$("#all").click(function () {
+		$("input[name='chklist']").prop("checked", $("#all").prop("checked"));
+
+	});
+	
+	// 체크박스 선택에 따른 각 테이블 행 값을 추출하고 배열 및 객체에 저장, 그리고 서버와 통신
+	$("#vallist").click(function () {
+		var admin = {}
+		var tdArr = new Array();
+		var checkBox = $("input[name='chklist']:checked");
+		
+		// each를 사용하면 특정 객체 내부에 여러 객체가 존재하면 존재하는 갯수 만큼 반복을 돌면서
+		// 별도의 명령을 수행
+		checkBox.each(function(i) {
+			// tr은 체크박스의 부모 (td) -> 부모 (tr)
+			var tr = checkBox.parent().parent().eq(i);
+			// tr의 자식 객체는 (td);
+			var td = tr.children();
+			
+			// Row에 td들은 순서대로 나열
+			// 0번째 : 체크박스 영역
+			// 1번째 : 목록 번호
+			// 2번째 : 매니저 ID
+			// 3번째 : 매니저 이름
+			// 4번째 : 권한 관리 체크박스 4종류
+			var box = {}; 
+			box["no"] = td.eq(1).text();
+			box["id"] = td.eq(2).text();
+			box["name"] = td.eq(3).text();
+			var chkbox = td.eq(4).children();
+			
+			// 4번째 td의 체크박스의 id와 체크 상태를 가져오기 위해
+			// 배열 선언
+			var chklist = new Array();
+			
+			// 객체의 자식중 해당 이름을 가진 자식 객체만 넘겨받는다.
+			// 이때 자식 객체가 여러 개일 수 있어 배열 변수에 넘겨준다.
+			chklist = chkbox.find("input");
+						
+			// 4번째 TD는 여러개가 존재하기 때문에 for 문으로 값을 꺼내
+			// 다시 하나의 객체로 묶어준 다음 배열에 push
+			for (let i = 0; i < chklist.length; i++) {
+				box[chklist[i].id] = chklist[i].checked;					
+			}
+			
+			// 배열 안에 box 객체를 push
+			tdArr.push(box);
+		});	
+
+		// JAVA에서 JSON형태로 값을 뽑아내기 위해
+		// 별도의 객체의 키값을 지정하고 해당 키의 값을 tdArr 배열로 지정
+		admin['admin'] = tdArr;
+		
+		// JSON 형태를 문자열로 넘겨주기 위해 파싱
+		var jsonData = JSON.stringify(admin);
+		
+		$.ajax({
+			url: contextPath + "/net/admin/management/updateManager",
+			type: "post",
+			data: {admin : jsonData},
+			dataType: "json",
+			traditional: true,
+// 			contentType: "application/json",
+			success: function(data) {
+				console.log(data);
+				location.href = data;
+			},
+			error: function(data){
+				
+			}
+		});
+	});
+	
+	
+	
+	
 function deleteAdmin(id) {
-	
-	function getContextPath() { // contextPath 가져오는 방법
-		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-	};
-	
-	var contextPath = getContextPath();
 	
 	if(confirm("정말 삭제하시겠습니까?")){
 		// location.replace=`${pageContext.request.contextPath}`; // 기존 페이지를 새로운 페이지로 변경
@@ -308,6 +382,13 @@ function deleteAdmin(id) {
 		return;
 	};
 }
+
+var contextPath = getContextPath();
+function getContextPath() { // contextPath 가져오는 방법
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+};
+
 
 </script>
 </body>

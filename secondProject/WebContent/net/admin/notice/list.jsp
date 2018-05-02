@@ -133,15 +133,14 @@
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8" align="center">
+		<c:if test="${paging.totalCount != 0 }">
        	  <nav>
 			<ul class="pagination">
-  	          <c:if test="${paging.pageNo > 1}">
-			    <li>
-			      <a href="${pageContext.request.contextPath}/net/admin/notice/list?pageNo=${paging.pageNo - 1}" aria-label="Previous">
+			    <li class="<c:if test='${paging.prev eq false }'>disabled</c:if>">
+			      <a href="${pageContext.request.contextPath}/net/admin/notice/list?pageNo=${paging.startPage - 1}" aria-label="Previous">
 			        <span aria-hidden="true">&laquo;</span>
 			      </a>
 			    </li>
-			  </c:if>
 			  <c:forEach var="iContent" begin="${paging.startPage}" end="${paging.endPage}">
         		<c:choose>
         			<c:when test="${iContent == paging.pageNo}">
@@ -156,15 +155,14 @@
         			</c:otherwise>
         		</c:choose>
         	</c:forEach>
-        	<c:if test="${paging.pageNo < paging.totalPage}">
-        	  <li>
-			    <a href="${pageContext.request.contextPath}/net/admin/notice/list?pageNo=${paging.pageNo + 1}" aria-label="Next">
+        	<li class="<c:if test='${paging.next eq false}'>disabled</c:if>">
+			    <a href="${pageContext.request.contextPath}/net/admin/notice/list?pageNo=${paging.endPage + 1}" aria-label="Next">
 			      <span aria-hidden="true">&raquo;</span>
 			    </a>
-			  </li>
-			 </c:if>
+	        </li>
 			</ul>
 		 </nav>
+		</c:if>
         </div>
         </div>
       </div>

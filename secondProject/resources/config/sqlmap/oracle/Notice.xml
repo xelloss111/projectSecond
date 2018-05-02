@@ -16,11 +16,14 @@
 
 
 	<insert id="insertNotice" parameterType="notice">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select s_notice_no.nextval from dual
+		</selectKey>
 		insert into notice (
 			code_no, no, id, title, content
 		) values (
 			#{codeNo},
-			s_notice_no.nextval,
+			#{no},
 			#{id},
 			#{title},
 			#{content}

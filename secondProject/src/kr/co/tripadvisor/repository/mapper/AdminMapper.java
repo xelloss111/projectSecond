@@ -9,4 +9,5 @@ public interface AdminMapper {
 	List<Admin> selectAdminAll();
 	void insertAdmin(Admin admin);
 	void deleteAdmin(String id);
+	void updateAdmin(Admin admin);
 }

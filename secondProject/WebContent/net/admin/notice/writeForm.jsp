@@ -101,7 +101,7 @@
 
   <section class="content">
     <div class="container-fluid">
-   	  <form method="post" action="write">
+   	  <form id="mForm" method="post" action="write">
  	  	 <input type="hidden" name="codeNo" value="3004" />
    	  	 <input type="hidden" name="id" value='admin' />
 	     <div class="row">
@@ -114,17 +114,13 @@
 		 </div>
 		 <div class="row">
 	  		<div class="col-md-1"></div>
-	  		<div class="col-md-10" align="right"><button type="submit" class="btn btn-success">등록</button></div>
+	  		<div class="col-md-10" align="right"><button id="submit" type="button" class="btn btn-success">등록</button></div>
 		 </div>
 	  </form>
      </div>
    </section>
   </div>
 </div>
-
-
-
-
 <!-- jQuery 3 -->
 <script src="../../../js/admin/jquery.js"></script>
 <script src="../../../js/admin/jquery.min.js"></script>
@@ -162,7 +158,6 @@
 				}
 			},
 			
-			
 			dialogsFade: true,
 			fontNames: ['Roboto Light', 'Roboto Regular', 'Roboto Bold'],
 			toolbar: [
@@ -180,8 +175,11 @@
 		});
 	});
 	
+	// 프로젝트 경로
 	var contextPath = getContextPath();
 	
+	var fileName = [];
+	// 에디터에 파일 등록 후 url를 되돌려 받아 에디터에 뿌려주는 코드
 	function sendFile(file, el) {
 		var form_data = new FormData();
 		form_data.append('file', file);
@@ -191,21 +189,25 @@
 			url: contextPath + "/fileUpload",
 			cache: false,
 			contentType: false,
-// 			enctype: 'multipart/form-data',
 			processData: false,
 			success: function(url) {
-				console.log(url);
-// 				editor.insertImage(url);
-				$(el).summernote("editor.insertImage", "http://localhost:8000" + contextPath+ "/down?path=" + url);
+// 				console.log(url);
+				$(el).summernote("editor.insertImage", "http://localhost" + contextPath + "/down?path=" + url);
+				// 프로젝트명, 파일 경로를 제외한 순수 파일이름만 가져오기
+				let index = url.indexOf("=");
+				// 배열에 각각의 파일명 저장
+				fileName.push(url.substring(index + 1));
+				console.log(fileName);
 			}
 		});
 	}
 	
+	// 이미지 삭제
 	function deleteFile(src) {
 	    $.ajax({
 	        data: {src : src},
 	        type: "POST",
-	        url: contextPath + "/fileDelete", // replace with your url
+	        url: contextPath + "/fileDelete", 
 	        cache: false,
 	        success: function(resp) {
 	            console.log(resp);
@@ -213,10 +215,30 @@
 	    });
 	}
     
-    function getContextPath() { // contextPath 가져오는 방법
+	
+	// contextPath 가져오는 방법
+    function getContextPath() { 
     	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
     	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
     }
+    
+    // 등록 버튼 클릭 시 form에 파일 이름을 추가하여 글쓰기 컨트롤러에 전송
+    // 결과 성공 시 리스트 페이지로 이동
+	$("#submit").click(function () {
+		var formData = $("#mForm").serializeArray();
+		for (let i = 0; i < fileName.length; i++) {
+			formData.push({ name : 'file', value : fileName[i]});
+		}		
+		$.ajax({
+			type: "POST",
+			data: formData,
+			url: "write",
+			success: function (url) {
+				console.log(url);
+				location.href = url;
+			}
+		});
+	});
 </script>
 </body>
 </html>

@@ -22,13 +22,8 @@ public class ListNoticeController extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PagingMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(PagingMapper.class);
 		
-		int pageNo;
-		
-		if (request.getParameter("pageNo") != null) {
-			pageNo = Integer.parseInt(request.getParameter("pageNo"));
-		} else {
-			pageNo = 1;
-		}
+		String no = request.getParameter("pageNo");
+		int pageNo = (no != null) ? Integer.parseInt(no) : 1; 
 		
 		int totalCnt = mapper.totalNoticeCount();
 		Paging paging = new Paging(totalCnt, pageNo, 10, 5);

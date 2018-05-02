@@ -60,9 +60,11 @@ public class FileUploadController extends HttpServlet {
 				nImage.setDefaultPath(defaultPath);
 				nImage.setDetailPath(detailPath);
 				nImage.setFileSize(fileSize);
+				
 				mapper.insertFileInfo(nImage);
 				
 				out.println(detailPath + "&sName=" + sysName);
+				
 				out.close();
 			}
 		}

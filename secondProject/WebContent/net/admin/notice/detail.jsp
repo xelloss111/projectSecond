@@ -108,7 +108,7 @@
       		<i class="fa fa-user-o"></i><span style="padding-left: 5px; padding-right: 5px;">${notice.id}</span>
       	</div>
       	<div class="col-md-5" id="info" style="text-align: right; padding: 10px 15px; border-top: 0.3px solid slategray; border-bottom:0.3px solid slategray; font-size: 12px">
-      		<i class="fa fa-calendar-check-o"></i><span style="padding-left: 5px; padding-right: 5px;">&nbsp;작성일&nbsp;</span><strong><fmt:formatDate value="${notice.regDate}" pattern="MM/dd/yy" /></strong>
+      		<i class="fa fa-calendar-check-o"></i><span style="padding-left: 5px; padding-right: 5px;">&nbsp;작성일&nbsp;</span><strong><fmt:formatDate value="${notice.regDate}" pattern="yyyy/MM/dd HH:mm:ss" /></strong>
       		<span id="bar" style="padding-left: 5px; padding-right: 5px"> | </span>
       		<i class="fa fa-eye"></i><span style="padding-left: 5px; padding-right: 5px;">조회수</span><strong>1,111</strong>
       	</div>
