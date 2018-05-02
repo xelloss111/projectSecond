@@ -8,7 +8,6 @@ public class Admin {
 	private String pass;
 	private String name;
 	private String boardAuth;
-	private String galleryAuth;
 	private String noticeAuth;
 	private String userAuth;
 	private Date accessTime;
@@ -42,12 +41,6 @@ public class Admin {
 	}
 	public void setBoardAuth(String boardAuth) {
 		this.boardAuth = boardAuth;
-	}
-	public String getGalleryAuth() {
-		return galleryAuth;
-	}
-	public void setGalleryAuth(String galleryAuth) {
-		this.galleryAuth = galleryAuth;
 	}
 	public String getNoticeAuth() {
 		return noticeAuth;

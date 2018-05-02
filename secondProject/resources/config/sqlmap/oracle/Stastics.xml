@@ -64,7 +64,7 @@
 	
 	<select id="noticeCount" parameterType="string" resultType="int">
 		select count(*) scrapCnt
-		  from notice
+		  from tb_notice
 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
 		 <![CDATA[and code_no='3004']]>
 	</select>

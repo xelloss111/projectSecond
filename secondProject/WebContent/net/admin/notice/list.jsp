@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>트립팁 어드민 - 공지 관리</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
  	<!-- Bootstrap 3.3.7 -->
@@ -35,6 +35,12 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body>
+  <c:if test="${!empty alert}">
+  <script>
+  	alert(${alert});
+  </script>
+  </c:if>
+
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
       <header class="main-header">
@@ -57,27 +63,27 @@
       <aside class="main-sidebar">
         <section class="sidebar">
           <ul class="sidebar-menu">
-            <li class="treeview">
+            <li id="stastics" class="treeview">
 			  <a href="${pageContext.request.contextPath}/net/admin/stastics/index">
 				<i class="fa fa-pie-chart"></i><span>통  계</span>
               </a>
             </li>
-            <li class="treeview">
-              <a href="${pageContext.request.contextPath}/net/admin/management/index">
+            <li id="manager" class="treeview">
+              <a href="${pageContext.request.contextPath}/net/admin/management/admin">
                 <i class="fa fa-laptop"></i><span>매니저 관리</span>
               </a>
             </li>
-            <li class="treeview">
-              <a href="user_management.html">
+            <li id="user" class="treeview">
+              <a href="${pageContext.request.contextPath}/net/admin/management/user">
                 <i class="fa fa-user-o"></i><span>회원 관리</span>
               </a>
             </li>
-            <li class="active treeview menu-open">
-              <a href="${pageContext.request.contextPath}/net/admin/notice/list">
+            <li id="notice" class="active treeview menu-open">
+              <a href="#1">
                 <i class="fa fa-edit"></i><span>공지 관리</span>
               </a>
             </li>
-            <li class="treeview">
+            <li id="board" class="treeview">
               <a href="board_management.html">
                 <i class="fa fa-clipboard"></i><span>게시판 관리</span>
               </a>
@@ -89,7 +95,7 @@
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>매니저 관리</h1>
+    <h1>공지 관리</h1>
     <ol class="breadcrumb">
       <li><a href="index.html"><i class="fa fa-edit"></i>Home</a></li>
       <li class="active">Notice</li>
@@ -100,7 +106,7 @@
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10" align="right">
-	        <button type="button" class="btn btn-success" onclick="moveWriteForm()">게시글 등록</button>
+	        <button type="button" class="btn btn-success" onclick="moveWriteForm()">공지 등록</button>
         </div>
       </div>
       <p>
@@ -212,8 +218,32 @@ function deleteNotice(no) {
 		// document.form.submit; /* form 영역의 내용을 submit하겠다는 명령 */
 	} else {
 		return;
-	};
+	}
 }
+
+
+$("ul.sidebar-menu li").click(function () {
+	var nAuth = `${admin.noticeAuth}`;
+	var uAuth = `${admin.userAuth}`;
+	var pAuth = `${admin.boardAuth}`;
+	var id = `${admin.id}`;
+	
+	if (this.id === "manager" && id === "admin") {
+		location.href = contextPath + "/net/admin/management/admin";
+	} else if (this.id === "user" && uAuth === 't') {
+		location.href = contextPath + "/net/admin/management/user";
+	} else if (this.id === "notice" && nAuth === 't') {
+		location.href = contextPath + "/net/admin/notice/list";
+	} else if (this.id === "board" && pAuth === 't') {
+		location.href = contextPath + "/net/admin/board/index";
+	} else if (this.id === "stastics") {
+		location.href = contextPath + "/net/admin/stastics/index";
+	} else {
+		alert("해당 페이지의 접근 권한이 없습니다. 슈퍼 관리자에게 문의하세요");
+		return false;
+	}
+});
+
 </script>
 </body>
 </html>

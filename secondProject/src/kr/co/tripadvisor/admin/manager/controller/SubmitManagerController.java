@@ -23,18 +23,19 @@ public class SubmitManagerController extends HttpServlet {
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 		String name = request.getParameter("name");
+		
 		String noticeAuth = "f";
 		String boardAuth = "f";
-		String galleryAuth = "f";
 		String userAuth = "f";
 		
 		String[] authList = request.getParameterValues("registAuth");
 		
-		for (String s : authList) {
-			if ("1".equals(s)) noticeAuth = "t";
-			if ("2".equals(s)) boardAuth = "t";
-			if ("3".equals(s)) galleryAuth = "t";
-			if ("4".equals(s)) userAuth = "t";
+		if (authList != null) {
+			for (String s : authList) {
+				if ("1".equals(s)) noticeAuth = "t";
+				if ("2".equals(s)) boardAuth = "t";
+				if ("3".equals(s)) userAuth = "t";
+			}
 		}
 		
 		Admin admin = new Admin();
@@ -43,10 +44,9 @@ public class SubmitManagerController extends HttpServlet {
 		admin.setName(name);
 		admin.setNoticeAuth(noticeAuth);
 		admin.setBoardAuth(boardAuth);
-		admin.setGalleryAuth(galleryAuth);
 		admin.setUserAuth(userAuth);
 		mapper.insertAdmin(admin);
 		
-		response.sendRedirect(request.getContextPath() + "/net/admin/management/index");
+		response.sendRedirect(request.getContextPath() + "/net/admin/management/admin");
 	}
 }

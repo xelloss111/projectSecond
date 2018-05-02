@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
+import kr.co.tripadvisor.repository.domain.Admin;
 import kr.co.tripadvisor.repository.domain.Notice;
 import kr.co.tripadvisor.repository.domain.Paging;
 import kr.co.tripadvisor.repository.mapper.PagingMapper;

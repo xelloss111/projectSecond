@@ -40,13 +40,15 @@ public class WriteNoticeController extends HttpServlet {
 		mapper.insertNotice(notice);
 		
 		// 파일명이 들어있는 배열에서 파일명을 읽고 현재 등록된 게시물 번호를 같이 포함하여 객체 생성 후 업데이트
-		for (int i = 0; i < files.length; i++) {
-			NoticeImage nImage = new NoticeImage();
-			String fileName = (files[i].replaceAll("(\r\n|\r|\n|\n\r)", ""));
-			System.out.println(fileName);
-			nImage.setSysName(fileName);
-			nImage.setNo(notice.getNo());
-			mapper2.updateFileInfo(nImage);
+		if (files != null) {
+			for (int i = 0; i < files.length; i++) {
+				NoticeImage nImage = new NoticeImage();
+				String fileName = (files[i].replaceAll("(\r\n|\r|\n|\n\r)", ""));
+				System.out.println(fileName);
+				nImage.setSysName(fileName);
+				nImage.setNo(notice.getNo());
+				mapper2.updateFileInfo(nImage);
+			}
 		}
 		
 		PrintWriter out = response.getWriter();

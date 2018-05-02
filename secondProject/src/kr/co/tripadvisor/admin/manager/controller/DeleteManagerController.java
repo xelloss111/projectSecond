@@ -20,7 +20,7 @@ public class DeleteManagerController extends HttpServlet {
 		
 		mapper.deleteAdmin(request.getParameter("id"));
 		
-		response.sendRedirect(request.getContextPath() + "/net/admin/management/index");
+		response.sendRedirect(request.getContextPath() + "/net/admin/management/admin");
 	
 	}
 }

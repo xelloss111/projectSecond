@@ -39,7 +39,9 @@ public class LoginManagerController extends HttpServlet{
 			HttpSession session = request.getSession();
 			admin.setAccessTime(new Date());
 			session.setAttribute("admin", admin);
-			response.sendRedirect(request.getContextPath() +"/net/admin/stastics/index");
+			response.sendRedirect(request.getContextPath() + "/net/admin/stastics/index");
+//			RequestDispatcher rd = request.getRequestDispatcher("/net/admin/stastics/index");
+//			rd.forward(request, response);
 			return;
 		} else {
 			request.setAttribute("errMsg", "비밀번호가 잘못되었습니다.");

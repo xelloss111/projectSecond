@@ -60,27 +60,27 @@
       <aside class="main-sidebar">
         <section class="sidebar">
           <ul class="sidebar-menu">
-            <li class="treeview">
+            <li id="stastics" class="treeview">
 			  <a href="${pageContext.request.contextPath}/net/admin/stastics/index">
 				<i class="fa fa-pie-chart"></i><span>통  계</span>
               </a>
             </li>
-            <li class="treeview">
-              <a href="${pageContext.request.contextPath}/net/admin/management/index">
+            <li id="manager" class="treeview">
+              <a href="${pageContext.request.contextPath}/net/admin/management/admin">
                 <i class="fa fa-laptop"></i><span>매니저 관리</span>
               </a>
             </li>
-            <li class="treeview">
-              <a href="user_management.html">
+            <li id="user" class="treeview">
+              <a href="${pageContext.request.contextPath}/net/admin/management/user">
                 <i class="fa fa-user-o"></i><span>회원 관리</span>
               </a>
             </li>
-            <li class="active treeview menu-open">
+            <li id="notice" class="active treeview menu-open">
               <a href="${pageContext.request.contextPath}/net/admin/notice/list">
                 <i class="fa fa-edit"></i><span>공지 관리</span>
               </a>
             </li>
-            <li class="treeview">
+            <li id="board" class="treeview">
               <a href="board_management.html">
                 <i class="fa fa-clipboard"></i><span>게시판 관리</span>
               </a>
@@ -192,7 +192,7 @@
 			processData: false,
 			success: function(url) {
 				console.log(url);
-				$(el).summernote("editor.insertImage", "http://localhost" + contextPath+ "/down?path=" + url);
+				$(el).summernote("editor.insertImage", "http://localhost:8000" + contextPath+ "/down?path=" + url);
 			}
 		});
 	}
@@ -213,6 +213,29 @@
     	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
     	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
     }
+    
+    $("ul.sidebar-menu li").click(function () {
+		var nAuth = `${admin.noticeAuth}`;
+		var uAuth = `${admin.userAuth}`;
+		var pAuth = `${admin.boardAuth}`;
+		var id = `${admin.id}`;
+		
+		if (this.id === "manager" && id === "admin") {
+			location.href = contextPath + "/net/admin/management/admin";
+		} else if (this.id === "user" && uAuth === 't') {
+			location.href = contextPath + "/net/admin/management/user";
+		} else if (this.id === "notice" && nAuth === 't') {
+			location.href = contextPath + "/net/admin/notice/list";
+		} else if (this.id === "board" && pAuth === 't') {
+			location.href = contextPath + "/net/admin/board/index";
+		} else if (this.id === "stastics") {
+			location.href = contextPath + "/net/admin/stastics/index";
+		} else {
+			alert("해당 페이지의 접근 권한이 없습니다. 슈퍼 관리자에게 문의하세요");
+			return false;
+		}
+	});
+    
 </script>
 </body>
 </html>

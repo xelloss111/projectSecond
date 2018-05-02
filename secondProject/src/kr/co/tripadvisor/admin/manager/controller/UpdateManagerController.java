@@ -46,7 +46,6 @@ public class UpdateManagerController extends HttpServlet {
 				System.out.println("이름 : " + tempObj.get("name"));
 				System.out.println("boardAuth : " + tempObj.get("boardAuth"));
 				System.out.println("noticeAuth : " + tempObj.get("noticeAuth"));
-				System.out.println("galleryAuth : " + tempObj.get("galleryAuth"));
 				System.out.println("userAuth : " + tempObj.get("userAuth"));
 				
 				// JSON 배열의 각각의 객체에서 뽑아낸 값을 Admin 객체 타입 변수에 set
@@ -54,7 +53,6 @@ public class UpdateManagerController extends HttpServlet {
 				admin.setNo(Integer.parseInt((String)tempObj.get("no")));
 				admin.setBoardAuth((boolean)tempObj.get("boardAuth") == true ? "t" : "f" );
 				admin.setNoticeAuth((boolean)tempObj.get("noticeAuth") == true ? "t" : "f");
-				admin.setGalleryAuth((boolean)tempObj.get("galleryAuth") == true ? "t" : "f");
 				admin.setUserAuth((boolean)tempObj.get("userAuth") == true ? "t" : "f");
 				
 				// Admin 객체 정보를 DB update
@@ -62,7 +60,7 @@ public class UpdateManagerController extends HttpServlet {
 			}
 		} catch (ParseException e) {
 		}
-		out.print(new Gson().toJson(request.getContextPath() + "/net/admin/management/index"));
+		out.print(new Gson().toJson(request.getContextPath() + "/net/admin/management/admin"));
 		out.close();
 	}
 }

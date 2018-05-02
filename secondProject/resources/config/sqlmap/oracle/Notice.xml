@@ -19,7 +19,7 @@
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
 			select s_notice_no.nextval from dual
 		</selectKey>
-		insert into notice (
+		insert into tb_notice (
 			code_no, no, id, title, content
 		) values (
 			#{codeNo},
@@ -33,27 +33,27 @@
 
 	<select id="selectNotice" resultMap="noticeMap">
 		select *
-		  from notice
+		  from tb_notice
 		 order by no desc
 	</select>
 
 	
 	<select id="selectNoticeByNo" parameterType="int" resultMap="noticeMap">
 		select *
-		  from notice
+		  from tb_notice
 		 where no = #{no}
 	</select>
 	
 	
 	<update id="updateNotice" parameterType="notice">
-		update notice
+		update tb_notice
 		   set title = #{title}, content = #{content}, mod_date = sysdate
 		 where no = #{no} 
 	</update>
 	
 	<delete id="deleteNotice" parameterType="int">
 		delete 
-		  from notice
+		  from tb_notice
 		 where no = #{no}
 	</delete>
 	

@@ -9,7 +9,6 @@
 		<result column="pass" property="pass" />
 		<result column="name" property="name" />
 		<result column="board_auth" property="boardAuth" />
-		<result column="gallery_auth" property="galleryAuth" />
 		<result column="notice_auth" property="noticeAuth" />
 		<result column="user_auth" property="userAuth" />
 	</resultMap>
@@ -29,7 +28,7 @@
 	
 	<insert id="insertAdmin" parameterType="admin">
 		insert into tb_admin(
-			no, id, pass, name, notice_auth, board_auth, gallery_auth, user_auth
+			no, id, pass, name, notice_auth, board_auth, user_auth
 		) values (
 			s_admin_no.nextval,
 			#{id},
@@ -37,7 +36,6 @@
 			#{name},
 			#{noticeAuth},
 			#{boardAuth},
-			#{galleryAuth},
 			#{userAuth}
 		)
 	</insert>
@@ -52,7 +50,6 @@
 		update tb_admin
 		   set board_auth = #{boardAuth},
 		       notice_auth = #{noticeAuth},
-		       gallery_auth = #{galleryAuth},
 		       user_auth = #{userAuth}
 		 where no = #{no}
 	</update>

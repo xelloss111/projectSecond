@@ -19,7 +19,7 @@
 	<!-- iCheck -->
 	<link rel="stylesheet" href="../../../css/admin/blue.css">
 	<!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
+	 folder instead of downloading all of them to reduce the load. -->
 	<link rel="stylesheet" href="../../../css/admin/_all-skins.min.css">
 
 	<!--  Google chart -->
@@ -58,28 +58,27 @@
 	<aside class="main-sidebar">
 		<section class="sidebar">
 			<ul class="sidebar-menu">
-				<li class="active treeview menu-open">
-					<a href="${pageContext.request.contextPath}/net/admin/stastics/index">
+				<li id="stastics" class="active treeview menu-open">
+					<a href="#1">
 						<i class="fa fa-pie-chart"></i><span>통  계</span>
 					</a>
 				</li>
-				<li class="treeview">
-					<a href="${pageContext.request.contextPath}/net/admin/management/index">
+				<li id="manager" class="treeview">
+					<a href="${pageContext.request.contextPath}/net/admin/management/admin">
 						<i class="fa fa-laptop"></i><span>매니저 관리</span>
 					</a>
 				</li>
-				<li>
-    				<li class="treeview">
-        				<a href="user_management.html">
-							<i class="fa fa-user-o"></i><span>회원 관리</span>
-						</a>
-					</li>
-				<li class="treeview">
+   				<li id="user" class="treeview">
+       				<a href="${pageContext.request.contextPath}/net/admin/management/user">
+						<i class="fa fa-user-o"></i><span>회원 관리</span>
+					</a>
+				</li>
+				<li id="notice" class="treeview">
 					<a href="${pageContext.request.contextPath}/net/admin/notice/list">
 						<i class="fa fa-edit"></i><span>공지 관리</span>
 					</a>
 				</li>
-				<li class="treeview">
+				<li id="board" class="treeview">
 					<a href="board_management.html">
 						<i class="fa fa-clipboard"></i><span>게시판 관리</span>
 					</a>
@@ -146,67 +145,93 @@ function getContextPath() { // contextPath 가져오는 방법
 
 var contextPath = getContextPath();
 
-$("#stastic").click(function() {
-	var form = $("#mForm").serialize();
-	var info = [];
-	var options = {	title: "지표별 통계", seriesType: 'bars', height: 400};
-	info.push(['집계일자', '자유게시판', '갤러리', '공지', '유저', '게시판 댓글', '갤러리 댓글', '스크랩']);
-	$.ajax({
-// 		type: "POST",
-		data: form,
-// 		dataType: "json",
-		url: "search",
-		success: function(data) {
-			// 얼럿 메시지는 배열 타입이 아니기 때문에
-			// 인덱스 요소에 대괄호가 있는지 검사 
-			if (data.indexOf('[') == -1) {
-				alert(data);
-				return;
+	// 날짜 선택 후 검색 버튼 클릭 시 발생하는 이벤트 처리
+	$("#stastic").click(function() {
+		var form = $("#mForm").serialize();
+		var info = [];
+		var options = {	title: "지표별 통계", seriesType: 'bars', height: 400};
+		info.push(['집계일자', '자유게시판', '갤러리', '공지', '유저', '게시판 댓글', '갤러리 댓글', '스크랩']);
+		$.ajax({
+	// 		type: "POST",
+			data: form,
+	// 		dataType: "json",
+			url: "search",
+			success: function(data) {
+				// 얼럿 메시지는 배열 타입이 아니기 때문에
+				// 인덱스 요소에 대괄호가 있는지 검사 
+				if (data.indexOf('[') == -1) {
+					alert(data);
+					return;
+				}
+				
+				// 문자열을 JSON 타입으로 파싱
+				var value = JSON.parse(data);
+							
+				for (let i = 0; i < value.length; i++) {
+					var val = [];
+					// 문자열로 된 날짜를 다시 날짜 형식 객체로 생성
+					var d = new Date(value[i].stasticsDate);
+					// 날짜 포맷을 변경한 수 배열에 삽십
+					val.push(getFormattedDate(d));
+					// 나머지 통계 정보를 배열에 삽입
+					val.push(value[i].boardCount);
+					val.push(value[i].galleryCount);
+					val.push(value[i].noticeCount);
+					val.push(value[i].userCount);
+					val.push(value[i].boardCommentCount);
+					val.push(value[i].galleryCommentCount);
+					val.push(value[i].scrapCount);
+					info.push(val);
+				}
+				
+				// 구글 차트 버전 최신으로 세팅
+				google.charts.load('current', {'packages':['corechart']});
+	
+				// 콜백 함수 호출
+				google.charts.setOnLoadCallback(function() {
+					var chart = new google.visualization.ComboChart(document.querySelector('#revenue-chart'));
+					chart.draw(google.visualization.arrayToDataTable(info), options);
+				});
 			}
-			
-			// 문자열을 JSON 타입으로 파싱
-			var value = JSON.parse(data);
-						
-			for (let i = 0; i < value.length; i++) {
-				var val = [];
-				// 문자열로 된 날짜를 다시 날짜 형식 객체로 생성
-				var d = new Date(value[i].stasticsDate);
-				// 날짜 포맷을 변경한 수 배열에 저장
-				val.push(getFormattedDate(d));
-				val.push(value[i].boardCount);
-				val.push(value[i].galleryCount);
-				val.push(value[i].noticeCount);
-				val.push(value[i].userCount);
-				val.push(value[i].boardCommentCount);
-				val.push(value[i].galleryCommentCount);
-				val.push(value[i].scrapCount);
-				info.push(val);
-			}
-			
-			// 구글 차트 버전 최신으로 세팅
-			google.charts.load('current', {'packages':['corechart']});
+		});
+	});
 
-			// 콜백 함수 호출
-			google.charts.setOnLoadCallback(function() {
-				var chart = new google.visualization.ComboChart(document.querySelector('#revenue-chart'));
-				chart.draw(google.visualization.arrayToDataTable(info), options);
-			});
+	// 날짜 데이터 포맷 변환 함수
+	function getFormattedDate(date) {
+		var year = date.getFullYear();
+	
+		var month = (1 + date.getMonth()).toString();
+		month = month.length > 1 ? month : '0' + month;
+		
+		var day = date.getDate().toString();
+		day = day.length > 1 ? day : '0' + day;
+			
+		return year + '-' + month + '-' + day;
+	}
+	
+	$("ul.sidebar-menu li").click(function () {
+		var nAuth = `${admin.noticeAuth}`;
+		var uAuth = `${admin.userAuth}`;
+		var pAuth = `${admin.boardAuth}`;
+		var id = `${admin.id}`;
+		
+		if (this.id === "manager" && id === "admin") {
+			location.href = contextPath + "/net/admin/management/admin";
+		} else if (this.id === "user" && uAuth === 't') {
+			location.href = contextPath + "/net/admin/management/user";
+		} else if (this.id === "notice" && nAuth === 't') {
+			location.href = contextPath + "/net/admin/notice/list";
+		} else if (this.id === "board" && pAuth === 't') {
+			location.href = contextPath + "/net/admin/board/index";
+		} else if (this.id === "stastics") {
+			location.href = contextPath + "/net/admin/stastics/index";
+		} else {
+			alert("해당 페이지의 접근 권한이 없습니다. 슈퍼 관리자에게 문의하세요");
+			return false;
 		}
 	});
-});
-
-// 날짜 데이터 포맷 변환 함수
-function getFormattedDate(date) {
-	var year = date.getFullYear();
-
-	var month = (1 + date.getMonth()).toString();
-	month = month.length > 1 ? month : '0' + month;
 	
-	var day = date.getDate().toString();
-	day = day.length > 1 ? day : '0' + day;
-		
-	return year + '-' + month + '-' + day;
-}
+	
 </script>
 </body>
 </html>
