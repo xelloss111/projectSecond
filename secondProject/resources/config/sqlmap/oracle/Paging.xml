@@ -100,6 +100,7 @@
 	<select id="totalBoardCount" resultType="int">
 		select count(*)
 		  from tb_board
+		 where code_no = '3001'
 	</select>
 	  
 	<resultMap id="boardMap" type="board">
@@ -151,6 +152,7 @@
 	<select id="totalGalleryCount" resultType="int">
 		select count(*)
 		  from tb_board
+		 where code_no = '3002'
 	</select>
 	  
 	<select id="galleryListUp" parameterType="paging" resultMap="boardMap">

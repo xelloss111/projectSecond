@@ -81,7 +81,7 @@
               </a>
             </li>
             <li id="board" class="treeview">
-              <a href="board_management.html">
+              <a href="${pageContext.request.contextPath}/net/admin/board/index">
                 <i class="fa fa-clipboard"></i><span>게시판 관리</span>
               </a>
             </li>

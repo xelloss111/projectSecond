@@ -78,7 +78,7 @@
               </a>
             </li>
             <li id="board" class="treeview">
-              <a href="board_management.html">
+              <a href="${pageContext.request.contextPath}/net/admin/board/index">
                 <i class="fa fa-clipboard"></i><span>게시판 관리</span>
               </a>
             </li>
@@ -98,24 +98,24 @@
     <div class="container-fluid"><p><p>
       <div class="row">
       	<div class="col-md-1"></div>
-      	<div class="col-md-10" id="title" style="border-top: 2px solid slategray; background:#3C8DBC; color: white">
+      	<div class="col-md-10" id="title">
       		<h5>${notice.title}</h5>
       	</div>
       </div>
       <div class="row">
       	<div class="col-md-1"></div>
-      	<div class="col-md-5" id="writer" style="padding: 10px 15px; border-top: 0.3px solid slategray; border-bottom:0.3px solid slategray; font-size: 12px">
-      		<i class="fa fa-user-o"></i><span style="padding-left: 5px; padding-right: 5px;">${notice.id}</span>
+      	<div class="col-md-5" id="writer">
+      		<i class="fa fa-user-o"></i><span>${notice.id}</span>
       	</div>
-      	<div class="col-md-5" id="info" style="text-align: right; padding: 10px 15px; border-top: 0.3px solid slategray; border-bottom:0.3px solid slategray; font-size: 12px">
-      		<i class="fa fa-calendar-check-o"></i><span style="padding-left: 5px; padding-right: 5px;">&nbsp;작성일&nbsp;</span><strong><fmt:formatDate value="${notice.regDate}" pattern="yyyy/MM/dd HH:mm:ss" /></strong>
-      		<span id="bar" style="padding-left: 5px; padding-right: 5px"> | </span>
-      		<i class="fa fa-eye"></i><span style="padding-left: 5px; padding-right: 5px;">조회수</span><strong>1,111</strong>
+      	<div class="col-md-5" id="info">
+      		<i class="fa fa-calendar-check-o"></i><span>&nbsp;작성일&nbsp;</span><strong><fmt:formatDate value="${notice.regDate}" pattern="yyyy/MM/dd HH:mm:ss" /></strong>
+      		<span> | </span>
+      		<i class="fa fa-eye"></i><span>조회수</span><strong>${notice.viewCnt}</strong>
       	</div>
       </div>
       <div class="row">
       	<div class="col-md-1"></div>
-      	<div class="col-md-10" id="content" style="height: 330px; padding: 20px; overflow: auto; border-bottom: 0.3px solid slategray;">
+      	<div class="col-md-10" id="content">
       		${notice.content}
       	</div>
       </div>
@@ -159,52 +159,60 @@
 		location.href = contextPath + "/net/admin/notice/updateForm?no=" + num;
 	});
 
-function moveWriteForm(){
-	var contextPath = getContextPath();
-	location.href = contextPath + "/net/admin/notice/writeForm";
-}
-
-function getContextPath() { // contextPath 가져오는 방법
-	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-}
-
-function deleteNotice(no) {
-	var contextPath = getContextPath();
-	
-	if(confirm("정말 삭제하시겠습니까?")){
-		// location.replace=`${pageContext.request.contextPath}`; // 기존 페이지를 새로운 페이지로 변경
-		location.href = contextPath + "/net/admin/notice/noticeDelete?no=" + no;
-		// document.form.submit; /* form 영역의 내용을 submit하겠다는 명령 */
-	} else {
-		return;
-	};
-}
-
-$("ul.sidebar-menu li").click(function () {
-	var nAuth = `${admin.noticeAuth}`;
-	var uAuth = `${admin.userAuth}`;
-	var pAuth = `${admin.boardAuth}`;
-	var id = `${admin.id}`;
-	
-	if (this.id === "manager" && id === "admin") {
-		location.href = contextPath + "/net/admin/management/admin";
-	} else if (this.id === "user" && uAuth === 't') {
-		location.href = contextPath + "/net/admin/management/user";
-	} else if (this.id === "notice" && nAuth === 't') {
-		location.href = contextPath + "/net/admin/notice/list";
-	} else if (this.id === "board" && pAuth === 't') {
-		location.href = contextPath + "/net/admin/board/index";
-	} else if (this.id === "stastics") {
-		location.href = contextPath + "/net/admin/stastics/index";
-	} else {
-		alert("해당 페이지의 접근 권한이 없습니다. 슈퍼 관리자에게 문의하세요");
-		return false;
+	function moveWriteForm(){
+		var contextPath = getContextPath();
+		location.href = contextPath + "/net/admin/notice/writeForm";
 	}
-});
+	
+	function getContextPath() { // contextPath 가져오는 방법
+		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+	}
 
+	function deleteNotice(no) {
+		var contextPath = getContextPath();
+		
+		if(confirm("정말 삭제하시겠습니까?")){
+			// location.replace=`${pageContext.request.contextPath}`; // 기존 페이지를 새로운 페이지로 변경
+			location.href = contextPath + "/net/admin/notice/noticeDelete?no=" + no;
+			// document.form.submit; /* form 영역의 내용을 submit하겠다는 명령 */
+		} else {
+			return;
+		};
+	}
 
+	$("ul.sidebar-menu li").click(function () {
+		var nAuth = `${admin.noticeAuth}`;
+		var uAuth = `${admin.userAuth}`;
+		var pAuth = `${admin.boardAuth}`;
+		var id = `${admin.id}`;
+		
+		if (this.id === "manager" && id === "admin") {
+			location.href = contextPath + "/net/admin/management/admin";
+		} else if (this.id === "user" && uAuth === 't') {
+			location.href = contextPath + "/net/admin/management/user";
+		} else if (this.id === "notice" && nAuth === 't') {
+			location.href = contextPath + "/net/admin/notice/list";
+		} else if (this.id === "board" && pAuth === 't') {
+			location.href = contextPath + "/net/admin/board/index";
+		} else if (this.id === "stastics") {
+			location.href = contextPath + "/net/admin/stastics/index";
+		} else {
+			alert("해당 페이지의 접근 권한이 없습니다. 슈퍼 관리자에게 문의하세요");
+			return false;
+		}
+	});
 
+	$("document").ready(function () {
+		$("#title").css("border-top", "2px solid slategray").css("background", "#3C8DBC").css("color", "white");
+		$("#writer").css("padding", "10px 15px").css("border-top", "0.3px solid slategray").css("border-bottom", "0.3px solid slategray")
+					.css("font-size", "12px");
+		$("#info").css("text-align", "right").css("padding", "10px 15px").css("border-top", "0.3px solid slategray")
+				.css("border-bottom", "0.3px solid slategray").css("font-size", "12px");
+		$("#content").css("height", "330px").css("padding","20px").css("overflow", "auto")
+					.css("border-bottom", "0.3px solid slategray");
+		$("div.col-md-5 span").css("padding-left", "5px").css("padding-right", "5px");
+	});
 </script>
 </body>
 </html>
