@@ -15,7 +15,7 @@ import kr.co.tripadvisor.repository.mapper.BoardMapper;
 public class DeleteBoardController extends HttpServlet {
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(BoardMapper.class);
 		mapper.deleteBoard(Integer.parseInt(request.getParameter("boardNo")));
 		

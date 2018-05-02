@@ -92,7 +92,7 @@
 				<div>
 					<!-- ****************summer note**************** -->
 					<textarea name="editordata" id="summernote" ></textarea>
-					<input type="submit" class="btn btn-primary" value="Send data">
+					<input type="button" class="btn btn-primary" value="Send data" id="submit">
 				</div>
 			</form>
 		</article>
@@ -149,40 +149,50 @@
 				]
 			});
 		});
+		
+		// 프로젝트 경로
 		var contextPath = getContextPath();
 		
-		function sendFile(file, el) {
-			var form_data = new FormData();
-			form_data.append('file', file);
-			$.ajax({
-				data: form_data,
-				type: "POST",
-				url: contextPath + "/fileUpload",
-				cache: false,
-				contentType: false,
-//	 			enctype: 'multipart/form-data',
-				processData: false,
-				success: function(url) {
-					console.log(url);
-//	 				editor.insertImage(url);
-					$(el).summernote("editor.insertImage", "http://localhost:8000" + contextPath+ "/down?path=" + url);
-				}
-			});
-		}
+		var fileName = [];
+		// 에디터에 파일 등록 후 url를 되돌려 받아 에디터에 뿌려주는 코드
+
+	function sendFile(file, el) {
+		var form_data = new FormData();
+		form_data.append('file', file);
+		$.ajax({
+			data: form_data,
+			type: "POST",
+			url: contextPath + "/fileUpload",
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(url) {
+// 				console.log(url);
+				$(el).summernote("editor.insertImage", "http://localhost" + contextPath + "/down?path=" + url);
+				// 프로젝트명, 파일 경로를 제외한 순수 파일이름만 가져오기
+				let index = url.indexOf("=");
+				// 배열에 각각의 파일명 저장
+				fileName.push(url.substring(index + 1));
+				console.log(fileName);
+			}
+		});
+	}
 		
-		function deleteFile(src) {
-		    $.ajax({
-		        data: {src : src},
-		        type: "POST",
-		        url: contextPath + "/fileDelete", // replace with your url
-		        cache: false,
-		        success: function(resp) {
-		            console.log(resp);
-		        }
-		    });
-		}
+	// 이미지 삭제
+	function deleteFile(src) {
+	    $.ajax({
+	        data: {src : src},
+	        type: "POST",
+	        url: contextPath + "/fileDelete", 
+	        cache: false,
+	        success: function(resp) {
+	            console.log(resp);
+	        }
+	    });
+	}
 	    
-	    function getContextPath() { // contextPath 가져오는 방법
+	// contextPath 가져오는 방법
+	    function getContextPath() { 
 	    	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
 	    	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 	    }
@@ -191,7 +201,25 @@
 			var editordata = $('textarea[name="editordata"]').html(
 					$('#summernote').code());
 		}
-
+	
+		$("#submit").click(function () {
+			var formData = $("#postForm").serializeArray();
+			
+			for (let i = 0; i < fileName.length; i++) {
+				formData.push({ name : 'file', value : fileName[i]});
+			}		
+// 			console.log(formData);
+			$.ajax({
+				type: "POST",
+				data: formData,
+				url: "write",
+				success: function (url) {
+					console.log(url);
+					location.href = url;
+				}
+			});
+		});
+		
 		function submitCheck() {
 			var pf = document.postForm;
 			

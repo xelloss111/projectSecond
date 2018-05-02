@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "kr.co.tripadvisor.repository.mapper.ImageMapper">
+<mapper namespace="kr.co.tripadvisor.repository.mapper.ImageMapper">
 	<resultMap type="noticeImage" id="nImageMap">
 		<result column="image_no" property="imageNo" />
 		<result column="no" property="no" />
@@ -12,6 +12,7 @@
 		<result column="sys_name" property="sysName" />
 		<result column="file_size" property="fileSize" />
 	</resultMap>
+	
 	<resultMap id="bImageMap" type="boardImage">
 		<result column="image_no" property="imageNo" />
 		<result column="board_no" property="boardNo" />
@@ -19,44 +20,78 @@
 		<result column="ori_name" property="oriName" />
 		<result column="sys_name" property="sysName" />
 		<result column="file_size" property="fileSize" />
-</resultMap>
+	</resultMap>
 	
+	<!-- notice -->
 	<insert id="insertFileInfo" parameterType="noticeImage">
-		insert into notice_image (
-			image_no, no, default_path, detail_path, ori_name, sys_name, file_size
-		) values (
-			s_notice_image_no.nextval,
-			#{no},
-			#{defaultPath},
-			#{detailPath},
-			#{oriName},
-			#{sysName},
-			#{fileSize}
+		insert into
+		notice_image (
+		image_no, no, default_path, detail_path, ori_name, sys_name, file_size
+		) values
+		(
+		s_notice_image_no.nextval,
+		#{no},
+		#{defaultPath},
+		#{detailPath},
+		#{oriName},
+		#{sysName},
+		#{fileSize}
+		)
+	</insert>
+
+
+	<delete id="deleteFileInfo" parameterType="string">
+		delete
+		from notice_image
+		where sys_name = #{sysName}
+	</delete>
+
+	<!-- 갤러리이미지 -->
+	<select id="selectImageAll" resultMap="bImageMap">
+		select *
+		from tb_image
+		order by image_no asc
+	</select>
+
+	<insert id="insertImageFile" parameterType="boardImage">
+		insert into tb_image (image_no, board_no, path, ori_name, sys_name,
+		file_size)
+		values (s_image_no.nextval, #{boardNo}, #{path}, #{oriName}, #{sysName},
+		#{fileSize})
+	</insert>
+
+	<select id="selectImageFile" parameterType="int" resultMap="bImageMap">
+		select *
+		from tb_image
+		where board_no = #{boardNo}
+	</select>
+	
+	<!-- 게시판 -->
+
+	<insert id="insertFileInfoBoard" parameterType="boardImage">
+		insert into
+		tb_image (
+		image_no, board_no, path, ori_name, sys_name, file_size
+		) values
+		(
+		s_image_no.nextval, 
+		#{boardNo}, 
+		#{path}, 
+		#{oriName}, 
+		#{sysName},
+		#{fileSize}
 		)
 	</insert>
 	
-	<delete id="deleteFileInfo" parameterType="string">
-		delete
-		  from notice_image
-		 where sys_name = #{sysName}
-	</delete>
+	<update id="updateFileInfoBoard" parameterType="boardImage">
+		update tb_image
+			set board_no = #{boardNo}
+			where sys_name = #{sysName}
+	</update>
+	
+	
+	<!-- 민희 리스트 이미지 썸네일 -->
 
-<!-- 갤러리이미지 -->
-<select id="selectImageAll" resultMap="bImageMap">
-	select *
-	  from tb_image
-	 order by image_no asc
-</select>
-
-<insert id="insertImageFile" parameterType="boardImage">
-	insert into tb_image (image_no, board_no, path, ori_name, sys_name, file_size)
-	values (s_image_no.nextval, #{boardNo}, #{path}, #{oriName}, #{sysName}, #{fileSize})
-</insert>
-
-<select id="selectImageFile" parameterType="int" resultMap="bImageMap">
-select *
-  from tb_image
- where board_no = #{boardNo}
-</select>
-
+	
+	
 </mapper>

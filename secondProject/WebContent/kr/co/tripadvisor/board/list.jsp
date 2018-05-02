@@ -34,15 +34,12 @@
 					</ul>
 				</div>
 				<h3 id="menuScrap">
-					<a href="/kr/co/tripadvisor/client/scrapList">
-						<i class="fas fa-tags"></i>
-						스크랩
+					<a href="/secondProject/kr/co/tripadvisor/client/scrapList"> <i
+						class="fas fa-tags"></i> 스크랩
 					</a>
 				</h3>
 				<h3>
-					<a href="#">
-						<i class="far fa-smile"></i>
-						회원정보
+					<a href="#"> <i class="far fa-smile"></i> 회원정보
 					</a>
 				</h3>
 			</div>
@@ -132,9 +129,12 @@
 						<li>
 							<figure>
 								<a
-									href='detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}'><div class="fi_div">
-										<img src="../../../../images/trip_1.png">
-									</div></a>
+									href='detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}'>
+									<div class="fi_div">
+										<img
+											src='/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}' />
+									</div>
+								</a>
 							</figure>
 							<div>
 
@@ -145,23 +145,48 @@
 								<span id="sel_${b.boardNo}">지역 : ${b.area} </span>
 
 								<script type="text/javascript">
-								var result = ""
-								switch("${b.area}") {
-									case "2001" : result = "서울"; break;
-									case "2002" : result= "광주"; break;
-									case "2003" : result= "경기"; break;
-									case "2004" : result= "호남"; break;
-									case "2005" : result= "인천"; break;
-									case "2006" : result= "부산"; break;
-									case "2007" : result= "강원"; break;
-									case "2008" : result= "영남"; break;
-									case "2009" : result= "대전"; break;
-									case "2010" : result= "대구"; break;
-									case "2011" : result= "충청"; break;
-									case "2012" : result= "제주"; break;
-									
-								};
-								$("#sel_${b.boardNo}").text("지역 : "+result);
+									var result = ""
+									switch ("${b.area}") {
+									case "2001":
+										result = "서울";
+										break;
+									case "2002":
+										result = "광주";
+										break;
+									case "2003":
+										result = "경기";
+										break;
+									case "2004":
+										result = "호남";
+										break;
+									case "2005":
+										result = "인천";
+										break;
+									case "2006":
+										result = "부산";
+										break;
+									case "2007":
+										result = "강원";
+										break;
+									case "2008":
+										result = "영남";
+										break;
+									case "2009":
+										result = "대전";
+										break;
+									case "2010":
+										result = "대구";
+										break;
+									case "2011":
+										result = "충청";
+										break;
+									case "2012":
+										result = "제주";
+										break;
+
+									};
+									$("#sel_${b.boardNo}").text(
+											"지역 : " + result);
 								</script>
 
 								<span id="sel2_${b.boardNo}">주제 : ${b.attract} </span>
@@ -169,12 +194,22 @@
 								<script type="text/javascript">
 									var count = 1;
 									var result = ""
-									switch("${b.attract}") {
-										case "1001" : result = "맛집"; count++; break;
-										case "1002" : result = "명소"; count++; break;
-										case "1003" : result = "숙소"; count++; break;
+									switch ("${b.attract}") {
+									case "1001":
+										result = "맛집";
+										count++;
+										break;
+									case "1002":
+										result = "명소";
+										count++;
+										break;
+									case "1003":
+										result = "숙소";
+										count++;
+										break;
 									};
-									$("#sel2_${b.boardNo}").text("주제 : "+result);
+									$("#sel2_${b.boardNo}").text(
+											"주제 : " + result);
 								</script>
 
 								<span><fmt:formatDate value="${b.regDate}"
@@ -186,48 +221,58 @@
 				</ul>
 			</div>
 			<div>
-				<nav class="paging_area">
-				  <ul class="pagination">
-				    <li class="disabled">
-				      <span>
-				        <span aria-hidden="true">&laquo;</span>
-				      </span>
-				    </li>
-				    <li class="active">
-				      <span>1 <span class="sr-only">(current)</span></span>
-				    </li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>
+				<c:if test="${paging.totalCount != 0 }">
+					<nav class="paging_area">
+						<ul class="pagination">
+							<li class="<c:if test='${paging.prev eq false }'>disabled</c:if>">
+								<a
+								href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list?pageNo=${paging.startPage - 1}"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a>
+							</li>
+							<c:forEach var="iContent" begin="${paging.startPage}"
+								end="${paging.endPage}">
+								<c:choose>
+									<c:when test="${iContent == paging.pageNo}">
+										<li class="active"><a
+											href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list?pageNo=${iContent}">${iContent}</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li><a
+											href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list?pageNo=${iContent}">${iContent}</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="<c:if test='${paging.next eq false}'>disabled</c:if>">
+								<a
+								href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list?pageNo=${paging.endPage + 1}"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a>
+							</li>
+						</ul>
+					</nav>
+				</c:if>
 			</div>
 			<!-- search_area -->
 		</article>
 	</div>
-	
+
 	<!-- script 영역 -->
 	<script type="text/javascript">
-	$(function() {// jQuery 시작 / 메뉴 마우스 오버 효과
-		$(".accordion_navi > div").hide();
-		$(".accordion_navi h3").mouseover(function() {
-			if (!($(this).hasClass("selected"))) {
-				$(".accordion_navi > h3").removeClass("selected");
-				$(this).addClass("selected");
-				$(".accordion_navi>div").not().slideUp("slow");
-				$("+div", this).slideDown("slow"); //$(this).find("+div")
-			}
-		})
+		$(function() {// jQuery 시작 / 메뉴 마우스 오버 효과
+			$(".accordion_navi > div").hide();
+			$(".accordion_navi h3").mouseover(function() {
+				if (!($(this).hasClass("selected"))) {
+					$(".accordion_navi > h3").removeClass("selected");
+					$(this).addClass("selected");
+					$(".accordion_navi>div").not().slideUp("slow");
+					$("+div", this).slideDown("slow"); //$(this).find("+div")
+				}
+			})
 
-	}); //jQuery 종결
-
-
-</script>
+		}); //jQuery 종결
+	</script>
 </body>
 </html>

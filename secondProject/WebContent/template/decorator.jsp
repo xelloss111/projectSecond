@@ -21,6 +21,9 @@
 	href="/secondProject/css/client/jquery.modal.min.css" media="all">
 	<!-- minimal Scrollbar -->
 	<link rel="stylesheet" type="text/css" href="/secondProject/css/client/minimal_scrollbar.css" media="all">
+	<!-- member_scrapList css -->
+	<link rel="stylesheet" type="text/css"
+	href="/secondProject/css/client/member_scrapList.css" media="all">
 	<!-- board_detail css -->
 	<link rel="stylesheet" type="text/css"
 	href="/secondProject/css/client/board_detail.css" media="all">

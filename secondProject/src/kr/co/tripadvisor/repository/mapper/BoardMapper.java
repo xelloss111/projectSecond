@@ -16,10 +16,17 @@ public interface BoardMapper {
 	void insertBoard (Board board);
 	Board selectBoardByNo(int boardNo);
 	int updateBoard(Board board);
+	
 	int deleteBoardByNo(int boardNo);
+	
+	//min
 	void deleteBoard(int no);
+	
 	void updateBoardViewCnt(int boardno);
+	
+	//민희
 	//index list
 	List<Board> selectIndex();	
+
 
 }

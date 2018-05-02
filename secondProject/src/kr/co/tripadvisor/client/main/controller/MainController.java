@@ -21,7 +21,6 @@ public class MainController extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(BoardMapper.class);
 	
-		
 		List<Board> list = mapper.selectIndex();
 		 	
 		request.setAttribute("list", list);

@@ -14,7 +14,14 @@ public class Board {
 	Date regDate;
 	Date modDate;
 	int viewCnt;
+	BoardImage boardImage;
 	
+	public BoardImage getBoardImage() {
+		return boardImage;
+	}
+	public void setBoardImage(BoardImage boardImage) {
+		this.boardImage = boardImage;
+	}
 	public String getCodeNo() {
 		return codeNo;
 	}
@@ -74,6 +81,12 @@ public class Board {
 	}
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
+	}
+	@Override
+	public String toString() {
+		return "Board [codeNo=" + codeNo + ", boardNo=" + boardNo + ", title=" + title + ", id=" + id + ", editordata="
+				+ editordata + ", area=" + area + ", attract=" + attract + ", regDate=" + regDate + ", modDate="
+				+ modDate + ", viewCnt=" + viewCnt + ", boardImage=" + boardImage + "]";
 	}
 
 }

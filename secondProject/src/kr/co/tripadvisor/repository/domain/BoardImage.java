@@ -44,5 +44,10 @@ public class BoardImage {
 	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
+	@Override
+	public String toString() {
+		return "BoardImage [imageNo=" + imageNo + ", boardNo=" + boardNo + ", path=" + path + ", oriName=" + oriName
+				+ ", sysName=" + sysName + ", fileSize=" + fileSize + "]";
+	}
 
 }

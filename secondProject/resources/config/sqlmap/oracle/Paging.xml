@@ -113,9 +113,18 @@
 		<result column="reg_date" property="regDate" />
 		<result column="mod_date" property="modDate" />
 		<result column="view_cnt" property="viewCnt" />
+		<association property="boardImage" column="board_no" select="selectImageByNo"/>
+		
 	</resultMap>  
 	  
-	  
+	  	<resultMap id="bImageMap" type="boardImage">
+			<result column="image_no" property="imageNo" />
+			<result column="board_no" property="boardNo" />
+			<result column="path" property="path" />
+			<result column="ori_name" property="oriName" />
+			<result column="sys_name" property="sysName" />
+			<result column="file_size" property="fileSize" />
+		</resultMap>
 	<select id="boardListUp" parameterType="paging" resultMap="boardMap">
 		select X.*
 		  from ( 
@@ -131,6 +140,13 @@
          where <![CDATA[X.rnum >= #{startCount}]]>
 	</select>
 			
+			
+	<select id="selectImageByNo" parameterType="int" resultMap="bImageMap">
+		select *
+		from tb_image
+		where board_no = #{boardNo}
+		and rownum = 1
+	</select>
 <!-- 갤러리 페이징 쿼리 -->
 	<select id="totalGalleryCount" resultType="int">
 		select count(*)

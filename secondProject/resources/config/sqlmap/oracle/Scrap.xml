@@ -10,12 +10,21 @@
 		<result column="board_no" property="boardNo" />
 		<result column="scrap_no" property="scrapNo" />
 		<result column="reg_date" property="regDate" />
+		<association property="board" column="board_no" select="selectScrapByNo"/>
 	</resultMap>
-
-<!-- association	 -->
-<!-- 	<resultMap id="scrapMap2" type="scrap" > -->
-<!-- 		<association property="boardMap" column="id" javaType="board" select="selectBoard" /> -->
-<!-- 	</resultMap> -->
+	<!-- board Map -->
+	<resultMap id="boardMap" type="board">
+		<result column="code_no" property="codeNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="title" property="title" />
+		<result column="id" property="id" />
+		<result column="editordata" property="editordata" />
+		<result column="area" property="area" />
+		<result column="attract" property="attract" />
+		<result column="reg_date" property="regDate" />
+		<result column="mod_date" property="modDate" />
+		<result column="view_cnt" property="viewCnt" />
+	</resultMap>
 	
 	<insert id="insertScrap" parameterType="scrap">
 		insert into tb_scrap (
@@ -29,32 +38,16 @@
 	</insert>
 	
 	<!-- scrap list --> 
-
+	<select id="selectScrap" resultMap="scrap">
 	
-<!-- 	<select id="selectScrapBoard" resultMap="scrapMap2" parameterType="string"> -->
-<!-- 		select * -->
-<!-- 		from tb_scrap -->
-<!-- 		where id='tester' -->
-<!-- 	</select> -->
-	
-<!-- 	<select id="selectBoard" resultMap="boardMap" parameterType="string"> -->
-<!-- 		select * -->
-<!-- 		  from tb_board -->
-<!-- 		 where id = 'tester' -->
-<!-- 	</select> -->
-	
-	
+	</select>
 	<!--  -->
 	
-	
-	<select id="selectScrapByNo" parameterType="int" resultType="board">
+	<select id="selectScrapByNo" parameterType="int" resultMap="boardMap">
 		select *
-		  from tb_board
-		 where board_no = (
-		 					select board_no
-		 					  from tb_scrap
-		 					 where scrap_no = #{scrapNo}
-		 				  )
+		from tb_board
+		where board_no = #{boardNo}
+		and rownu = 1		
 	</select>
 	
 	<delete id="deleteScrap" parameterType="int">

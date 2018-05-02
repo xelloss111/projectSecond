@@ -1,6 +1,7 @@
 package kr.co.tripadvisor.client.board.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,37 +11,56 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.Board;
+import kr.co.tripadvisor.repository.domain.BoardImage;
 import kr.co.tripadvisor.repository.mapper.BoardMapper;
+import kr.co.tripadvisor.repository.mapper.ImageMapper;
 
 
-@WebServlet("/kr/co/tripadvisor/board/writeboard") 
+@WebServlet("/kr/co/tripadvisor/board/write") 
 
 public class WriteBoardController extends HttpServlet {
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(BoardMapper.class);
+		ImageMapper mapper2 = MyAppSqlConfig.getSqlSession().getMapper(ImageMapper.class);
 		
 		request.setCharacterEncoding("utf-8");
 		
-		String codeNo = request.getParameter("codeNo");
-		String title = request.getParameter("title");
-		String editordata = request.getParameter("editordata");
-		String id = request.getParameter("id");
-		String area = request.getParameter("area");
-		String attract = request.getParameter("attract");
+		String[] id = request.getParameterValues("id");
+		String[] codeNo = request.getParameterValues("codeNo");
+		String[] title = request.getParameterValues("title");
+		String[] editordata = request.getParameterValues("editordata");
+		String[] files = request.getParameterValues("file");
+		String[] area = request.getParameterValues("area");
+		String[] attract = request.getParameterValues("attract");
 		
+		// 에디터에 있는 게시글 등록
+
 		Board b = new Board();
-		
-		b.setCodeNo(codeNo);
-		b.setTitle(title);
-		b.setEditordata(editordata);
-		b.setId(id);
-		b.setArea(area);
-		b.setAttract(attract);
+		b.setCodeNo(codeNo[0]);
+		b.setId(id[0]);
+		b.setTitle(title[0]);
+		b.setEditordata(editordata[0]);
+		b.setArea(area[0]);
+		b.setAttract(attract[0]);
 		mapper.insertBoard(b);
 		
-		response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/board/list");
+		// 파일명이 들어있는 배열에서 파일명을 읽고 현재 등록된 게시물 번호를 같이 포함하여 객체 생성 후 업데이트
+		for (int i = 0; i < files.length; i++) {
+			BoardImage bImage = new BoardImage();
+			
+			String fileName = (files[i].replaceAll("(\r\n|\r|\n|\n\r)", ""));
+			//System.out.println(fileName);
+			bImage.setSysName(fileName);
+			bImage.setBoardNo(b.getBoardNo());
+			
+			mapper2.updateFileInfoBoard(bImage);
+		}
+		PrintWriter out = response.getWriter();
+		
+		out.print(request.getContextPath() + "/kr/co/tripadvisor/board/list");
+		out.close();
 	}
 
 }

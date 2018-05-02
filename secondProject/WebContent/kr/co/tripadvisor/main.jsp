@@ -233,7 +233,9 @@
 					</c:if>
 					<c:forEach var='board' items="${list}" end="5" step="1">
 						<li>
-							<a href="#"><img src="../../../images/trip_1.png"></a>
+							<a href='board/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}'>
+								<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
+							</a>
 							<div>
 								<h5>${board.title}</h5>
 								<span id="sel2_${board.boardNo}">주제 : ${board.attract} </span>

@@ -53,13 +53,11 @@ aside {
 	display:block; color:#000;
 }
 article {
-	padding-top: 30px;
 	width: 60%;
 	height: auto;
 	margin-right: 10%;
 	float: left;
 	position: relative;
-	padding: 5%;
 }
 
 .top_sel {

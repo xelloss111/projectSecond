@@ -14,8 +14,17 @@
 		<result column="reg_date" property="regDate" />
 		<result column="mod_date" property="modDate" />
 		<result column="view_cnt" property="viewCnt" />
+		<association property="boardImage" column="board_no" select="selectImageByNo"/>
 	</resultMap>
 
+		<resultMap id="bImageMap" type="boardImage">
+			<result column="image_no" property="imageNo" />
+			<result column="board_no" property="boardNo" />
+			<result column="path" property="path" />
+			<result column="ori_name" property="oriName" />
+			<result column="sys_name" property="sysName" />
+			<result column="file_size" property="fileSize" />
+		</resultMap>
 	<!-- 리스트 -->
 	<!-- <select id="selectBoard" parameterType="boardSearch" resultMap="boardMap"> -->
 	<select id="selectBoard" resultMap="boardMap">
@@ -24,7 +33,14 @@
 		where code_no='3001'
 		order by board_no desc
 	</select>
-
+	
+	<select id="selectImageByNo" parameterType="int" resultMap="bImageMap">
+		select *
+		from tb_image
+		where board_no = #{boardNo}
+		and rownum = 1
+	</select>
+	
 	<!-- 인덱스 최신 게시물 -->
 	<select id="selectIndex" resultMap="boardMap">
 		select *
@@ -75,13 +91,20 @@
 		where board_no = #{boardNo}
 	</update>
 
-	<!-- 게시글 삭제 -->
+	<!-- 게시글 삭제 혜리-->
 	<delete id="deleteBoardByNo" parameterType="int">
 		delete
 		from tb_board
 		where board_no = #{boardNo}
 	</delete>
 
+
+	<!-- 게시글 삭제 민희-->
+	<delete id="deleteBoard" parameterType="int">
+		delete
+		from tb_board
+		where board_no = #{boardNo}
+	</delete>
 	<!-- 첨부파일 파트 -->
 
 	<resultMap id="boardImageMap" type="boardImage">
@@ -111,7 +134,6 @@
 		#{fileSize}
 		)
 	</insert>
-
 
 
 	<!-- 자유게시판 수정 -->

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
+import kr.co.tripadvisor.repository.domain.BoardImage;
 import kr.co.tripadvisor.repository.domain.NoticeImage;
 import kr.co.tripadvisor.repository.mapper.ImageMapper;
 
@@ -53,6 +54,9 @@ public class FileUploadController extends HttpServlet {
 				String sysName = mRequest.getFilesystemName(name);
 				long fileSize = file.length();
 				
+				System.out.println(detailPath);
+				System.out.println(sysName);
+				
 				NoticeImage nImage = new NoticeImage();
 				nImage.setNo(1);
 				nImage.setOriName(oriName);
@@ -62,7 +66,18 @@ public class FileUploadController extends HttpServlet {
 				nImage.setFileSize(fileSize);
 				
 				mapper.insertFileInfo(nImage);
+
+//				Board
+				BoardImage bImage = new BoardImage();
+				bImage.setBoardNo(1);
+				bImage.setOriName(oriName);
+				bImage.setSysName(sysName);
+				//bImage.setDefaultPath(defaultPath);
+				bImage.setPath(detailPath);
+				bImage.setFileSize(fileSize);
 				
+				mapper.insertFileInfoBoard(bImage);
+
 				out.println(detailPath + "&sName=" + sysName);
 				
 				out.close();

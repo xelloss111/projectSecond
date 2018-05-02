@@ -154,7 +154,7 @@
 				processData: false,
 				success: function(url) {
 					console.log(url);
-					$(el).summernote("editor.insertImage", "http://localhost:8000" + contextPath+ "/down?path=" + url);
+					$(el).summernote("editor.insertImage", "http://localhost" + contextPath+ "/down?path=" + url);
 				}
 			});
 		}

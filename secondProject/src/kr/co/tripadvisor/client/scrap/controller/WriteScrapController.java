@@ -19,13 +19,16 @@ public class WriteScrapController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ScrapMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(ScrapMapper.class);
 		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
 		Scrap scrap = new Scrap();
 		
 		scrap.setId(request.getParameter("id"));
 		scrap.setCodeNo(request.getParameter("codeNo"));
-		scrap.setBoardNo(Integer.parseInt(request.getParameter("boardNo")));
+		scrap.setBoardNo(boardNo);
 		
 		mapper.insertScrap(scrap);
+		
 	}
 
 }

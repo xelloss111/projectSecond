@@ -29,8 +29,8 @@ public class EmailController extends HttpServlet {
 	  
 	  
 	  String host     = "smtp.naver.com";
-	  final String user   = "아이디";
-	  final String password  = "비밀번호";
+	  final String user   = "";
+	  final String password  = "";
 	  
 	  String email = request.getParameter("email");
 	  

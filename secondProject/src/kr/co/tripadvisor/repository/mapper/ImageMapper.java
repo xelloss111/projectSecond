@@ -10,6 +10,13 @@ public interface ImageMapper {
 	void deleteFileInfo(String sysName);
 	void updateFileInfo(NoticeImage nImage);
 	
+	//민희_board
+	void updateFileInfoBoard(BoardImage bImage);
+	void insertFileInfoBoard(BoardImage bImage);
+	//board image 
+	BoardImage selectimageboardList();
+	
+	
 	//혜리_갤러리
 	void insertImageFile(BoardImage image);
 	List<BoardImage> selectImageAll();
