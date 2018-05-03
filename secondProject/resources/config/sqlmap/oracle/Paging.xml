@@ -48,6 +48,7 @@
 		<result column="content" property="content" />
 		<result column="reg_date" property="regDate" />
 		<result column="mod_date" property="modDate" />
+		<result column="view_cnt" property="viewCnt" />
 	</resultMap>
 		
 	<select id="noticeListUp" parameterType="paging" resultMap="noticeMap">

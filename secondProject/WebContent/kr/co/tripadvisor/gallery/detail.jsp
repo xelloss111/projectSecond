@@ -216,7 +216,7 @@ h1{ font-size: xx-large;}
 	 <form id="rForm" class="form-inline">
 		<div id="comment">
 		    <div class="form-group">
-			    <input type="text" name="id" class="form-control" value="${sessionScope.user.id}" readonly />
+			    <input type="text" name="id" class="form-control" value="Admin" readonly />
 		    </div>
 		    <div class="form-group">
 			    <input type="text" name="content" class="form-control input-wp1" placeholder="내용을 입력하세요">

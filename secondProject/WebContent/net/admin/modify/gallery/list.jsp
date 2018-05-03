@@ -88,10 +88,10 @@
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>자유게시판 관리</h1>
+    <h1>갤러리 관리</h1>
     <ol class="breadcrumb">
       <li><a href="index.html"><i class="fa fa-edit"></i>Home</a></li>
-      <li class="active">Board</li>
+      <li class="active">Gallery</li>
     </ol>
   </section>
   <section class="content">
@@ -115,12 +115,12 @@
                 <th>번호</th><th>작성자</th><th>제목</th><th>지역</th><th>여행분류</th><th>등록일</th><th>조회수</th><th></th>
               </tr>
             </thead>
-              <c:forEach var="board" items="${boardList}">
+              <c:forEach var="board" items="${galleryList}">
                 <tr>
                   <td><input type="checkbox" name="chklist" id="${board.boardNo}">
               	  <td style="width:80px;">${board.boardNo}</td>
               	  <td style="width:80px;"><c:out value="${board.id}" /></td>
-              	  <td style="width:590px;"><a href="detail?no=${board.boardNo}"><c:out value="${board.title}" /></a></td>
+              	  <td style="width:590px;"><a href="detail?boardNo=${board.boardNo}"><c:out value="${board.title}" /></a></td>
               	  <td id="area" style="width:100px;">${board.area}</td>
               	  <td id="attract" style="width:100px;">${board.attract}</td>
               	  <td style="width:120px;"><fmt:formatDate value='${board.regDate}' pattern="yyyy-MM-dd" /></td>       
@@ -143,7 +143,7 @@
 						<ul class="pagination">
 							<li class="<c:if test='${paging.prev eq false }'>disabled</c:if>">
 								<a
-								href="${pageContext.request.contextPath}/net/admin/board/free/list?pageNo=${paging.startPage - 1}"
+								href="${pageContext.request.contextPath}/net/admin/board/gallery/list?pageNo=${paging.startPage - 1}"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a>
 							</li>
@@ -152,19 +152,19 @@
 								<c:choose>
 									<c:when test="${iContent == paging.pageNo}">
 										<li class="active"><a
-											href="${pageContext.request.contextPath}/net/admin/board/free/list?pageNo=${iContent}">${iContent}</a>
+											href="${pageContext.request.contextPath}/net/admin/board/gallery/list?pageNo=${iContent}">${iContent}</a>
 										</li>
 									</c:when>
 									<c:otherwise>
 										<li><a
-											href="${pageContext.request.contextPath}/net/admin/board/free/list?pageNo=${iContent}">${iContent}</a>
+											href="${pageContext.request.contextPath}/net/admin/board/gallery/list?pageNo=${iContent}">${iContent}</a>
 										</li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 							<li class="<c:if test='${paging.next eq false}'>disabled</c:if>">
 								<a
-								href="${pageContext.request.contextPath}/net/admin/board/free/list?pageNo=${paging.endPage + 1}"
+								href="${pageContext.request.contextPath}/net/admin/board/gallery/list?pageNo=${paging.endPage + 1}"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a>
 							</li>

@@ -115,17 +115,46 @@
       <div class="row">
       	<div class="col-md-1"></div>
       	<div class="col-md-10" id="content">
-      		<c:out value="${board.editordata}"/>
+      		${board.editordata}
       	</div>
       </div>
       <p>
       <div class="row">
       	<div class="col-md-1"></div>
-      	<div class="col-md-10" align="right">
+      	<div class="col-md-10" align="right" style="padding: 0px;">
       		<button class="btn btn-warning" id="modify">수정</button>
-      		<button class="btn btn-danger" id="delete" onclick="javascript:deleteBoard(${board.boardNo})">삭제</button>
+      		<button class="btn btn-danger" id="delete" onclick="javascript:deleteBoard(${board.boardNo})">삭제</button><p>
       	</div>
       </div>
+       	<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10" style="padding: 0px;">
+				<%-- 댓글 관련 파트 시작 --%>
+				<form id="rForm" class="form-inline" >
+					<div id="comment">
+						<div class="form-group">
+							<input type="text" name="id" class="form-control" value="Admin"	readonly />
+						</div>
+						<div class="form-group">
+							<input type="text" name="content" class="form-control input-wp1" placeholder="내용을 입력하세요">
+						</div>
+						<button class="btn btn-primary">등록</button>
+					</div>
+				</form>
+				<p>
+			</div>
+		</div>	
+      	
+		<div class="row">
+			<%--  댓글 파트입니다.  --%>
+			<form action="updateComment" method="post">
+				<input type="hidden" name="boardNo" value="${board.boardNo}" />
+				<input type="hidden" name="commentNo" value="${commentNo}" />
+				<%-- 댓글 목록 --%>
+				<div id="commentList"></div>
+			</form>
+			<p>
+		</div>
     </div>
  </section>
 </div>      	
@@ -205,7 +234,150 @@
 		$("#content").css("height", "330px").css("padding","20px").css("overflow", "auto")
 					.css("border-bottom", "0.3px solid slategray");
 		$("div.col-md-5 span").css("padding-left", "5px").css("padding-right", "5px");
+		$(".form-group input[name='content']").css("width", "670px");
 	});
+
+	// 댓글 처리	
+	function commentDelete(commentNo) {
+		$.ajax({
+			url: "<c:url value='/gallery/deleteComment'/>",
+			data: {
+				boardNo : "${board.boardNo}", 
+				commentNo: commentNo
+			},
+			dataType: "json",
+			success: makeCommentList
+		});
+	}
+	
+	function commentUpdateForm(commentNo) {
+		
+		$("#commentList tr[id^=row]").show();
+		$("#commentList tr[id^=modRow]").remove();
+		
+		var modId = $("#row" + commentNo + " > td:eq(0)").text();
+		var modContent = $("#row" + commentNo + " > td:eq(1)").text();
+		
+		var html = '';
+		html += '<tr id="modRow' + commentNo + '">';
+		html += '	<td>' + modId + '</td>';
+		html += '	<td>';
+		html += '		<div class="form-group">';
+		html += '			<input type="text" name="content" value="' + modContent + '" class="form-control input-wp2" placeholder="내용을 입력하세요">';
+		html += '		</div>';
+		html += '	</td>';
+		html += '	<td colspan="2">'; 
+		html += '		<a href="javascript:commentUpdate(' + commentNo + ');" class="btn btn-success btn-sm" role="button">수정</a>';
+		html += '		<a href="javascript:commentCancel(' + commentNo + ');" class="btn btn-warning btn-sm" role="button">취소</a>';
+		html += '	</td>';
+		html += '</tr>';
+		$("#row" + commentNo).after(html);	
+		$("#row" + commentNo).hide();
+	}
+	
+	function commentUpdate(commentNo) {
+		$.ajax({
+			url: "<c:url value='/gallery/updateComment'/>",
+			type: "POST",
+			data: {
+				boardNo: "${board.boardNo}", 
+				content: $("#modRow" + commentNo + " input[name=content]").val(), 
+				commentNo: commentNo
+			},
+			dataType: "json",
+			success: function (result) {
+				makeCommentList(result);
+			} 
+		});
+	}
+	
+	function commentCancel(commentNo) {
+		$("#row" + commentNo).show();
+		$("#modRow" + commentNo).remove();
+	}
+	
+	// 댓글 등록 처리
+	$("#rForm").submit(function (e) {
+		e.preventDefault();
+		
+		$.ajax({
+			url: "<c:url value='/gallery/writeComment'/>",
+			type: "POST",
+			data: {
+				boardNo: "${board.boardNo}", 
+				content: $("#rForm input[name='content']").val(), 
+				id : $("#rForm input[name='id']").val()
+			},
+			dataType: "json"
+		})
+		
+		.done(function (result) {
+			if (!'${sessionScope.user.id}') {
+				$("#rForm input[name='writer']").val("");
+			}
+			$("#rForm input[name='content']").val("");
+			
+			makeCommentList(result);
+		});
+		
+	});	
+	
+	// 댓글 목록 만드는 공통 함수
+	function makeCommentList(result) {
+		console.dir(result);
+		var html = "";
+		html += '<div class="row">';
+		html += '	<div class="col-md-1"></div>';
+		html += '	<div class="col-md-10">';
+		html += '		<table class="table table-bordered">';
+		html += '			<colgroup>'; 
+		html += '				<col width="7%">'; 
+		html += '				<col width="*">'; 
+		html += '				<col width="14%">'; 
+		html += '				<col width="14%">'; 
+		html += '			</colgroup>';
+
+		
+		for (var i = 0; i < result.length; i++) {
+			var comment = result[i];
+			html += '<tr id="row' + comment.commentNo + '">';
+			html += '	<td>' + comment.id + '</td>';
+			html += '	<td>' + comment.content + '</td>';
+			var date = new Date(comment.regDate);
+			var time = date.getFullYear() + "-" 
+			         + (date.getMonth() + 1) + "-" 
+			         + date.getDate() + " "
+			         + date.getHours() + ":"
+			         + date.getMinutes() + ":"
+			         + date.getSeconds();
+			html += '	<td>' + time + '</td>';  
+			html += '	<td>';    
+			html += '		<a href="javascript:commentUpdateForm(' + comment.commentNo + ')" class="btn btn-success btn-sm" role="button">수정</a>';    
+			html += '		<a href="javascript:commentDelete(' + comment.commentNo + ')" class="btn btn-danger btn-sm" role="button">삭제</a>';    
+			html += '	</td>';    
+			html += '</tr>';
+		}
+		if (result.length == 0) {
+			html += '<tr><td colspan="4">댓글이 존재하지 않습니다.</td></tr>';
+		}
+		html += "</table>";
+		html += '	</div>';
+		html += '</div>';  
+		$("#commentList").html(html);
+	}
+	
+	// 댓글 목록 조회
+	function commentList() {
+		$.ajax({
+			url: "<c:url value='/gallery/commentList'/>",
+			data: {boardNo: "${board.boardNo}"},
+			dataType: "json", 
+			success: makeCommentList
+		});
+	}
+	
+	// 상세 페이지 로딩시 댓글 목록 조회 ajax 호출
+	commentList();	
 </script>
 </body>
 </html>

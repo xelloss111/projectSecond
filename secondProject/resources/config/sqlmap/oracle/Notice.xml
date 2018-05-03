@@ -74,5 +74,10 @@
 		 where no = #{no}
 	</delete>
 	
+	<update id="updateNoticeViewCnt" parameterType="int">
+		update tb_notice
+		   set view_cnt = view_cnt + 1
+		 where no = #{no}
+	</update>
 
 </mapper>

@@ -9,5 +9,6 @@ public interface NoticeMapper {
 	List<Notice> selectNotice();
 	Notice selectNoticeByNo(int no);
 	void updateNotice(Notice notice);
-	void deleteNotice(int no);	
+	void deleteNotice(int no);
+	void updateNoticeViewCnt(int no);
 }
