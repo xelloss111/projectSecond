@@ -1,11 +1,171 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>트립팁 어드민 - 게시판 관리</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+ 	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" href="../../../css/admin/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../../../css/admin/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="../../../css/admin/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../../../css/admin/AdminLTE.min.css">
+	<!-- iCheck -->
+	<link rel="stylesheet" href="../../../css/admin/blue.css">
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="../../../css/admin/_all-skins.min.css">
+	
+	
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	<!-- Google Font -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+      <header class="main-header">
+      <!-- Logo -->
+        <a href="index" class="logo">
+          <span class="logo-lg"><b>TripTip</b>Admin</span>
+        </a>
+      <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+          <div class="navbar-custom-menu">
+            <div class="col-md-10" style="padding-top: 6.5px">
+              <form method="post" action="${pageContext.request.contextPath}/net/admin/main/logout">
+                <button type="submit" class="btn btn-info">Log-out</button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+     <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <section class="sidebar">
+          <ul class="sidebar-menu">
+            <li id="stastics" class="treeview">
+			  <a href="${pageContext.request.contextPath}/net/admin/stastics/index">
+				<i class="fa fa-pie-chart"></i><span>통  계</span>
+              </a>
+            </li>
+            <li id="manager" class="treeview">
+              <a href="${pageContext.request.contextPath}/net/admin/management/admin">
+                <i class="fa fa-laptop"></i><span>매니저 관리</span>
+              </a>
+            </li>
+            <li id="user" class="treeview">
+              <a href="${pageContext.request.contextPath}/net/admin/management/user">
+                <i class="fa fa-user-o"></i><span>회원 관리</span>
+              </a>
+            </li>
+            <li id="notice" class="treeview">
+              <a href="${pageContext.request.contextPath}/net/admin/notice/list">
+                <i class="fa fa-edit"></i><span>공지 관리</span>
+              </a>
+            </li>
+            <li id="board" class="active treeview menu-open">
+              <a href="#1">
+                <i class="fa fa-clipboard"></i><span>게시판 관리</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </aside>
+      
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>게시판 관리</h1>
+    <ol class="breadcrumb">
+      <li><a href="index.html"><i class="fa fa-edit"></i>Home</a></li>
+      <li class="active">Board</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-1"></div>
+    		<div class="col-md-4">
+    			<a href="${pageContext.request.contextPath}/net/admin/board/free/list" class="btn btn-primary btn-lg btn-block" role="button">자유게시판</a>
+    		</div>
+    		<div class="col-md-2"></div>
+    		<div class="col-md-4">
+    			<a href="${pageContext.request.contextPath}/net/admin/board/gallery/list" class="btn btn-info btn-lg btn-block" role="button">갤러리</a>
+    		</div>
+    	</div>
+    </div>
+ </section>
+ </div>
+</div>
 
+<!-- jQuery 3 -->
+<script src="../../../js/admin/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../../js/admin/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../../../js/admin/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../../js/admin/adminlte.min.js"></script>
+<!-- Sparkline -->
+<script src="../../../js/admin/jquery.sparkline.min.js"></script>
+<!-- jvectormap  -->
+<script src="../../../js/admin/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="../../../js/admin/jquery-jvectormap-world-mill-en.js"></script>
+<!-- SlimScroll -->
+<script src="../../../js/admin/jquery.slimscroll.min.js"></script>
+<!-- ChartJS -->
+<script src="../../../js/admin/Chart.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../../js/admin/demo.js"></script>
+<script src="../../../js/admin/bootstrap-toggle.min.js"></script>
+<script>
+	function getContextPath() { // contextPath 가져오는 방법
+		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+	}
+	
+	$("ul.sidebar-menu li").click(function () {
+		var nAuth = `${admin.noticeAuth}`;
+		var uAuth = `${admin.userAuth}`;
+		var pAuth = `${admin.boardAuth}`;
+		var id = `${admin.id}`;
+		
+		if (this.id === "manager" && id === "admin") {
+			location.href = contextPath + "/net/admin/management/admin";
+		} else if (this.id === "user" && uAuth === 't') {
+			location.href = contextPath + "/net/admin/management/user";
+		} else if (this.id === "notice" && nAuth === 't') {
+			location.href = contextPath + "/net/admin/notice/list";
+		} else if (this.id === "board" && pAuth === 't') {
+			location.href = contextPath + "/net/admin/board/index";
+		} else if (this.id === "stastics") {
+			location.href = contextPath + "/net/admin/stastics/index";
+		} else {
+			alert("해당 페이지의 접근 권한이 없습니다. 슈퍼 관리자에게 문의하세요");
+			return false;
+		}
+	});
+
+
+	$("document").ready(function () {
+		$(".container-fluid").css("position", "absolute").css("top", "40%").css("width", "80%")
+							.css("margin-left", "auto").css("margin-right", "auto");
+		$("div.row a").css("height", "150px").css("line-height", "140px");
+	});
+
+</script>
 </body>
 </html>

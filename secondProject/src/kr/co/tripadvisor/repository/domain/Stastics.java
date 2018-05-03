@@ -7,8 +7,7 @@ public class Stastics {
 	private Integer galleryCount;
 	private Integer noticeCount;
 	private Integer userCount;
-	private Integer boardCommentCount;
-	private Integer galleryCommentCount;
+	private Integer commentCount;
 	private Integer scrapCount;
 	private Date stasticsDate;
 	
@@ -36,17 +35,11 @@ public class Stastics {
 	public void setUserCount(Integer userCount) {
 	    this.userCount = userCount;
 	}
-	public Integer getBoardCommentCount() {
-	    return boardCommentCount;
+	public Integer getCommentCount() {
+		return commentCount;
 	}
-	public void setBoardCommentCount(Integer boardCommentCount) {
-	    this.boardCommentCount = boardCommentCount;
-	}
-	public Integer getGalleryCommentCount() {
-	    return galleryCommentCount;
-	}
-	public void setGalleryCommentCount(Integer galleryCommentCount) {
-	    this.galleryCommentCount = galleryCommentCount;
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
 	}
 	public Integer getScrapCount() {
 	    return scrapCount;

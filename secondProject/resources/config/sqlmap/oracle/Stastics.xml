@@ -8,8 +8,7 @@
 		<result column="gallery_count" property="galleryCount" />
 		<result column="notice_count" property="noticeCount" />
 		<result column="scrap_count" property="scrapCount" />
-		<result column="board_comment_count" property="boardCommentCount" />
-		<result column="gallery_comment_count" property="galleryCommentCount" />
+		<result column="comment_count" property="commentCount" />
 		<result column="user_count" property="userCount" />
 		<result column="stastics_date" property="stasticsDate" />
 	</resultMap>
@@ -17,9 +16,9 @@
 <!-- 통계 테이블 입력 쿼리 -->
 	<insert id="insertStastics" parameterType="stastics">
 		insert into stastics (
-			board_count, gallery_count, notice_count, board_comment_count, gallery_comment_count, scrap_count, user_count
+			board_count, gallery_count, notice_count, comment_count, scrap_count, user_count
 		) values (
-			#{boardCount}, #{galleryCount}, #{noticeCount}, #{boardCommentCount}, #{galleryCommentCount}, #{scrapCount}, #{userCount}
+			#{boardCount}, #{galleryCount}, #{noticeCount}, #{commentCount}, #{scrapCount}, #{userCount}
 		)
 	</insert>
 	
@@ -38,6 +37,18 @@
 		  from stastics
 		 where to_char(stastics_date,'yyyy-MM-dd') = #{regDate}
 	</select>
+	
+<!-- 만약 기존 데이터가 존재한다면 덮어 쓰기 -->
+	<update id="updateStastics" parameterType="stastics">
+		update stastics
+		   set board_count = #{boardCount},
+		       gallery_count = #{galleryCount},
+		       notice_count = #{noticeCount},
+		       comment_count = #{commentCount},
+		       scrap_count = #{scrapCount},
+		       user_count = #{userCount}
+		 where to_char(stastics_date, 'yy/MM/dd') = to_char(#{stasticsDate}, 'yy/MM/dd')
+	</update>
 
 <!-- 각각의 게시판 및 댓글 테이블에서 일일 총 카운트를 구하는 쿼리 -->
 
@@ -69,19 +80,19 @@
 		 <![CDATA[and code_no='3004']]>
 	</select>
 	
-	<select id="boardCommentCount" parameterType="string" resultType="int">
+	<select id="commentCount" parameterType="string" resultType="int">
 		select count(*) bCommentCnt
 		  from tb_comment
 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
-		 <![CDATA[and code_no='3001']]>
+<!-- 		 <![CDATA[and code_no='3001']]> -->
 	</select>
 	
-	<select id="galleryCommentCount" parameterType="string" resultType="int">
-		select count(*) gCommentCnt
-		  from tb_comment
-		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]>
-		 <![CDATA[and code_no='3002']]>
-	</select>
+<!-- 	<select id="galleryCommentCount" parameterType="string" resultType="int"> -->
+<!-- 		select count(*) gCommentCnt -->
+<!-- 		  from tb_comment -->
+<!-- 		 <![CDATA[where to_date(reg_date,'yy/MM/dd') = to_date(#{regDate}, 'yy/MM/dd')]]> -->
+<!-- 		 <![CDATA[and code_no='3002']]> -->
+<!-- 	</select> -->
 	
 	<select id="userCount" parameterType="string" resultType="int">
 		select count(*) userCnt
