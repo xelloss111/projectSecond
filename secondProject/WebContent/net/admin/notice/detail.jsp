@@ -154,24 +154,23 @@
 <script>
 	var num = ${notice.no};
 	console.log(num);
-	$("#modify").on("click", function () {
-		var contextPath = getContextPath();
-		location.href = contextPath + "/net/admin/notice/updateForm?no=" + num;
-	});
-
-	function moveWriteForm(){
-		var contextPath = getContextPath();
-		location.href = contextPath + "/net/admin/notice/writeForm";
-	}
 	
 	function getContextPath() { // contextPath 가져오는 방법
 		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
 		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 	}
+	var contextPath = getContextPath();
+	
+	
+	$("#modify").on("click", function () {
+		location.href = contextPath + "/net/admin/notice/updateForm?no=" + num;
+	});
 
+	function moveWriteForm(){
+		location.href = contextPath + "/net/admin/notice/writeForm";
+	}
+	
 	function deleteNotice(no) {
-		var contextPath = getContextPath();
-		
 		if(confirm("정말 삭제하시겠습니까?")){
 			// location.replace=`${pageContext.request.contextPath}`; // 기존 페이지를 새로운 페이지로 변경
 			location.href = contextPath + "/net/admin/notice/noticeDelete?no=" + no;

@@ -150,7 +150,7 @@ var contextPath = getContextPath();
 		var form = $("#mForm").serialize();
 		var info = [];
 		var options = {	title: "지표별 통계", seriesType: 'bars', height: 400};
-		info.push(['집계일자', '자유게시판', '갤러리', '공지', '유저', '게시판 댓글', '갤러리 댓글', '스크랩']);
+		info.push(['집계일자', '자유게시판', '갤러리', '공지', '유저', '댓글', '스크랩']);
 		$.ajax({
 	// 		type: "POST",
 			data: form,
@@ -178,8 +178,7 @@ var contextPath = getContextPath();
 					val.push(value[i].galleryCount);
 					val.push(value[i].noticeCount);
 					val.push(value[i].userCount);
-					val.push(value[i].boardCommentCount);
-					val.push(value[i].galleryCommentCount);
+					val.push(value[i].commentCount);
 					val.push(value[i].scrapCount);
 					info.push(val);
 				}

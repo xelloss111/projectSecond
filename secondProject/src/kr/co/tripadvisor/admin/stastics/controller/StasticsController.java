@@ -31,6 +31,8 @@ public class StasticsController extends HttpServlet {
 		List<Stastics> list = null;
 		String date = request.getParameter("date");
 		
+		Date targetDate = null;
+		
 		if (date == null) {
 			return;
 		}
@@ -40,7 +42,7 @@ public class StasticsController extends HttpServlet {
 			// alert 출력을 위한 메시지를 포함해서 리턴
 			Date today = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date targetDate = sdf.parse(date);
+			targetDate = sdf.parse(date);
 			if (targetDate.getTime() > today.getTime()) {
 				out.print("오늘 날짜 또는 이전 날짜를 선택해 주세요");
 				out.close();
@@ -55,17 +57,24 @@ public class StasticsController extends HttpServlet {
 		int userCount = mapper.userCount(date);
 		int boardCount = mapper.boardCount(date);
 		int galleryCount = mapper.galleryCount(date);
+		int commentCount = mapper.commentCount(date);
+//		int galleryCommentCount = mapper.galleryCommentCount(date);
+		int scrapCount = mapper.scrapCount(date);
+		
+		Stastics stastics = new Stastics();
+		stastics.setBoardCount(boardCount);
+		stastics.setNoticeCount(noticeCount);
+		stastics.setGalleryCount(galleryCount);
+		stastics.setUserCount(userCount);
+		stastics.setCommentCount(commentCount);
+//			stastics.setGalleryCommentCount(galleryCommentCount);
+		stastics.setScrapCount(scrapCount);
+		stastics.setStasticsDate(targetDate);
 		
 		if (mapper.selectStasticsCheck(date) == 0) {
-			Stastics stastics = new Stastics();
-			stastics.setBoardCount(boardCount);
-			stastics.setNoticeCount(noticeCount);
-			stastics.setGalleryCount(galleryCount);
-			stastics.setUserCount(userCount);
-			stastics.setBoardCommentCount(20);
-			stastics.setGalleryCommentCount(15);
-			stastics.setScrapCount(40);
 			mapper.insertStastics(stastics);
+		} else {
+			mapper.updateStastics(stastics);
 		}
 		
 		list = mapper.selectStastics(date);
