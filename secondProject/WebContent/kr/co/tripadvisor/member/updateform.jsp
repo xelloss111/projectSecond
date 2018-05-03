@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -51,20 +52,44 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 
 <form id="info" method="post" action="${pageContext.request.contextPath}/user/update">
 		<p><label>ID</label><input type="text" name="id" value="${sessionScope.user.id}" readonly /></p>
-		<p><label>Password</label><input type="password" name="pass" value="${sessionScope.user.pass}"/></p>
-		<p><label>PasswordCheck</label><input type="password" value="${sessionScope.user.pass}"/></p>	 
-		<p><label>Email</label><input type="text" name="email" id="email" value="${sessionScope.user.email}"/>
-		<button type="button" id="auth" class="email_but">EmailAuth</button></p>
-		<p id="authNum"></p>
-		<p><label>Name</label><input type="text" name="name" id="name" value="${sessionScope.user.name}" readonly/></p>
+		<p><label>Password</label><input type="password" name="pass" value="${sessionScope.user.pass}" id="infopass"/></p>
+		<p><label>PasswordCheck</label><input type="password" value="${sessionScope.user.pass}" id="infopasscheck"/></p>
+		<p id="infopassresult"></p>	 
+		<p><label>Email</label><input type="text" name="email" id="infoemail" value="${sessionScope.user.email}"/>
+		<button type="button" id="infoauth" class="email_but">EmailAuth</button></p>
+		<input type='text' id='infouserauth' placeholder='인증번호를 입력하세요.' maxlength=5 />
+		<p><label>Name</label><input type="text" name="name" id="infoname" value="${sessionScope.user.name}" readonly/></p>
 		<p><label>BirthDate</label><input type="text" placeholder="19700101" maxlength="8" name="birth" id="birth" value="${sessionScope.user.birth}" readonly/></p>
 		<p><input type="submit" value="수정" class="login_but" id="infobut" /></p>
 </form>
 
 <script type="text/javascript">
- 		 	$("#auth").click(function (e) {
- 		 		console.log(e);
 
+			$("#infopasscheck").keyup(function (e) {
+				
+				$.ajax({
+					url: "/secondProject/signajax",
+					type: "post",
+					data: {
+					pass : $("#infopass").val(),
+					passcheck : $("#infopasscheck").val()
+					},
+					dataType: "json",
+					success: function (data) {
+						var result = "";
+						if(data.passresult == 'false') {
+						result = "비밀번호가 일치하지 않습니다.";
+						}
+						$("#infopassresult").text(result);
+					}
+				});
+			});
+
+			$("#infoemail").keyup(function (e) {
+				 $("#infobut").attr("type", "button");
+			});
+
+			$("#infoauth").click(function (e) {
  		 		$.ajax({
 					url: "/secondProject/emailauth",
 					type: "post",
@@ -73,22 +98,16 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 					},
 					dataType: "json",
 					success: function (data) {
-					   console.log(data);
-						$("#authNum").html("<input type='text' id='userauth' placeholder='인증번호를 입력하세요.' maxlength=5 />");
-						  $("#userauth").keyup(function () {
+						console.log(data)
+						  $("#infouserauth").keyup(function () {
 							  if(this.value.length == 5) {  
 							  if(this.value==data.authNum) {
 								  alert("이메일 인증 성공:계속 작성해주십시오.");
-								  $('#infobut').off("click");
 								  $("#infobut").attr("type", "submit");
 							  } else {
 								  alert("이메일 인증 실패:다시 입력해주십시오.");
-								  this.focus();
-								  this.select();
 								  $("#infobut").attr("type", "button");
-								  $("#infobut").click(function (e) {
-									  alert("이메일 인증 실패:다시 입력해주십시오.");
-								})
+								  
 							 	 }
 							  }
 						  });
@@ -107,19 +126,12 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 $("#withdraw").click(function (e) {
 	if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
 		location.href= "${pageContext.request.contextPath}/user/delete"; 
-// 		location.href="delete"; 
-	//컨트롤러는 user/delete인데... jsp에서 이동하게 되면 member/delete가 됨...
 	}else{   //취소
 	    return;
 	}
 });
 </script>
 
-<!-- 상단에 탈퇴 버튼 누르면 
-'정말 탈퇴하시겠습니까?' 얼럿 혹은 비밀번호 입력 한번 더 받기
-deleteUser controller에서 처리하고 : deleteuser맵퍼... (세션은?) '탈퇴에 성공하였습니다' 얼럿
-메인페이지로 리다이렉트
--->
 </article>
 </div> <!-- wrap -->
 	<script type="text/javascript">

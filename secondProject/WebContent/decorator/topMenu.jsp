@@ -173,11 +173,18 @@
 				},
 				dataType: "json",
 				success: function (data) {
-					var result = "이미 사용중인 아이디 입니다.";
 					if(data.idresult==0) {
-						result = "사용 가능한 아이디 입니다.";		
+						$("#idresult").text("사용 가능한 아이디 입니다.");
+// 						$('#signBut').off("click");
+// 					    $("#signBut").attr("type", "submit");
+					}else {
+						$("#idresult").text("이미 사용중인 아이디 입니다.");
+// 						$("#signBut").attr("type", "button");
+// 						$("#signBut").click(function (e) {
+// 							  alert("이미 사용중인 아이디 입니다.");
+// 						})
+// 						$("#signBut").focus().select();
 					}
-					$("#idresult").text(result);
 				}
 			});
 		});
@@ -200,12 +207,19 @@
 				},
 				dataType: "json",
 				success: function (data) {
-					var result = "";
 					if(data.passresult == 'false') {
-					result = "비밀번호가 일치하지 않습니다.";
+						$("#passresult").text("비밀번호가 일치하지 않습니다.");
+// 						$("#signBut").attr("type", "button");
+// 						$("#signBut").click(function (e) {
+// 							  alert("입력하신 비밀번호가 일치하지 않습니다.");
+// 						})
+					}else {
+						$("#passresult").text("");
+// 						$('#signBut').off("click");
+// 					    $("#signBut").attr("type", "submit");
 					}
-					$("#passresult").text(result);
 				}
+				
 			});
 		});
 		</script>
@@ -214,7 +228,8 @@
 		<p><label>Email</label><input type="text" name="email" id="email"/></p>
 		<p id="emailresult"><p>
 		<p><button type="button" id="auth" class="email_but">EmailAuth</button></p><br>
-		<p id="authNum"></p>
+<!-- 		<p id="authNum"></p> -->
+		<input type="text" id="userauth" placeholder="인증번호를 입력하세요." maxlength=5 />
 		
 		<script>
 		$("#email").keyup(function (e) {
@@ -227,11 +242,17 @@
 				},
 				dataType: "json",
 				success: function (data) {
-					var result = "이미 가입된 이메일 입니다.";
 					if(data.emailresult==0) {
-						result = "가입 가능한 이메일 입니다.";		
+						$("#emailresult").text("가입 가능한 이메일 입니다.");	
+// 						$('#signBut').off("click");
+// 					    $("#signBut").attr("type", "submit");
+					}else {
+						$("#emailresult").text("이미 가입된 이메일 입니다.");
+// 						$("#signBut").attr("type", "button");
+// 						$("#signBut").click(function (e) {
+// 							  alert("이미 가입된 이메일 입니다.");
+// 						})
 					}
-					$("#emailresult").text(result);
 				}
 			});
 		});
@@ -252,25 +273,27 @@
 					dataType: "json",
 					success: function (data) {
 					   console.log(data);
-						$("#authNum").html("<input type='text' id='userauth' placeholder='인증번호를 입력하세요.' maxlength=5 />");
+// 						$("#authNum").html("<input type='text' id='userauth' placeholder='인증번호를 입력하세요.' maxlength=5 />");
+// 						  $("#signBut").attr("type", "button");
 						  $("#userauth").keyup(function () {
 							  if(this.value.length == 5) {  
 							  if(this.value==data.authNum) {
 								  alert("이메일 인증 성공:계속 작성해주십시오.");
-								  $("#name").prop("disabled", false);
-								  $("#birth").prop("disabled", false);
-								  $("#name").attr("style", "");
-								  $("#birth").attr("style", "");
-							  } else {
+// 									$('#signBut').off("click");
+								    $("#signBut").attr("type", "submit");
+							  } else{
 								  alert("이메일 인증 실패:다시 입력해주십시오.");
-								  this.focus();
-								  this.select();
-								  $("#name").prop("disabled", true);
-								  $("#birth").prop("disabled", true);
-								  $("#name").attr("style", "background-color:#aaa");
-								  $("#birth").attr("style", "background-color:#aaa");
+// 								  $("#signBut").attr("type", "button");
+// 								  $("#signBut").click(function (e) {
+// 									    alert("이메일 인증번호가 올바르지 않습니다.");
+// 									})
 								  
 							 	 }
+							  } else if(this.value.length < 5) {
+// 								  $("#signBut").attr("type", "button");
+// 								  $("#signBut").click(function (e) {
+// 									    alert("이메일 인증번호가 올바르지 않습니다.");
+// 									})
 							  }
 						  });
 					}, //sucsess
@@ -287,5 +310,5 @@
 		 	 <label for="male">&nbsp;&nbsp;male<input type="radio" id="male" name="sex" value="1" /></label>
              <label for="female">&nbsp;&nbsp;female<input type="radio" id="female" name="sex" value="2" /></label>
 			 </p>
-		 	 <p><input type="submit" value="SIGN UP" class="login_but" /></p>
+		 	 <p><input type="button" value="SIGN UP" class="login_but" id="signBut" /></p>
 		</form>
