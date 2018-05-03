@@ -13,5 +13,11 @@ public interface UserMapper {
 	void adminUpdateUser(User user);
 	int selectIdCount(String id);
 	int selectEmailCount(String email);
+	String findId(User user);
+	String findPass(User user);
+	
+	
+	
+	
 
 }
