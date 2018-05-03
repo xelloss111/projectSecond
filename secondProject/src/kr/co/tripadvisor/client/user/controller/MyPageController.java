@@ -14,14 +14,14 @@ import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
-@WebServlet("/user/mypage")
+@WebServlet("/kr/co/tripadvisor/user/mypage")
 public class MyPageController extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		response.sendRedirect(request.getContextPath() +"/kr/co/tripadvisor/member/scrap/scrapList");
+		response.sendRedirect("scrap/scrapList");
 
 	}
 

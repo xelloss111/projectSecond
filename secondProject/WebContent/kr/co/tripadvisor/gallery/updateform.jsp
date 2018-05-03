@@ -3,21 +3,12 @@
 <html>
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-	<title>tripadvisor</title>
 	<meta charset="UTF-8">
+	<title>tripadvisor</title>
+		<!-- gallery common css -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/client/gallery_common.css" media="all">
 
-	<!-- Remember to include jQuery :) -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js" type="text/javascript"></script>
-	<!-- jQuery Modal -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js" type="text/javascript"></script>
-	<!-- jQuery Modal -->
-	<script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<!-- web font -->
-	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
-	<!-- common css -->
-	<link rel="stylesheet" type="text/css" href="../../../../css/common.css" media="all">
-	<!-- modal css -->
-	<link rel="stylesheet" type="text/css" href="../../../../css/jquery.modal.min.css" media="all">
+
 
 
 	<script type="text/javascript">
@@ -38,46 +29,7 @@
 	
 </script>
 <style type="text/css">
-.wrap {
-	width: 100%;
-	height: 100%;
-}
-aside {
-	box-sizing: border-box;
-	width: 10%;
-	height: 100%;
-	position: relative;
-	margin-left: 10%; 
 
-	letter-spacing: 2px;
-	float: left;
-	padding-top:30px;
-}
-.accordion_navi {float:left; width: 100%; color:#444; margin:10px;}
-.accordion_navi h3 {height:50px; line-height:50px; 
-	text-indent:12px; 
-	color:#000;
-}
-.accordion_navi h3.over {cursor:pointer;} /* 마우스 오버 스타일*/
-.accordion_navi h3.selected {cursor:default;} /* 선택 스타일*/
-.accordion_navi > div > ul {
-	text-indent:1rem;
-}
-.accordion_navi > div > ul li a {
-	display:block; color:#444;
-}
-.accordion_navi > div > ul li a:hover {
-	color:skyblue; text-decoration: none;
-}
-article {
-	padding-top: 30px;
-	width: 60%;
-	height: auto;
-	margin-right: 10%;
-	float: left;
-	position: relative;
-	padding: 5%;
-}
 .top_sel {
 	width: 100%;
 	height: 50px;
@@ -226,27 +178,28 @@ border-radius: 4px;
 		<!-- 메뉴  -->
 		<aside>
 			<div class="accordion_navi">
-				<h3><i class="fas fa-paper-plane"></i>
-					Tip Board
+				<h3>
+					<i class="fas fa-paper-plane"></i> Tip Board
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 글쓰기</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
 					</ul>
 				</div>
-				<h3><i class="fas fa-camera-retro"></i>	
-					Gallery
+				<h3>
+					<i class="fas fa-camera-retro"></i> Gallery
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 사진 올리기</a></li>
+						<li><a href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/writeform">- 사진 올리기</a></li>
 					</ul>
 				</div>
 			</div><!-- accordion_navi 끝 -->
 		</aside>
 		<!-- 본문 -->
 		<article>
-			<form method="post" action="/secondProject/gallery/update" enctype="multipart/form-data">
+			<form method="post" action="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/update" enctype="multipart/form-data">
 			    <input type='hidden' name='boardNo' value='${board.boardNo}' />
 				<input type="hidden" name="codeNo" value="3002" />
 				<div class='top_sel'>

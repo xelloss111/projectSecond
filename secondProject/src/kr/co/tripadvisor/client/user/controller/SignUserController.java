@@ -14,7 +14,7 @@ import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
 
-@WebServlet("/user/singup")
+@WebServlet("/kr/co/tripadvisor/user/singup")
 public class SignUserController extends HttpServlet {
 
 	@Override
@@ -36,7 +36,7 @@ public class SignUserController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("user", mapper.selectUserById(request.getParameter("id")));
 		
-		response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/main");
+		response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/index.jsp");
 	}
 
 }

@@ -13,12 +13,17 @@ import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
-@WebServlet("/user/delete")
+@WebServlet("/kr/co/tripadvisor/user/delete")
 public class DeleteUserController extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
 		UserMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(UserMapper.class);
 		
 		User user = (User) request.getSession().getAttribute("user");
@@ -29,9 +34,6 @@ public class DeleteUserController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if(result != -1) {
 			request.getSession().invalidate();
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=utf-8");
-			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 			out.println("<script language='javascript' charset=\"utf-8\">");
 			out.println("alert(\"정상적으로 탈퇴되었습니다.\")");
 			out.println("window.location = \"/secondProject/kr/co/tripadvisor/index.jsp\"");
@@ -40,9 +42,6 @@ public class DeleteUserController extends HttpServlet {
 			return;
 			
 		} else {
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=utf-8");
-			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 			out.println("<script language='javascript' charset=\"utf-8\">");
 			out.println("alert(\"탈퇴에 실패했습니다.\")");
 			out.println("history.go(-1);");

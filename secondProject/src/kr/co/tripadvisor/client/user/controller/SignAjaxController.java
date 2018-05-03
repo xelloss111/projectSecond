@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
-@WebServlet("/signajax")
+@WebServlet("/kr/co/tripadvisor/user/signajax")
 public class SignAjaxController extends HttpServlet  {
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {

@@ -15,7 +15,7 @@ import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
 
-@WebServlet("/user/update")
+@WebServlet("/kr/co/tripadvisor/user/update")
 public class UpdateUserController extends HttpServlet {
 
 	@Override

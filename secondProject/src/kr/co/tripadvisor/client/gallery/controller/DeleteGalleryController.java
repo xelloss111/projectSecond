@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.mapper.BoardMapper;
 
-	@WebServlet("/gallery/delete")
+	@WebServlet("/kr/co/tripadvisor/gallery/delete")
 	public class DeleteGalleryController extends HttpServlet {
 
 		@Override
@@ -21,7 +21,7 @@ import kr.co.tripadvisor.repository.mapper.BoardMapper;
 			
 			mapper.deleteBoardByNo(Integer.parseInt(request.getParameter("boardNo")));
 			
-			response.sendRedirect("/secondProject/kr/co/tripadvisor/main");
+			response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/main");
 
 		}
 		

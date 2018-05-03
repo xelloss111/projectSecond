@@ -59,7 +59,7 @@ padding: 3.5px;
 -->
 <div id="d1">
 <h2>비밀번호를 입력하십시오.</h2>
-<input type="pass" name="infopass" id="infopass"/>
+<input type="password" name="infopass" id="infopass"/>
 <button id="passcheck" type="button" id="but">확인</button>
 </div>
 <script>

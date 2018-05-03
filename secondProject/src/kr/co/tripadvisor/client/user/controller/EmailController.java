@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/emailauth")
+@WebServlet("/kr/co/tripadvisor/user/emailauth")
 public class EmailController extends HttpServlet {
 
   @Override
@@ -29,8 +29,8 @@ public class EmailController extends HttpServlet {
 	  
 	  
 	  String host     = "smtp.naver.com";
-	  final String user   = "";
-	  final String password  = "";
+	  final String user   = "statandnow";
+	  final String password  = "vmfhwprxm";
 	  
 	  String email = request.getParameter("email");
 	  

@@ -14,7 +14,7 @@ import kr.co.tripadvisor.repository.domain.Board;
 import kr.co.tripadvisor.repository.mapper.BoardMapper;
 
 
-@WebServlet("/gallery/updateForm")
+@WebServlet("/kr/co/tripadvisor/gallery/updateform")
 public class UpdateFormGalleyController extends HttpServlet {
 
 	@Override
@@ -28,7 +28,7 @@ public class UpdateFormGalleyController extends HttpServlet {
 		
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/kr/co/tripadvisor/gallery/updateform.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("updateform.jsp");
 		rd.forward(request, response);
 
 	}

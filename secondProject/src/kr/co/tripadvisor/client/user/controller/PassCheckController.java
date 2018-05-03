@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.tripadvisor.repository.domain.User;
 
-@WebServlet("/user/passcheck")
+@WebServlet("/kr/co/tripadvisor/user/passcheck")
 public class PassCheckController extends HttpServlet {
 
   @Override

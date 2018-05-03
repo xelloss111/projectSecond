@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.mapper.BoardMapper;
 
-@WebServlet("/gallery/writeForm")
+@WebServlet("/kr/co/tripadvisor/gallery/writeform")
 public class WriteFormGalleryController extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/kr/co/tripadvisor/gallery/writeform.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("writeform.jsp");
 		rd.forward(request, response);
 	}
 	

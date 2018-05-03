@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.mapper.CommentMapper;
 
-@WebServlet("/gallery/deleteComment")
+@WebServlet("/kr/co/tripadvisor/gallery/deleteComment")
 public class DeleteGalleryCommentController extends HttpServlet {
 
 	@Override

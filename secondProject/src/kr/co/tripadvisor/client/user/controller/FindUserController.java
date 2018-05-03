@@ -13,7 +13,7 @@ import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
-@WebServlet("/user/find")
+@WebServlet("/kr/co/tripadvisor/user/find")
 public class FindUserController extends HttpServlet {
 
 	@Override

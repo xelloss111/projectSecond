@@ -13,7 +13,7 @@ import kr.co.tripadvisor.repository.domain.Board;
 import kr.co.tripadvisor.repository.mapper.BoardMapper;
 
 
-@WebServlet("/gallery/update")
+@WebServlet("/kr/co/tripadvisor/gallery/update")
 public class UpdateGalleryController extends HttpServlet {
 
 	@Override

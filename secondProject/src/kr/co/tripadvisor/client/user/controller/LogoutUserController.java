@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
-@WebServlet("/user/logout")
+@WebServlet("/kr/co/tripadvisor/user/logout")
 public class LogoutUserController extends HttpServlet {
 
 	@Override
@@ -21,7 +21,7 @@ public class LogoutUserController extends HttpServlet {
 		
 		request.getSession().invalidate();
 		
-		response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/main");
+		response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/index.jsp");
 		
 	}
 

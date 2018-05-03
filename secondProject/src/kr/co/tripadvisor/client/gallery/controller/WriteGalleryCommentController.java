@@ -15,7 +15,7 @@ import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.Comment;
 import kr.co.tripadvisor.repository.mapper.CommentMapper;
 
-@WebServlet("/gallery/writeComment")
+@WebServlet("/kr/co/tripadvisor/gallery/writeComment")
 public class WriteGalleryCommentController extends HttpServlet {
 
 	@Override

@@ -24,7 +24,7 @@ import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.BoardMapper;
 import kr.co.tripadvisor.repository.mapper.ImageMapper;
 
-@WebServlet("/gallery/write")
+@WebServlet("/kr/co/tripadvisor/gallery/write")
 public class WriteGalleryController extends HttpServlet {
 
 	@Override
@@ -93,7 +93,8 @@ public class WriteGalleryController extends HttpServlet {
 					}
 				}
 		
-		response.sendRedirect("detail?boardNo="+board.getBoardNo());
+//		response.sendRedirect("detail?boardNo="+board.getBoardNo());
+		response.sendRedirect("index");
 
 	}
 	

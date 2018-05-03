@@ -18,7 +18,7 @@ import kr.co.tripadvisor.repository.mapper.BoardMapper;
 import kr.co.tripadvisor.repository.mapper.CodeMapper;
 import kr.co.tripadvisor.repository.mapper.ImageMapper;
 
-@WebServlet("/gallery/index")
+@WebServlet("/kr/co/tripadvisor/gallery/index")
 public class ListGalleryController extends HttpServlet {
 
 	
@@ -42,7 +42,7 @@ public class ListGalleryController extends HttpServlet {
 		List<Board> boardList = boardMapper.selectBoardByCode("3002");
 		request.setAttribute("boardList", boardList);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/kr/co/tripadvisor/gallery/list.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
 		rd.forward(request, response);
 	}
 	

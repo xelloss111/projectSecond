@@ -14,7 +14,7 @@ import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
-@WebServlet("/user/info")
+@WebServlet("/kr/co/tripadvisor/user/info")
 public class InfoUserController extends HttpServlet {
 
 	@Override
@@ -39,7 +39,7 @@ public class InfoUserController extends HttpServlet {
 	    }
 		
 		//info.jsp로 연결시켜준다.
-		RequestDispatcher rd = request.getRequestDispatcher("/kr/co/tripadvisor/member/info.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("info.jsp");
 		rd.forward(request, response);
 		
 	}

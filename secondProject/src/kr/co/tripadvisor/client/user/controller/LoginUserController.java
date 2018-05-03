@@ -17,7 +17,7 @@ import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
 
-@WebServlet("/user/login")
+@WebServlet("/kr/co/tripadvisor/user/login")
 public class LoginUserController extends HttpServlet {
 
 	@Override

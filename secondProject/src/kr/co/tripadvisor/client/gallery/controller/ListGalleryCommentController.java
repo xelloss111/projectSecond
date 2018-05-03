@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.mapper.CommentMapper;
-@WebServlet("/gallery/commentList")
+@WebServlet("/kr/co/tripadvisor/gallery/commentList")
 public class ListGalleryCommentController extends HttpServlet {
 	@Override
 	public void service(

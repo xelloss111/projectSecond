@@ -19,7 +19,7 @@ import kr.co.tripadvisor.repository.mapper.CodeMapper;
 import kr.co.tripadvisor.repository.mapper.CommentMapper;
 import kr.co.tripadvisor.repository.mapper.ImageMapper;
 
-@WebServlet("/gallery/detail")
+@WebServlet("/kr/co/tripadvisor/gallery/detail")
 public class DetailGalleryController extends HttpServlet {
 
 	@Override
@@ -47,7 +47,7 @@ public class DetailGalleryController extends HttpServlet {
 		List<Comment> coList = comap.selectCommentByNo(boardNo);
 		request.setAttribute("coList", coList);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/kr/co/tripadvisor/gallery/detail.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
 		rd.forward(request, response);
 
 	}

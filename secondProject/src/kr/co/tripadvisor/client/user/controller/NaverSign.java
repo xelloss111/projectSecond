@@ -14,7 +14,7 @@ import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
 
-@WebServlet("/naversign")
+@WebServlet("/kr/co/tripadvisor/user/naversign")
 public class NaverSign extends HttpServlet{
 
 	@Override
@@ -50,7 +50,7 @@ public class NaverSign extends HttpServlet{
 		
 		request.setAttribute("user", user);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/kr/co/tripadvisor/member/naversign.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("naversign.jsp");
 		rd.forward(request, response);
 		
 	}

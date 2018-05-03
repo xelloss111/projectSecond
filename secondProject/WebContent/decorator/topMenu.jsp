@@ -4,10 +4,10 @@
 <header class='header' style="background-color: skyblue;"><a href="/secondProject/kr/co/tripadvisor/index.jsp" class='nav_logo'><span>tripadvisor</span></a>
 	<nav>
 		<ul>
-			<li class="nav_ui topBotomBordersOut"><a href="/secondProject/kr/co/tripadvisor/board/list"> <i
+			<li class="nav_ui topBotomBordersOut"><a href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list"> <i
 					class="fas fa-paper-plane"></i> Tip Board
 			</a></li>
-			<li class="nav_ui topBotomBordersOut"><a href="/secondProject/gallery/index"> <i
+			<li class="nav_ui topBotomBordersOut"><a href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index"> <i
 					class="fas fa-camera-retro"></i> Gallery
 			</a></li>
 			<li class="nav_ui topBotomBordersOut"><a href="#"> <i
@@ -23,7 +23,7 @@
 		</c:when>
 		<c:otherwise>
 			${sessionScope.user.name}님 접속
-			<a href="<c:url value="/user/logout" />">LOGOUT</a>
+			<a href="<c:url value="/kr/co/tripadvisor/user/logout" />">LOGOUT</a>
 		</c:otherwise>
 		
 		</c:choose>	
@@ -34,7 +34,7 @@
 		<a href="#ex2" rel="modal:open">SIGN UP</a>
 		</c:when>
 		<c:otherwise>
-		<a href="<c:url value="/user/mypage" />">MY PAGE</a>
+		<a href="<c:url value="/kr/co/tripadvisor/user/mypage" />">MY PAGE</a>
 		</c:otherwise>
 		</c:choose>	
 		
@@ -54,7 +54,7 @@
   <script>
 	$("#findId").click(function (e) {
 	 		$.ajax({
-			url: "${pageContext.request.contextPath}/user/find",
+			url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/find",
 			type: "post",
 			data: {
 			name :  $("#findIdForm input[name='name']").val(),
@@ -92,7 +92,7 @@
    <script>
 	$("#findPass").click(function (e) {
 	 		$.ajax({
-			url: "${pageContext.request.contextPath}/user/find",
+			url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/find",
 			type: "post",
 			data: {
 			id : $("#findPassForm input[name='id']").val(),
@@ -123,7 +123,7 @@
 
 
 
-<form action="${pageContext.request.contextPath}/user/login" class="login_form modal" id="ex1" style="display: none;">
+<form action="${pageContext.request.contextPath}/kr/co/tripadvisor/user/login" class="login_form modal" id="ex1" style="display: none;">
 	<h1>LOGIN</h1>
 	<br> <br>
 	<p>
@@ -146,7 +146,7 @@
 		var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "TFVjBEkov7Mxr3z9S3wC",
-				callbackUrl: "http://localhost:8000/secondProject/kr/co/tripadvisor/member/naverlogin.jsp",
+				callbackUrl: "http://localhost:8000/secondProject/kr/co/tripadvisor/user/naverlogin.jsp",
 				isPopup: false, /* 팝업을 통한 연동처리 여부 */
 				loginButton: {color: "white", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
 			}
@@ -158,7 +158,7 @@
 	
 	
 <!-- Modal HTML embedded directly into document -->
-<form method="post" action="${pageContext.request.contextPath}/user/singup" class="login_form modal" id="ex2" style="display:none;">
+<form method="post" action="${pageContext.request.contextPath}/kr/co/tripadvisor/user/singup" class="login_form modal" id="ex2" style="display:none;">
 	<h1> SIGN UP </h1><br><br>
 		<p><label>ID</label><input type="text" name="id" id="id"/></p>
 		<p id="idresult"><p>
@@ -199,7 +199,7 @@
 		$("#passcheck").keyup(function (e) {
 			
 			$.ajax({
-				url: "/secondProject/signajax",
+				url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/singajax",
 				type: "post",
 				data: {
 				pass : $("#pass").val(),
@@ -235,7 +235,7 @@
 		$("#email").keyup(function (e) {
 			
 			$.ajax({
-				url: "/secondProject/signajax",
+				url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/signajax",
 				type: "post",
 				data: {
 				email :  $("#email").val()
@@ -265,7 +265,7 @@
  		 		console.log(e);
 
  		 		$.ajax({
-					url: "/secondProject/emailauth",
+					url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/emailauth",
 					type: "post",
 					data: {
 					email :  $("#ex2 input[name='email']").val()
@@ -273,6 +273,7 @@
 					dataType: "json",
 					success: function (data) {
 					   console.log(data);
+					   alert("인증 메일을 발송했습니다.");
 // 						$("#authNum").html("<input type='text' id='userauth' placeholder='인증번호를 입력하세요.' maxlength=5 />");
 // 						  $("#signBut").attr("type", "button");
 						  $("#userauth").keyup(function () {

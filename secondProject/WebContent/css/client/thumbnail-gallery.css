@@ -1,3 +1,4 @@
+
 body {
     min-height: 100vh;
     font: normal 16px sans-serif;
@@ -19,10 +20,22 @@ body {
 }
 
 .tz-gallery {
-    padding: 40px;
+    padding: 25px;
 }
 
+.col-md-4 {
+	display: inline-block;
+        float: left;
+}
+.col-sm-6 {
+    width: 33%;
+    box-sizing: border-box;
+}
+
+
 .tz-gallery .thumbnail {
+	
+	width: 100%;
     padding: 0;
     margin-bottom: 30px;
     background-color: #fff;
@@ -41,8 +54,10 @@ body {
 }
 
 .tz-gallery .caption{
+	width: 100%;
     padding: 26px 30px;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .tz-gallery .caption h3 {

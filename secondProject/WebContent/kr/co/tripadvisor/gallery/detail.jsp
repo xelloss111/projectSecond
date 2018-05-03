@@ -5,17 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Gallery</title>
-	<!-- common css -->
-	<link rel="stylesheet" type="text/css" href="css/common.css" media="all">
-	<!-- modal css -->
-	<link rel="stylesheet" type="text/css" href="css/jquery.modal.min.css" media="all">
-	<!-- Remember to include jQuery :) -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js" type="text/javascript"></script>
-	<!-- jQuery Modal -->
-	<script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js" type="text/javascript"></script>
-	<!-- web font -->
-	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+	<!-- gallery common css -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/client/gallery_common.css" media="all">
 
 	<script type="text/javascript">
 	$(function(){// jQuery 시작 / 메뉴 마우스 오버 효과
@@ -32,45 +23,7 @@
 	}); //jQuery 종결 
 </script>
 <style type="text/css">
-.wrap {
-	width: 100%;
-	height: 100%;
-}
-aside {
-	box-sizing: border-box;
-	width: 10%;
-	height: 100%;
-	position: relative;
-	margin-left: 10%; 
 
-	letter-spacing: 2px;
-	float: left;
-	padding-top:30px;
-}
-.accordion_navi {float:left; width: 100%; color:#444; margin:10px;}
-.accordion_navi h3 {height:50px; line-height:50px; 
-	text-indent:12px; 
-	color:#000;
-}
-.accordion_navi h3.over {cursor:pointer;} /* 마우스 오버 스타일*/
-.accordion_navi h3.selected {cursor:default;} /* 선택 스타일*/
-.accordion_navi > div > ul {
-	text-indent:1rem;
-}
-.accordion_navi > div > ul li a {
-	display:block; color:#444;
-}
-.accordion_navi > div > ul li a:hover {
-	color:skyblue; text-decoration: none;
-}
-article {
-	padding-top: 30px;
-	width: 70%;
-	height: auto;
-	margin-right: 10%;
-	float: left;
-	position: relative;
-}
 .content_box {
     text-align: center;
     box-sizing: border-box;
@@ -154,20 +107,21 @@ h1{ font-size: xx-large;}
 		<!-- 메뉴  -->
 		<aside>
 			<div class="accordion_navi">
-				<h3><i class="fas fa-paper-plane"></i>
-					Tip Board
+				<h3>
+					<i class="fas fa-paper-plane"></i> Tip Board
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 글쓰기</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
 					</ul>
 				</div>
-				<h3><i class="fas fa-camera-retro"></i>	
-					Gallery
+				<h3>
+					<i class="fas fa-camera-retro"></i> Gallery
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 글쓰기</a></li>
+						<li><a href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/writeform">- 사진 올리기</a></li>
 					</ul>
 				</div>
 			</div><!-- accordion_navi 끝 -->
@@ -216,7 +170,7 @@ h1{ font-size: xx-large;}
 	 <form id="rForm" class="form-inline">
 		<div id="comment">
 		    <div class="form-group">
-			    <input type="text" name="id" class="form-control" value="Admin" readonly />
+			    <input type="text" name="id" class="form-control" value="${sessionScope.user.id}" readonly />
 		    </div>
 		    <div class="form-group">
 			    <input type="text" name="content" class="form-control input-wp1" placeholder="내용을 입력하세요">
@@ -228,7 +182,7 @@ h1{ font-size: xx-large;}
 	<script>
 	function commentDelete(commentNo) {
 		$.ajax({
-			url: "<c:url value='/gallery/deleteComment'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/deletecomment'/>",
 			data: {
 				no: "${board.boardNo}", 
 				commentNo: commentNo
@@ -265,7 +219,7 @@ h1{ font-size: xx-large;}
 	
 	function commentUpdate(commentNo) {
 		$.ajax({
-			url: "<c:url value='/gallery/updateComment'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/updateComment'/>",
 			type: "POST",
 			data: {
 				no: "${board.boardNo}", 
@@ -289,7 +243,7 @@ h1{ font-size: xx-large;}
 		e.preventDefault();
 		
 		$.ajax({
-			url: "<c:url value='/gallery/writeComment'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/writecomment'/>",
 			type: "POST",
 			data: {
 				no: "${board.boardNo}", 
@@ -351,7 +305,7 @@ h1{ font-size: xx-large;}
 	// 댓글 목록 조회
 	function commentList() {
 		$.ajax({
-			url: "<c:url value='/board/commentList'/>",
+			url: "<c:url value='kr/co/tripadvisor/board/commentList'/>",
 			data: {no: "${board.boardNo}"},
 			dataType: "json", 
 			success: makeCommentList
