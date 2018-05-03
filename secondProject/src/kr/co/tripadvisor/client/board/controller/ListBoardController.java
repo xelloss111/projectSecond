@@ -37,7 +37,7 @@ public class ListBoardController extends HttpServlet{
 		Paging paging = new Paging(totalCnt, pageNo, 10, 5);
 		
 		List<Board> list = mapper.boardListUp(paging);
-		
+				
 		request.setAttribute("list", list);
 		request.setAttribute("paging", paging);
 		

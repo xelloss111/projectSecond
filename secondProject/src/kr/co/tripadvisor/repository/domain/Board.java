@@ -15,7 +15,7 @@ public class Board {
 	Date modDate;
 	int viewCnt;
 	BoardImage boardImage;
-	
+
 	public BoardImage getBoardImage() {
 		return boardImage;
 	}

@@ -17,16 +17,26 @@
 		<association property="boardImage" column="board_no" select="selectImageByNo"/>
 	</resultMap>
 
-		<resultMap id="bImageMap" type="boardImage">
-			<result column="image_no" property="imageNo" />
-			<result column="board_no" property="boardNo" />
-			<result column="path" property="path" />
-			<result column="ori_name" property="oriName" />
-			<result column="sys_name" property="sysName" />
-			<result column="file_size" property="fileSize" />
-		</resultMap>
+	<!-- image map -->
+	<resultMap id="bImageMap" type="boardImage">
+		<result column="image_no" property="imageNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="path" property="path" />
+		<result column="ori_name" property="oriName" />
+		<result column="sys_name" property="sysName" />
+		<result column="file_size" property="fileSize" />
+	</resultMap>
+	
+	<!-- scrap map -->
+	<resultMap id="scrapMap" type="scrap" >
+		<result column="id" property="id" />
+		<result column="code_no" property="codeNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="scrap_no" property="scrapNo" />
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+	
 	<!-- 리스트 -->
-	<!-- <select id="selectBoard" parameterType="boardSearch" resultMap="boardMap"> -->
 	<select id="selectBoard" resultMap="boardMap">
 		select *
 		from tb_board
@@ -34,12 +44,14 @@
 		order by board_no desc
 	</select>
 	
+	<!-- association 1 -->
 	<select id="selectImageByNo" parameterType="int" resultMap="bImageMap">
 		select *
 		from tb_image
 		where board_no = #{boardNo}
 		and rownum = 1
 	</select>
+
 	
 	<!-- 인덱스 최신 게시물 -->
 	<select id="selectIndex" resultMap="boardMap">

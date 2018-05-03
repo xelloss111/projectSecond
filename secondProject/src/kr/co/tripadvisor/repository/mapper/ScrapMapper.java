@@ -6,13 +6,12 @@ import kr.co.tripadvisor.repository.domain.Board;
 import kr.co.tripadvisor.repository.domain.Scrap;
 
 public interface ScrapMapper {
-//	스크랩 추가
+	//	스크랩 추가
 	void insertScrap(Scrap scrap);
 	
-	List<Board> selectScrapBoard();
+	// 스크랩 list
+	List<Scrap> selectScrapByNo(String id);
 	
-	int selectBoardCheck(int boardNo);
-	List<Scrap> selectScrapById(String id);
-	Scrap selectScrapByNo(int no);
-	void deleteScrap(int no);
+	// 스크랩 삭제
+	void deleteScrap(int scrapNo);
 }

@@ -3,15 +3,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace = "kr.co.tripadvisor.repository.mapper.ScrapMapper">
-<!-- scrap map -->
+	<!-- scrap map -->
 	<resultMap id="scrapMap" type="scrap" >
 		<result column="id" property="id" />
 		<result column="code_no" property="codeNo" />
 		<result column="board_no" property="boardNo" />
 		<result column="scrap_no" property="scrapNo" />
 		<result column="reg_date" property="regDate" />
-		<association property="board" column="board_no" select="selectScrapByNo"/>
+		<association property="board" column="board_no" select="selectBoardByAll"/>
 	</resultMap>
+	
 	<!-- board Map -->
 	<resultMap id="boardMap" type="board">
 		<result column="code_no" property="codeNo" />
@@ -24,6 +25,17 @@
 		<result column="reg_date" property="regDate" />
 		<result column="mod_date" property="modDate" />
 		<result column="view_cnt" property="viewCnt" />
+		<association property="boardImage" column="board_no" select="selectImageByNo"/>
+	</resultMap>
+	
+	<!-- image Map -->
+	<resultMap id="bImageMap" type="boardImage">
+		<result column="image_no" property="imageNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="path" property="path" />
+		<result column="ori_name" property="oriName" />
+		<result column="sys_name" property="sysName" />
+		<result column="file_size" property="fileSize" />
 	</resultMap>
 	
 	<insert id="insertScrap" parameterType="scrap">
@@ -38,21 +50,31 @@
 	</insert>
 	
 	<!-- scrap list --> 
-	<select id="selectScrap" resultMap="scrap">
-	
+	<select id="selectScrapByNo" resultMap="scrapMap" parameterType="string">
+		select *
+		from tb_scrap
+		where id = #{id}
+		order by reg_date desc
 	</select>
-	<!--  -->
 	
-	<select id="selectScrapByNo" parameterType="int" resultMap="boardMap">
+	<!-- association 2 -->
+	<select id="selectBoardByAll" resultMap="boardMap" parameterType="int">
 		select *
 		from tb_board
 		where board_no = #{boardNo}
-		and rownu = 1		
+	</select>
+	
+	<!-- association 1 Board Image-->
+	<select id="selectImageByNo" parameterType="int" resultMap="bImageMap">
+		select *
+		from tb_image
+		where board_no = #{boardNo}
+		and rownum = 1
 	</select>
 	
 	<delete id="deleteScrap" parameterType="int">
 		delete
-		  from
+		  from tb_scrap
 		 where scrap_no = #{scrapNo}
 	</delete>
 

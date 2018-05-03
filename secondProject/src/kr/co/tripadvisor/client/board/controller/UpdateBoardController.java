@@ -1,10 +1,6 @@
 package kr.co.tripadvisor.client.board.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,12 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
-
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
-import kr.co.tripadvisor.common.file.MlecFileRenamePolicy;
 import kr.co.tripadvisor.repository.domain.Board;
-import kr.co.tripadvisor.repository.domain.BoardImage;
 import kr.co.tripadvisor.repository.mapper.BoardMapper;
 
 @WebServlet("/kr/co/tripadvisor/board/UpdateBoard")

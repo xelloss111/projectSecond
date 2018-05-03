@@ -8,7 +8,8 @@
 <title>tripadvisor</title>
 </head>
 <body>
-		<c:redirect url="/kr/co/tripadvisor/main" />
+	<% response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/main"); %>
+		<%--<c:redirect url="/kr/co/tripadvisor/main" /> --%>
 </body>
 </html>
 

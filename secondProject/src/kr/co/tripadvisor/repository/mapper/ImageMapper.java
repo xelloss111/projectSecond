@@ -16,6 +16,7 @@ public interface ImageMapper {
 	void updateFileInfoBoard(BoardImage bImage);
 	void insertFileInfoBoard(BoardImage bImage);
 	List<BoardImage> selectFileInfoBoard(int no);
+	void deleteFileInfoBoard(String sysName);
 	//board image 
 	BoardImage selectimageboardList();
 	

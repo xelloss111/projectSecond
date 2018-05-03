@@ -6,11 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <title>tripadvisor</title>
 <meta charset="UTF-8">
+	<!-- board_wirteform css -->
+	<link rel="stylesheet" type="text/css" href="/secondProject/css/client/board_updateform.css" media="all">
+	
 </head>
 <body>
 	<div class='wrap'>
 		<!-- 메뉴  -->
-		<aside>
+<aside>
 			<div class="accordion_navi">
 				<h3>
 					<i class="fas fa-paper-plane"></i> Tip Board
@@ -30,6 +33,18 @@
 						<li><a href="#">- 사진 올리기</a></li>
 					</ul>
 				</div>
+				<h3>
+					<a href="/secondProject/kr/co/tripadvisor/member/scrap/scrapList">
+						<i class="fas fa-tags"></i>
+						스크랩
+					</a>
+				</h3>
+				<h3>
+					<a href="#">
+						<i class="far fa-smile"></i>
+						회원정보
+					</a>
+				</h3>
 			</div>
 			<!-- accordion_navi 끝 -->
 		</aside>

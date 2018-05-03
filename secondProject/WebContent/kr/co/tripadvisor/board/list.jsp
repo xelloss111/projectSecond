@@ -8,8 +8,12 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <title>tripadvisor</title>
+	<!-- board_list css -->
+	<link rel="stylesheet" type="text/css" href="/secondProject/css/client/board_list.css" media="all">
+	<!-- paging css -->
+	<link rel="stylesheet" type="text/css"
+	href="/secondProject/css/client/paging.css" media="all">
 </head>
-
 
 <body>
 	<div class='wrap'>
@@ -34,7 +38,7 @@
 					</ul>
 				</div>
 				<h3 id="menuScrap">
-					<a href="/secondProject/kr/co/tripadvisor/client/scrapList"> <i
+					<a href="/secondProject/kr/co/tripadvisor/member/scrap/scrapList"> <i
 						class="fas fa-tags"></i> 스크랩
 					</a>
 				</h3>
@@ -125,7 +129,6 @@
 						</li>
 					</c:if>
 					<c:forEach var='b' items="${list}">
-
 						<li>
 							<figure>
 								<a

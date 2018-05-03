@@ -28,5 +28,4 @@ public interface BoardMapper {
 	//index list
 	List<Board> selectIndex();	
 
-
 }

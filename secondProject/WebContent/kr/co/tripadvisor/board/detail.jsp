@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <title>tripadvisor</title>
+	<!-- board_detail css -->
+	<link rel="stylesheet" type="text/css"
+	href="/secondProject/css/client/board_detail.css" media="all">
 </head>
 
 
@@ -101,7 +104,7 @@
 							<!-- 댓글 등록 -->
 
 							<td class="id_bold" id="id_tdView">
-							<input type="text" name="id" value="${board.id}"
+							<input type="text" name="id" value="${sessionScope.user.id}"
 								readonly="readonly" id="id_view"/></td>
 							<td id="content_tdView">
 								<textarea name="content" rows="4" cols="60" placeholder="내용을 입력하세요" class="content_view" ></textarea>
@@ -234,7 +237,7 @@
 		/* 스크랩 영역 */
 		var codeNo = ${board.codeNo};
 		var boardNo = ${board.boardNo};
-		var id = '${board.id}';
+		var id = '${sessionScope.user.id}';
 
 		var contextPath = getContextPath();
 		function getContextPath() { // contextPath 가져오는 방법
@@ -243,6 +246,7 @@
 	    }
 		
 		$("#scrap_btn").click(function(){
+			//console.log(id);
 			$.ajax({
 				  type: "POST",
 				  url: contextPath + "/kr/co/tripadvisor/client/scrap",

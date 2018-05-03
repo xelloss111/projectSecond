@@ -8,7 +8,22 @@ public class Scrap {
     private Integer boardNo;
     private Integer scrapNo;
     private Date regDate;
+    Board board;
+    BoardImage boardImage;
     
+	public BoardImage getBoardImage() {
+		return boardImage;
+	}
+	public void setBoardImage(BoardImage boardImage) {
+		this.boardImage = boardImage;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+	public void setBoard(Board board) {
+		this.board = board;
+	}
 	public String getId() {
 		return id;
 	}
@@ -39,4 +54,9 @@ public class Scrap {
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
+	@Override
+	public String toString() {
+		return "Scrap [id=" + id + ", codeNo=" + codeNo + ", boardNo=" + boardNo + ", scrapNo=" + scrapNo + ", regDate="
+				+ regDate + ", board=" + board + "]";
+	}
 }
