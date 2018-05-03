@@ -1,21 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
-<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-
-</head>
-<body>
-
 <header class='header' style="background-color: skyblue;"><a href="/secondProject/kr/co/tripadvisor/index.jsp" class='nav_logo'><span>tripadvisor</span></a>
-
 	<nav>
 		<ul>
 			<li class="nav_ui topBotomBordersOut"><a href="/secondProject/kr/co/tripadvisor/board/list"> <i
@@ -303,5 +289,3 @@
 			 </p>
 		 	 <p><input type="submit" value="SIGN UP" class="login_but" /></p>
 		</form>
-		</body>
-		</html>
