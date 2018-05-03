@@ -12,8 +12,18 @@
 		<result column="reg_date" property="regDate" />
 		<result column="mod_date" property="modDate" />
 		<result column="view_cnt" property="viewCnt" />
+		<association property="noticeImage" column="no" select="selectImageByNo"/>
 	</resultMap>
 
+	<resultMap type="noticeImage" id="nImageMap">
+		<result column="image_no" property="imageNo" />
+		<result column="no" property="no" />
+		<result column="default_path" property="defaultPath" />
+		<result column="detail_path" property="detailPath" />
+		<result column="ori_name" property="oriName" />
+		<result column="sys_name" property="sysName" />
+		<result column="file_size" property="fileSize" />
+	</resultMap>
 
 	<insert id="insertNotice" parameterType="notice">
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
@@ -29,6 +39,13 @@
 			#{content}
 		)
 	</insert>
+
+	<select id="selectImageByNo" parameterType="int" resultMap="nImageMap">
+		select *
+		from notice_image
+		where no = #{no}
+		and rownum = 1
+	</select>
 
 
 	<select id="selectNotice" resultMap="noticeMap">

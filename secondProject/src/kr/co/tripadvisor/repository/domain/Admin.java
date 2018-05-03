@@ -11,7 +11,6 @@ public class Admin {
 	private String noticeAuth;
 	private String userAuth;
 	private Date accessTime;
-	
 	public int getNo() {
 		return no;
 	}

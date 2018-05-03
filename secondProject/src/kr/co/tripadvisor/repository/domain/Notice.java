@@ -11,7 +11,14 @@ public class Notice {
     private Date regDate;
     private Date modDate;
     private int viewCnt;
+    NoticeImage noticeImage;
     
+	public NoticeImage getNoticeImage() {
+		return noticeImage;
+	}
+	public void setNoticeImage(NoticeImage noticeImage) {
+		this.noticeImage = noticeImage;
+	}
 	public String getCodeNo() {
 		return codeNo;
 	}

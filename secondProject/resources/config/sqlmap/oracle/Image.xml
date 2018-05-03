@@ -39,12 +39,23 @@
 		)
 	</insert>
 
+	<update id="updateFileInfo" parameterType="noticeImage">
+		update notice_image
+	       set no = #{no}
+	     where sys_name = #{sysName}
+	</update>
 
 	<delete id="deleteFileInfo" parameterType="string">
 		delete
 		from notice_image
 		where sys_name = #{sysName}
 	</delete>
+	
+	<select id="selectFileInfo" parameterType="int" resultMap="nImageMap">
+		select *
+		  from notice_image
+		 where no = #{no}
+	</select>
 
 	<!-- 갤러리이미지 -->
 	<select id="selectImageAll" resultMap="bImageMap">
@@ -89,6 +100,11 @@
 			where sys_name = #{sysName}
 	</update>
 	
+	<select id="selectFileInfoBoard" parameterType="int" resultMap="bImageMap">
+		select *
+		  from tb_image
+		 where board_no = #{boardNo}
+	</select>
 	
 	<!-- 민희 리스트 이미지 썸네일 -->
 
