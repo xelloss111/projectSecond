@@ -18,7 +18,8 @@
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 글쓰기</a></li>
+						<li><a
+							href="/secondProject/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
 					</ul>
 				</div>
 				<h3>
@@ -29,8 +30,9 @@
 						<li><a href="#">- 사진 올리기</a></li>
 					</ul>
 				</div>
-				<h3>
-					<a href="#"> <i class="fas fa-tags"></i> 스크랩
+				<h3 id="menuScrap">
+					<a href="/secondProject/kr/co/tripadvisor/member/scrap/scrapList"> <i
+						class="fas fa-tags"></i> 스크랩
 					</a>
 				</h3>
 				<h3>
@@ -50,7 +52,7 @@
 updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 수정되었습니다' 얼럿
 /user/info 페이지로 리다이렉트-->
 
-<form id="info" method="post" action="${pageContext.request.contextPath}/user/update">
+<form id="info" method="post" action="${pageContext.request.contextPath}/kr/co/tripadvisor/user/update">
 		<p><label>ID</label><input type="text" name="id" value="${sessionScope.user.id}" readonly /></p>
 		<p><label>Password</label><input type="password" name="pass" value="${sessionScope.user.pass}" id="infopass"/></p>
 		<p><label>PasswordCheck</label><input type="password" value="${sessionScope.user.pass}" id="infopasscheck"/></p>
@@ -68,7 +70,7 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 			$("#infopasscheck").keyup(function (e) {
 				
 				$.ajax({
-					url: "/secondProject/signajax",
+					url: "/${sessionScope.user.email}/kr/co/tripadvisor/user/signajax",
 					type: "post",
 					data: {
 					pass : $("#infopass").val(),
@@ -91,7 +93,7 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 
 			$("#infoauth").click(function (e) {
  		 		$.ajax({
-					url: "/secondProject/emailauth",
+					url: "/${sessionScope.user.email}/kr/co/tripadvisor/user/emailauth",
 					type: "post",
 					data: {
 					email :  $("#info input[name='email']").val()
@@ -125,7 +127,7 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 <script type="text/javascript">
 $("#withdraw").click(function (e) {
 	if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
-		location.href= "${pageContext.request.contextPath}/user/delete"; 
+		location.href= "${pageContext.request.contextPath}/kr/co/tripadvisor/user/delete"; 
 	}else{   //취소
 	    return;
 	}

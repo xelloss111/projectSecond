@@ -157,7 +157,7 @@
 </div>
 
 <div class="sc_submit">
-	<button onclick="location.href ='writeForm'">WRITE</button>
+	<button onclick="location.href ='writeform'">WRITE</button>
 </div>
 
 

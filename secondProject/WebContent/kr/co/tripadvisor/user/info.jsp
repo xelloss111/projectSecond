@@ -28,7 +28,8 @@ padding: 3.5px;
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 글쓰기</a></li>
+						<li><a
+							href="/secondProject/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
 					</ul>
 				</div>
 				<h3>
@@ -39,8 +40,9 @@ padding: 3.5px;
 						<li><a href="#">- 사진 올리기</a></li>
 					</ul>
 				</div>
-				<h3>
-					<a href="#"> <i class="fas fa-tags"></i> 스크랩
+				<h3 id="menuScrap">
+					<a href="/secondProject/kr/co/tripadvisor/member/scrap/scrapList"> <i
+						class="fas fa-tags"></i> 스크랩
 					</a>
 				</h3>
 				<h3>
@@ -66,7 +68,7 @@ padding: 3.5px;
 
 $("#passcheck").click(function (e) {
 	$.ajax({
-		url: "passcheck",
+		url: "<c:url value='/kr/co/tripadvisor/user/passcheck'/>",
 		type: "post",
 		data: {
 		infopass :  $("input[name='infopass']").val()
@@ -75,7 +77,7 @@ $("#passcheck").click(function (e) {
 		success: function (data) {
 // 			console.log(data.result);
 			if( data.result == "true") {
-				window.location = "${pageContext.request.contextPath}/kr/co/tripadvisor/member/updateform.jsp";
+				window.location = "${pageContext.request.contextPath}/kr/co/tripadvisor/user/updateform.jsp";
 			} else {
 				alert("비밀번호가 틀렸습니다.");
 			}

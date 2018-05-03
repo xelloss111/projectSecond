@@ -25,7 +25,7 @@ padding: 3.5px;
 
 
 <div id="form">
-<form method="post" action="/secondProject/user/singup">
+<form method="post" action="${pageContext.request.contextPath}/kr/co/tripadvisor/user/singup">
 <h1>Trip Advisor 이용 필수정보</h1>
 <h2>-생년월일을 8자리 숫자로 입력해주세요.</h2>
 <input type="hidden" name="pass" value=" " />
