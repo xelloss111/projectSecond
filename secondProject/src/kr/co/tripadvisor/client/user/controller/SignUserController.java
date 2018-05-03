@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.User;
@@ -32,7 +33,10 @@ public class SignUserController extends HttpServlet {
 		
 		mapper.insertUser(user);
 		
-		response.sendRedirect("/main");
+		HttpSession session = request.getSession();
+		session.setAttribute("user", mapper.selectUserById(request.getParameter("id")));
+		
+		response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/main");
 	}
 
 }

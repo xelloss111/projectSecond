@@ -8,7 +8,10 @@ public interface UserMapper {
 	void insertUser(User user);
 	List<User> selectUser();
 	User selectUserById(String id);
-	void updateUser(User user);
-	void deleteUser(String id);
+	int updateUser(User user);
+	int deleteUser(String id);
 	void adminUpdateUser(User user);
+	int selectIdCount(String id);
+	int selectEmailCount(String email);
+
 }

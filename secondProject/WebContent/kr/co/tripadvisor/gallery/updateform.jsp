@@ -251,7 +251,7 @@ border-radius: 4px;
 				<input type="hidden" name="codeNo" value="3002" />
 				<div class='top_sel'>
 					<div class='sel_1'>
-						<select class='round' name="area">
+						<select class='round' name="area" id="area">
 							<option value="">지역</option>
 							<option value="2001">서울</option>
 							<option value="2002">광주</option>
@@ -266,14 +266,20 @@ border-radius: 4px;
 							<option value="2011">충청</option>
 							<option value="2012">제주</option>	
 						</select>
+						<script>
+							$("#area").val("${board.area}").prop("selected", true);
+						</script>
 					</div><!-- sel_1 END -->
 					<div class='sel_2'>
-						<select class='round' name="attract">
+						<select class='round' name="attract" id="attract">
 							<option value="">주제</option>
 							<option value="1001">맛집</option>
 							<option value="1002">명소</option>
 							<option value="1003">숙소</option>
 						</select>
+						<script>
+							$("#attract").val("${board.attract}").prop("selected", true);
+						</script>
 					</div> <!-- sel_2 END -->
 					<div class="b_title">
 						<h2>제목 : </h2>

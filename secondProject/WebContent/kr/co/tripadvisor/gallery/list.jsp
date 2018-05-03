@@ -353,7 +353,7 @@ article {
                 </c:forEach>   
                     
                 <div class="caption">
-                    <h4>${board.title}</h4>
+                    <a href="detail?boardNo=${board.boardNo}"><h4>${board.title}</h4></a>
                     <p>${board.editordata}</p>
                     <p>photo by ${board.id}</p>
                 </div>
