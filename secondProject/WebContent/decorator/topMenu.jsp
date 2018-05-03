@@ -39,6 +39,7 @@
 			${sessionScope.user.name}님 접속
 			<a href="<c:url value="/user/logout" />">LOGOUT</a>
 		</c:otherwise>
+		
 		</c:choose>	
 		
 			
@@ -56,6 +57,86 @@
 
 
 <!-- Modal HTML embedded directly into document -->
+
+<form action="" class="login_form modal" id="findIdForm" style="display: none;">
+<div id="idResult">
+ <h1>아이디 찾기</h1>
+ 이름    : <input type="text" name="name"/><br>
+ 이메일 : <input type="text" name="email"/><br>
+  <button type="button" id="findId">찾기</button>
+</div>
+  <script>
+	$("#findId").click(function (e) {
+	 		$.ajax({
+			url: "${pageContext.request.contextPath}/user/find",
+			type: "post",
+			data: {
+			name :  $("#findIdForm input[name='name']").val(),
+			email :  $("#findIdForm input[name='email']").val()
+			},
+			dataType: "json",
+			success: function (data) {
+				console.log(data);
+				$("#idResult").html("<h2>회원님의 아이디는 "+data.id+"입니다.</h2>");
+				if(data.id == 'null') {
+					$("#idResult").html("일치하는 회원정보가 없습니다.");
+				}
+				$(".close-modal").click(function () {
+					$("#findIdForm").submit();
+				});
+			}, //sucsess
+			error: function(){
+				$("#idResult").html("처리 중 오류가 발생하였습니다.");
+				$(".close-modal").click(function () {
+					$("#findIdForm").submit();
+				});
+			}
+		}); //ajax
+	}); // click
+  </script>
+</form>
+
+<form action="" class="login_form modal" id="findPassForm" style="display: none;">
+<div id="passResult">
+ <h1>비밀번호 찾기</h1>
+ 아이디 : <input type="text" name="id"/><br>
+ 이메일 : <input type="text" name="email"/><br>
+ <button type="button" id="findPass">찾기</button>
+</div>
+   <script>
+	$("#findPass").click(function (e) {
+	 		$.ajax({
+			url: "${pageContext.request.contextPath}/user/find",
+			type: "post",
+			data: {
+			id : $("#findPassForm input[name='id']").val(),
+			email : $("#findPassForm input[name='email']").val()
+			},
+			dataType: "json",
+			success: function (data) {
+				console.log(data);
+				$("#passResult").html("<h2>회원님의 비밀번호는 "+data.pass+"입니다.</h2>");
+				if(data.pass == 'null') {
+					$("#passResult").html("일치하는 회원정보가 없습니다.");
+				}
+				$(".close-modal").click(function () {
+					$("#findPassForm").submit();
+				});
+			}, //sucsess
+			error: function(){
+				$("#passResult").html("처리 중 오류가 발생하였습니다.");
+				$(".close-modal").click(function () {
+					$("#findPassForm").submit();
+				});
+			}
+		}); //ajax
+	}); // click
+  </script>
+</form>
+
+
+
+
 <form action="${pageContext.request.contextPath}/user/login" class="login_form modal" id="ex1" style="display: none;">
 	<h1>LOGIN</h1>
 	<br> <br>
@@ -68,7 +149,7 @@
 	<p>
 		<input type="submit" value="LOGIN" class="login_but" />
 	</p><br>
-	<a href="" style="color:gray">아이디찾기</a>|<a href="" style="color:gray">비밀번호찾기</a>
+	<a href="#findIdForm" rel="modal:open" style="color:gray">아이디찾기</a>|<a href="#findPassForm" rel="modal:open" style="color:gray">비밀번호찾기</a>
 	
 <!-- 네이버 로그인 영역 -->
 		<div id="naverIdLogin">
