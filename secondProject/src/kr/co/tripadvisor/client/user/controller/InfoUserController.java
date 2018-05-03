@@ -20,15 +20,17 @@ public class InfoUserController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 	
 		//네이버 로그인 유저는 접근 불가능
 		User user = (User) request.getSession().getAttribute("user");
+		PrintWriter out = response.getWriter();
 	    if (user.getPass().equals(" ")) {
-	    	PrintWriter out = response.getWriter();
-	    	response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=utf-8");
-			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
-			out.println("<script language='javascript' charset=\"utf-8\">");
+			out.println("<script language='javascript'>");
 			out.println("alert(\"네이버로그인 사용자는 이용할 수 없습니다.\")");
 			out.println("history.go(-1);");
 			out.println("</script>");

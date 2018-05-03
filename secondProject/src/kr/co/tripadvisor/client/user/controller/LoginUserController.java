@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.UserMapper;
@@ -23,6 +25,8 @@ public class LoginUserController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		UserMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(UserMapper.class);
 		
 		String id = request.getParameter("id");
@@ -32,15 +36,10 @@ public class LoginUserController extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		if (user == null) {
-			 
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=utf-8");
-			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
-			out.println("<script language='javascript' charset=\"utf-8\">");
-			out.println("alert(\"아이디를 확인하세요.\")");
+			out.println("<script language='javascript'>");
+			out.println("alert('아이디를 확인하세요.');");
 			out.println("history.go(-1);");
 			out.println("</script>");
-			out.flush();
 			return;
 		}
 		else if (user.getPass().equals(pass)) {
@@ -50,15 +49,10 @@ public class LoginUserController extends HttpServlet {
 			return;
 		}
 		else {
-			 
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=utf-8");
-			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 			out.println("<script language='javascript' charset=\"utf-8\">");
 			out.println("alert('비밀번호를 확인하세요.')");
 			out.println("history.go(-1);");
 			out.println("</script>");
-			out.flush();
 			return;
 		}
 	}

@@ -33,15 +33,15 @@ public class UpdateUserController extends HttpServlet {
 		int result = mapper.updateUser(user);
 		user = mapper.selectUserById(request.getParameter("id"));
 		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if(result != -1) {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=utf-8");
-//			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 			out.println("<script>");
 			out.println("alert(\"정보수정에 성공했습니다.\")");
 			out.println("window.location = \"/secondProject/user/mypage\";");
@@ -49,10 +49,7 @@ public class UpdateUserController extends HttpServlet {
 			out.flush();
 			return;
 		} else {
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=utf-8");
-			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
-			out.println("<script language='javascript' charset=\"utf-8\">");
+			out.println("<script language='javascript'>");
 			out.println("alert(\"정보수정에 실패했습니다.\")");
 			out.println("history.go(-1);");
 			out.println("</script>");
