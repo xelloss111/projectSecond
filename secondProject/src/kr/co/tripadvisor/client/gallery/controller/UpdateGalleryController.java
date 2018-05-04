@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
-import kr.co.tripadvisor.common.file.GalleryThumbnailUtil;
 import kr.co.tripadvisor.common.file.MlecFileRenamePolicy;
+import kr.co.tripadvisor.common.file.ThumbnailUtil;
 import kr.co.tripadvisor.repository.domain.Board;
 import kr.co.tripadvisor.repository.domain.BoardImage;
 import kr.co.tripadvisor.repository.mapper.BoardMapper;
@@ -68,8 +68,7 @@ public class UpdateGalleryController extends HttpServlet {
 				String systemName = mRequest.getFilesystemName(name);
 				long fileSize = f.length();
 				
-				GalleryThumbnailUtil thumb = new GalleryThumbnailUtil();
-				thumb.createThumbnail(datePath, systemName);
+				ThumbnailUtil.createThumbnail(f.getPath(), f.getParent()+"/thumb_"+f.getName(), 320, 200, "X");
 				
 			ImageMapper map = MyAppSqlConfig.getSqlSession().getMapper(ImageMapper.class);
 				// 데이터베이스에 파일 정보 저장
