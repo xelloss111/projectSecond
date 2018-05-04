@@ -10,7 +10,7 @@
 			<li class="nav_ui topBotomBordersOut"><a href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index"> <i
 					class="fas fa-camera-retro"></i> Gallery
 			</a></li>
-			<li class="nav_ui topBotomBordersOut"><a href="#"> <i
+			<li class="nav_ui topBotomBordersOut"><a href="${pageContext.request.contextPath}/kr/co/tripadvisor/notice/list"> <i
 					class="fas fa-check-circle"></i> Notice
 			</a></li>
 		</ul>
