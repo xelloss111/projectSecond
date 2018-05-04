@@ -3,9 +3,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/client/gallery_common.css" media="all">
 <title>Insert title here</title>
+<style type="text/css">
+#upform {
+	padding: 30px 30px;
+	margin-left: 300px;
+	text-align: left;
+}
+#infoauth {
+	border: 1px #aaa;
+}
+</style>
 </head>
 <body>
 
@@ -45,12 +54,9 @@
 		<!-- *************본문************* -->
 		<article>
 <!-- 스크랩 페이지 틀 -->
-<h2>MyInfo페이지 접속성공</h2>
+<div id="upform">
 
-<!-- info form에 session에 있는 user정보 불러오고 -->
-<!-- 사용자가 수정해서 submit하면 
-updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 수정되었습니다' 얼럿
-/user/info 페이지로 리다이렉트-->
+<h1>My Info Upadte</h1><br>
 
 <form id="info" method="post" action="${pageContext.request.contextPath}/kr/co/tripadvisor/user/update">
 		<p><label>ID</label><input type="text" name="id" value="${sessionScope.user.id}" readonly /></p>
@@ -59,10 +65,12 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 		<p id="infopassresult"></p>	 
 		<p><label>Email</label><input type="text" name="email" id="infoemail" value="${sessionScope.user.email}"/>
 		<button type="button" id="infoauth" class="email_but">EmailAuth</button></p>
-		<input type='text' id='infouserauth' placeholder='인증번호를 입력하세요.' maxlength=5 />
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		<input type='text' id='infouserauth' placeholder='인증번호를 입력하세요.' maxlength=5 /></p>
 		<p><label>Name</label><input type="text" name="name" id="infoname" value="${sessionScope.user.name}" readonly/></p>
 		<p><label>BirthDate</label><input type="text" placeholder="19700101" maxlength="8" name="birth" id="birth" value="${sessionScope.user.birth}" readonly/></p>
 		<p><input type="submit" value="수정" class="login_but" id="infobut" /></p>
+		<button id="withdraw" type="button" class="login_but">탈퇴</button>
 </form>
 
 <script type="text/javascript">
@@ -93,7 +101,7 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 
 			$("#infoauth").click(function (e) {
  		 		$.ajax({
-					url: "/${sessionScope.user.email}/kr/co/tripadvisor/user/emailauth",
+					url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/emailauth",
 					type: "post",
 					data: {
 					email :  $("#info input[name='email']").val()
@@ -123,7 +131,8 @@ updateuser controller에서 처리하고 : updateuser맵퍼... '성공적으로 
 </script>
 
 
-<button id="withdraw">탈퇴</button>
+
+</div>
 <script type="text/javascript">
 $("#withdraw").click(function (e) {
 	if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인

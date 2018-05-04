@@ -44,7 +44,7 @@ public class UpdateUserController extends HttpServlet {
 			
 			out.println("<script>");
 			out.println("alert(\"정보수정에 성공했습니다.\")");
-			out.println("window.location = \"/secondProject/user/mypage\";");
+			out.println("window.location = '/secondProject/kr/co/tripadvisor/user/mypage';");
 			out.println("</script>");
 			out.flush();
 			return;

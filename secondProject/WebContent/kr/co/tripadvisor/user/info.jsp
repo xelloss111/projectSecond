@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/client/gallery_common.css" media="all">
 <title>Insert title here</title>
 <style>
 #d1 {
  text-align: center;
  padding-top: 50px;
 }
-#but {
+.passbut {
 border: 1px solid #aaa;
 padding: 3.5px;
 }
@@ -62,20 +62,20 @@ padding: 3.5px;
 <div id="d1">
 <h2>비밀번호를 입력하십시오.</h2>
 <input type="password" name="infopass" id="infopass"/>
-<button id="passcheck" type="button" id="but">확인</button>
+<button id="infopasscheck" type="button" class="passbut">확인</button>
 </div>
 <script>
 
-$("#passcheck").click(function (e) {
+$("#infopasscheck").click(function (e) {
 	$.ajax({
-		url: "<c:url value='/kr/co/tripadvisor/user/passcheck'/>",
+		url: "/secondProject/kr/co/tripadvisor/user/passcheck",
 		type: "post",
 		data: {
 		infopass :  $("input[name='infopass']").val()
 		},
 		dataType: "json",
 		success: function (data) {
-// 			console.log(data.result);
+			console.log(data.result);
 			if( data.result == "true") {
 				window.location = "${pageContext.request.contextPath}/kr/co/tripadvisor/user/updateform.jsp";
 			} else {
@@ -90,6 +90,7 @@ $("#passcheck").click(function (e) {
 
 </article>
 </div> <!-- wrap -->
+
 	<script type="text/javascript">
 		$(function() {// jQuery 시작 / 메뉴 마우스 오버 효과
 			$(".accordion_navi > div").hide();
