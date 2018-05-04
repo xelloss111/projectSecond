@@ -31,7 +31,9 @@ public class DetailGalleryController extends HttpServlet {
 		
 		BoardMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(BoardMapper.class);
 		
+		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		mapper.updateBoardViewCnt(boardNo);
 		Board board = mapper.selectBoardByNo(boardNo);
 		request.setAttribute("board", board);
 		

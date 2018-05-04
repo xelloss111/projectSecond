@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,8 +138,12 @@ h1{ font-size: xx-large;}
 			    <h1>${board.title}</h1>
 
 			    
-			    <p align="right">${board.id}</p>
-			    <p align="right">${board.regDate}</p>
+			    <p align="right">글쓴이 : ${board.id}</p>
+			    <p align="right">
+			    <fmt:formatDate var="regDate" value="${board.regDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+			    <c:out value="${regDate}" />
+			    </p>
+			    <p align="right" style="color:gray">조회수 ${board.viewCnt}</p>
 			    
 					<div class="content"><br>
 					<c:forEach var="image" items="${imgList}">
