@@ -21,7 +21,7 @@ import kr.co.tripadvisor.repository.mapper.BoardMapper;
 			
 			mapper.deleteBoardByNo(Integer.parseInt(request.getParameter("boardNo")));
 			
-			response.sendRedirect(request.getContextPath() + "/kr/co/tripadvisor/main");
+			response.sendRedirect("index");
 
 		}
 		
