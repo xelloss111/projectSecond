@@ -46,10 +46,10 @@
 
 <form action="" class="login_form modal" id="findIdForm" style="display: none;">
 <div id="idResult">
- <h1>아이디 찾기</h1>
- 이름    : <input type="text" name="name"/><br>
+ <h1>아이디 찾기</h1><br>
+　이름 : <input type="text" name="name"/><br>
  이메일 : <input type="text" name="email"/><br>
-  <button type="button" id="findId">찾기</button>
+  <button type="button" id="findId" class="login_but">찾기</button>
 </div>
   <script>
 	$("#findId").click(function (e) {
@@ -84,10 +84,10 @@
 
 <form action="" class="login_form modal" id="findPassForm" style="display: none;">
 <div id="passResult">
- <h1>비밀번호 찾기</h1>
+ <h1>비밀번호 찾기</h1><br>
  아이디 : <input type="text" name="id"/><br>
  이메일 : <input type="text" name="email"/><br>
- <button type="button" id="findPass">찾기</button>
+ <button type="button" id="findPass" class="login_but">찾기</button>
 </div>
    <script>
 	$("#findPass").click(function (e) {
