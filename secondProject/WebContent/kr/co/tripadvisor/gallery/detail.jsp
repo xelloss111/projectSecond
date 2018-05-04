@@ -155,12 +155,42 @@ h1{ font-size: xx-large;}
 					
 					
 			 </div><!-- content_box END -->
-			 
-			
+			 <div class="sc_submit">
+		      <button type="submit" class="b_write_but btn" id="scrap_btn">SCRAP</button>
+			 </div>
+		
+			<c:if test="${sessionScope.user.id==board.id}">
 		    <div class="sc_submit">
 			  <button onclick="location.href ='delete?boardNo=${board.boardNo}'">DELETE</button>
 			  <button onclick="location.href ='updateform?boardNo=${board.boardNo}'">UPDATE</button>
 		    </div>
+			</c:if>
+
+			 <script>
+			 		/* 스크랩 영역 */
+		var codeNo = ${board.codeNo};
+		var boardNo = ${board.boardNo};
+		var id = '${sessionScope.user.id}';
+
+		var contextPath = getContextPath();
+		function getContextPath() { // contextPath 가져오는 방법
+	    	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	    	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+	    }
+		
+		$("#scrap_btn").click(function(){
+			//console.log(id);
+			$.ajax({
+				  type: "POST",
+				  url: contextPath + "/kr/co/tripadvisor/client/scrap",
+				  data: {id:id, boardNo:boardNo, codeNo:codeNo},
+				  success: 
+					  function(){
+					  alert("스크랩이 완료되었습니다.")
+				  }
+				});
+			});
+			 </script>
 
 
  <%--  댓글 파트입니다.  --%>	
