@@ -159,7 +159,7 @@ h1{ font-size: xx-large;}
 			
 		    <div class="sc_submit">
 			  <button onclick="location.href ='delete?boardNo=${board.boardNo}'">DELETE</button>
-			  <button onclick="location.href ='updateForm?boardNo=${board.boardNo}'">UPDATE</button>
+			  <button onclick="location.href ='updateform?boardNo=${board.boardNo}'">UPDATE</button>
 		    </div>
 
 

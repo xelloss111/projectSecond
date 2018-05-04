@@ -22,6 +22,8 @@
 		<result column="file_size" property="fileSize" />
 	</resultMap>
 	
+
+	
 	<!-- notice -->
 	<insert id="insertFileInfo" parameterType="noticeImage">
 		insert into
@@ -76,6 +78,12 @@
 		from tb_image
 		where board_no = #{boardNo}
 	</select>
+	
+	<delete id="deleteGalleryImage" parameterType="int">
+	delete 
+	  from tb_image 
+	 where image_no = #{imageNo}
+	</delete>
 	
 	<!-- 게시판 -->
 

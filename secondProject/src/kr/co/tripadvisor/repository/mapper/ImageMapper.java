@@ -25,7 +25,5 @@ public interface ImageMapper {
 	void insertImageFile(BoardImage image);
 	List<BoardImage> selectImageAll();
 	List<BoardImage> selectImageFile(int BoardNo);
-	
-	
-
+	int deleteGalleryImage(int imageNo);
 }

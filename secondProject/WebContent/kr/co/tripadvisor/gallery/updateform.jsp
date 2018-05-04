@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -242,6 +243,15 @@ border-radius: 4px;
 				<div>
 
 						<textarea id="textcontent" name="editordata" maxlength="50" >${board.editordata}</textarea>
+						<c:set var="n" value="1" />
+						
+						<c:forEach var="image" items="${imageList}">
+						<div class="imageupdate">
+						<p id="${image.imageNo}">${image.oriName}<button type="button" class="imgbut">&emsp;x</button></p> <!-- ajax로 바로 삭제 -->
+						<input id="i${n}" type="hidden" value="${image.imageNo}" />
+						<c:set var="n" value="${n+1}" />
+						</div>
+						</c:forEach>
 						
 						<input type="file" name="attatch1" value="첨부파일"><br>
 						<input type="file" name="attatch2"><br>
@@ -253,5 +263,31 @@ border-radius: 4px;
 		</article>	
 
 	</div><!-- wrap END -->
+	<script type="text/javascript">
+	
+	$(".imgbut").click ( function () {
+		var id;
+		var no;
+		id = $(this).parent().parent();
+		no = id.children();
+		no = no.eq(1).val();
+		console.log(no);
+		$.ajax({
+			url: "/secondProject/kr/co/tripadvisor/file/imagedel",
+			type: "post",
+			data: {
+			imageNo :  no
+			},
+			dataType: "json",
+			success: function (data) {
+				console.log(data);
+				$("#"+no).html("");
+			}
+		});
+		
+	});
+	
+
+	</script>
 </body>
 </html>
