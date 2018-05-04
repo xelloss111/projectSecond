@@ -151,12 +151,27 @@
 	
 	<!-- index search -->
 	<select id="searchList" resultMap="boardMap" parameterType="string">
-<!-- 		select * -->
-<!-- 		from (select * from tb_board) -->
-<!-- 		where title like '%' || #{searchWord} || '%' -->
 		select *
 		from tb_board
 		where title like '%' || #{searchWord} || '%'
 	</select>
+	
+	<!-- board search -->
+	<select id="boardSearchList" resultMap="boardMap" parameterType="BoardSearch">
+		select *
+		from (select * from tb_board where code_no='3001' order by board_no desc)
+
+		<where>
+			<choose>
+				<when test="searchType == 'id'">
+					id like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'title'">
+					title like '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+		</where>
+	</select>	
+	
 	
 </mapper>

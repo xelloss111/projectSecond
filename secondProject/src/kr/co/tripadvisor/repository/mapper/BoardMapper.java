@@ -4,7 +4,7 @@ import java.util.List;
 
 import kr.co.tripadvisor.repository.domain.Board;
 import kr.co.tripadvisor.repository.domain.BoardImage;
-import kr.co.tripadvisor.repository.domain.Code;
+import kr.co.tripadvisor.repository.domain.BoardSearch;
 
 public interface BoardMapper {
 	
@@ -30,5 +30,8 @@ public interface BoardMapper {
 	
 	//index search
 	 List<Board> searchList(String seacrch);
+	 
+	 // board search
+	 List<Board> boardSearchList(BoardSearch searchWord);
 
 }

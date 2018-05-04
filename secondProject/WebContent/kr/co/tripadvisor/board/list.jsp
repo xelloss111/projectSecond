@@ -53,7 +53,7 @@
 		<article>
 
 			<div class="search_area">
-				<form action="" method="">
+				<form action="/secondProject/kr/co/tripadvisor/board/list" method="get" id="searchForm">
 					<div class="search_ctn">
 						<div class="search_div1">
 							<ul>
@@ -111,7 +111,9 @@
 							<option>선택</option>
 							<option value="id">ID</option>
 							<option value="title">제목</option>
-						</select> <input type="text" class="searchbox" />
+						</select> 
+						<input type="text" class="searchbox" name="searchWord"/>
+							
 						<button class="btn" type="submit">
 							<i class="fas fa-search-plus" style="color: skyblue"></i>
 						</button>
@@ -123,12 +125,12 @@
 
 			<div class='board_list'>
 				<ul>
-					<c:if test="${empty list}">
+					<c:if test="${empty searchList}">
 						<li>
 							<h1>입력된 게시물이 아직 없어요!</h1>
 						</li>
 					</c:if>
-					<c:forEach var='b' items="${list}">
+					<c:forEach var='b' items="${searchList}">
 						<li>
 							<figure>
 								<a

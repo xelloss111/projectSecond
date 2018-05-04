@@ -27,8 +27,6 @@ public class MainSearchController extends HttpServlet{
 		List<Board> list = mapper.searchList(searchWord);
 		request.setAttribute("list", list);
 		
-		System.out.println(list);
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/kr/co/tripadvisor/board/search.jsp");
 		rd.forward(request, response);
 	}
