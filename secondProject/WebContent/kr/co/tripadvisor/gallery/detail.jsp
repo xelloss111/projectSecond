@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Gallery</title>
+ 	<!-- Bootstrap 3.3.7 -->
+<!-- 	<link rel="stylesheet" href="../../../../css/admin/bootstrap.min.css"> -->
 	<!-- gallery common css -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/client/gallery_common.css" media="all">
 
@@ -97,7 +99,7 @@ h1{ font-size: xx-large;}
 	margin-right: 2%;
 }
 
-
+<!-- 댓글 부트스트랩  -->
 
 </style>
 </head>
@@ -192,34 +194,69 @@ h1{ font-size: xx-large;}
 			});
 			 </script>
 
-
- <%--  댓글 파트입니다.  --%>	
-	 <form action="updateComment" method="post">
-		<input type="hidden" name="boardNo" value="${board.boardNo}" />
-		<input type="hidden" name="commentNo" value="${commentNo}" />
-		<%-- 댓글 목록 --%>
-		<div id="commentList"></div>
-	 </form>
-		
-	 <%-- 댓글 관련 파트 시작 --%>		
-	 <form id="rForm" class="form-inline">
-		<div id="comment">
-		    <div class="form-group">
-			    <input type="text" name="id" class="form-control" value="${sessionScope.user.id}" readonly />
-		    </div>
-		    <div class="form-group">
-			    <input type="text" name="content" class="form-control input-wp1" placeholder="내용을 입력하세요">
-		    </div>
-		  	<button class="btn btn-primary">등록</button>
+				<%-- 댓글 관련 파트 시작 --%>
+				<form id="rForm" class="form-inline">
+					<div id="comment">
+						<div class="form-group">
+							<input type="text" name="id" class="form-control" value="${sessionScope.user.id}"	readonly />
+						</div>
+						<div class="form-group">
+							<input type="text" name="content" class="form-control input-wp1" placeholder="내용을 입력하세요">
+						</div>
+						<button class="btn btn-primary">등록</button>
+					</div>
+				</form>
+				<p>
+			</div>
+		</div>	
+      	
+		<div class="row">
+			<%--  댓글 파트입니다.  --%>
+			<form action="updateComment" method="post">
+				<input type="hidden" name="boardNo" value="${board.boardNo}" />
+				<input type="hidden" name="commentNo" value="${commentNo}" />
+				<%-- 댓글 목록 --%>
+				<div id="commentList"></div>
+			</form>
+			<p>
 		</div>
-	 </form>
 		
-	<script>
+	</div>
+ </section>
+</div>      	
+</div>
+
+<script>
+	// 게시물 수정 시 파라메터 값으로 입력 받을 값 JSP에서 JS로 
+	var num = ${board.boardNo};
+	console.log(num);
+
+	function getContextPath() { // contextPath 가져오는 방법
+		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+	}
+	
+	var contextPath = getContextPath();
+
+	$("document").ready(function () {
+		$("#title").css("border-top", "2px solid slategray").css("background", "#3C8DBC").css("color", "white");
+		$("#writer").css("padding", "10px 15px").css("border-top", "0.3px solid slategray").css("border-bottom", "0.3px solid slategray")
+					.css("font-size", "12px");
+		$("#info").css("text-align", "right").css("padding", "10px 15px").css("border-top", "0.3px solid slategray")
+				.css("border-bottom", "0.3px solid slategray").css("font-size", "12px");
+		$("#content").css("height", "330px").css("padding","20px").css("overflow", "auto")
+					.css("border-bottom", "0.3px solid slategray");
+		$("div.col-md-5 span").css("padding-left", "5px").css("padding-right", "5px");
+		$(".form-group input[name='content']").css("width", "670px");
+	});
+	
+	
+	// 댓글 처리	
 	function commentDelete(commentNo) {
 		$.ajax({
-			url: "<c:url value='/kr/co/tripadvisor/gallery/deletecomment'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/deleteComment'/>",
 			data: {
-				no: "${board.boardNo}", 
+				boardNo : "${board.boardNo}", 
 				commentNo: commentNo
 			},
 			dataType: "json",
@@ -257,7 +294,7 @@ h1{ font-size: xx-large;}
 			url: "<c:url value='/kr/co/tripadvisor/gallery/updateComment'/>",
 			type: "POST",
 			data: {
-				no: "${board.boardNo}", 
+				boardNo: "${board.boardNo}", 
 				content: $("#modRow" + commentNo + " input[name=content]").val(), 
 				commentNo: commentNo
 			},
@@ -278,12 +315,12 @@ h1{ font-size: xx-large;}
 		e.preventDefault();
 		
 		$.ajax({
-			url: "<c:url value='/kr/co/tripadvisor/gallery/writecomment'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/writeComment'/>",
 			type: "POST",
 			data: {
-				no: "${board.boardNo}", 
+				boardNo: "${board.boardNo}", 
 				content: $("#rForm input[name='content']").val(), 
-				writer: $("#rForm input[name='writer']").val()
+				id : $("#rForm input[name='id']").val()
 			},
 			dataType: "json"
 		})
@@ -303,19 +340,23 @@ h1{ font-size: xx-large;}
 	function makeCommentList(result) {
 		console.dir(result);
 		var html = "";
-		html += '<table class="table table-bordered">';
-		html += '	<colgroup>'; 
-		html += '		<col width="7%">'; 
-		html += '		<col width="*">'; 
-		html += '		<col width="14%">'; 
-		html += '		<col width="10%">'; 
-		html += '	</colgroup>'; 
-		  
+		html += '<div class="row">';
+		html += '	<div class="col-md-1"></div>';
+		html += '	<div class="col-md-10">';
+		html += '		<table class="table table-bordered">';
+		html += '			<colgroup>'; 
+		html += '				<col width="7%">'; 
+		html += '				<col width="*">'; 
+		html += '				<col width="14%">'; 
+		html += '				<col width="14%">'; 
+		html += '			</colgroup>';
+
+		
 		for (var i = 0; i < result.length; i++) {
 			var comment = result[i];
 			html += '<tr id="row' + comment.commentNo + '">';
 			html += '	<td>' + comment.id + '</td>';
-			html += '	<td>' + comment.content + '</td>';
+			html += '	<td >' + comment.content + '</td>';
 			var date = new Date(comment.regDate);
 			var time = date.getFullYear() + "-" 
 			         + (date.getMonth() + 1) + "-" 
@@ -323,8 +364,9 @@ h1{ font-size: xx-large;}
 			         + date.getHours() + ":"
 			         + date.getMinutes() + ":"
 			         + date.getSeconds();
-			html += '	<td>' + time + '</td>';  
+			html += '	<td id=\'time\'>' + time + '</td>';  
 			html += '	<td>';    
+			console.log(${sessionScope.user.id}, comment.id);
 			html += '		<a href="javascript:commentUpdateForm(' + comment.commentNo + ')" class="btn btn-success btn-sm" role="button">수정</a>';    
 			html += '		<a href="javascript:commentDelete(' + comment.commentNo + ')" class="btn btn-danger btn-sm" role="button">삭제</a>';    
 			html += '	</td>';    
@@ -333,15 +375,17 @@ h1{ font-size: xx-large;}
 		if (result.length == 0) {
 			html += '<tr><td colspan="4">댓글이 존재하지 않습니다.</td></tr>';
 		}
-		html += "</title>";
+		html += "</table>";
+		html += '	</div>';
+		html += '</div>';  
 		$("#commentList").html(html);
 	}
 	
 	// 댓글 목록 조회
 	function commentList() {
 		$.ajax({
-			url: "<c:url value='kr/co/tripadvisor/board/commentList'/>",
-			data: {no: "${board.boardNo}"},
+			url: "<c:url value='/kr/co/tripadvisor/gallery/commentList'/>",
+			data: {boardNo: "${board.boardNo}"},
 			dataType: "json", 
 			success: makeCommentList
 		});
@@ -349,6 +393,7 @@ h1{ font-size: xx-large;}
 	
 	// 상세 페이지 로딩시 댓글 목록 조회 ajax 호출
 	commentList();	
+	
 	</script>	
 			
 		</article>
