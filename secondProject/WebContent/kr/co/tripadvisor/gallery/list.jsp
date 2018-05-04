@@ -160,6 +160,42 @@
 
 
 
+<div>
+				<c:if test="${paging.totalCount != 0 }">
+					<nav class="paging_area">
+						<ul class="pagination">
+							<li class="<c:if test='${paging.prev eq false }'>disabled</c:if>">
+								<a
+								href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.startPage - 1}"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a>
+							</li>
+							<c:forEach var="iContent" begin="${paging.startPage}"
+								end="${paging.endPage}">
+								<c:choose>
+									<c:when test="${iContent == paging.pageNo}">
+										<li class="active"><a
+											href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${iContent}">${iContent}</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li><a
+											href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${iContent}">${iContent}</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<li class="<c:if test='${paging.next eq false}'>disabled</c:if>">
+								<a
+								href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.endPage + 1}"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a>
+							</li>
+						</ul>
+					</nav>
+				</c:if>
+			</div>
+
 
 		</article>
 	</div>
