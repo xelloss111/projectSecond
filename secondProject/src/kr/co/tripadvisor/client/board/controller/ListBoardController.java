@@ -1,6 +1,7 @@
 package kr.co.tripadvisor.client.board.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -33,8 +34,24 @@ public class ListBoardController extends HttpServlet{
 		String no = request.getParameter("pageNo");
 		
 		BoardSearch bs = new BoardSearch();
+		
+		String [] attrList = request.getParameterValues("attract");
+		String [] areaList = request.getParameterValues("area");
+		
+		bs.setAttrList(attrList);
+		bs.setAreaList(areaList);
+		
 		bs.setSearchType(request.getParameter("searchType"));
 		bs.setSearchWord(request.getParameter("searchWord"));
+		
+		try {
+			System.out.println("몇 개?: "+ attrList.length);
+			for (String s : attrList) {
+				System.out.println(s);
+			}
+		} catch (Exception e) {
+			
+		}
 		
 		
 		int pageNo = (no != null) ? Integer.parseInt(no) : 1; 
@@ -42,14 +59,15 @@ public class ListBoardController extends HttpServlet{
 		int totalCnt = mapper.totalBoardCount();
 		Paging paging = new Paging(totalCnt, pageNo, 10, 5);
 		
-		List<Board> list = mapper.boardListUp(paging);
+//		List<Board> list = mapper.boardListUp(paging);
 		
 		List<Board> searchList = sMapper.boardSearchList(bs);
 					
-		request.setAttribute("list", list);
 		request.setAttribute("searchList", searchList);
 		request.setAttribute("paging", paging);
 
+		System.out.println("검색 결과 : " + searchList);
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
 		rd.forward(request, response);
