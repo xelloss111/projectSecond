@@ -1,38 +1,37 @@
 package kr.co.tripadvisor.repository.domain;
 
-import java.util.List;
-
 public class BoardSearch {
-	private List<String> attrList;
-	private List<String> areaList;
+	private String[] attrList;
+	private String[] areaList;
+	private String attract;
+	private String area;
 	private String searchType;
 	private String searchWord;
-	private String [] areas;
-	private String [] attracts;
-	
-	public String[] getAttracts() {
-		return attracts;
-	}
-	public void setAttracts(String[] attracts) {
-		this.attracts = attracts;
-	}
-	public String[] getAreas() {
-		return areas;
-	}
-	public void setAreas(String[] areas) {
-		this.areas = areas;
-	}
-	public List<String> getAttrList() {
+
+
+	public String[] getAttrList() {
 		return attrList;
 	}
-	public void setAttrList(List<String> attrList) {
+	public void setAttrList(String[] attrList) {
 		this.attrList = attrList;
 	}
-	public List<String> getAreaList() {
+	public String[] getAreaList() {
 		return areaList;
 	}
-	public void setAreaList(List<String> areaList) {
+	public void setAreaList(String[] areaList) {
 		this.areaList = areaList;
+	}
+	public String getAttract() {
+		return attract;
+	}
+	public void setAttract(String attract) {
+		this.attract = attract;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
 	}
 	public String getSearchType() {
 		return searchType;

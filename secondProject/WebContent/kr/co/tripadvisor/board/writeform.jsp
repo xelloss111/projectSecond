@@ -78,8 +78,8 @@
 						<select class='round' name="attract">
 							<option>주제</option>
 							<option value="1001">맛집</option>
-							<option value="1002">숙소</option>
 							<option value="1002">명소</option>
+							<option value="1003">숙소</option>
 						</select>
 					</div>
 					<!-- sel_2 END -->
