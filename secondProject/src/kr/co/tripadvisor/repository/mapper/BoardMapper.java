@@ -27,5 +27,8 @@ public interface BoardMapper {
 	//민희
 	//index list
 	List<Board> selectIndex();	
+	
+	//index search
+	 List<Board> searchList(String seacrch);
 
 }

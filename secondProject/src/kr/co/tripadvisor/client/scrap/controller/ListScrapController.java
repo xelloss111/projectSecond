@@ -16,7 +16,7 @@ import kr.co.tripadvisor.repository.domain.Scrap;
 import kr.co.tripadvisor.repository.domain.User;
 import kr.co.tripadvisor.repository.mapper.ScrapMapper;
 
-@WebServlet("/kr/co/tripadvisor/member/scrap/scrapList")
+@WebServlet("/kr/co/tripadvisor/user/scrap/scrapList")
 
 public class ListScrapController extends HttpServlet{
 

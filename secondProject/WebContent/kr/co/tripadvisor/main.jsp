@@ -164,10 +164,10 @@
 			<span class='showHere'>tripadvisor</span>
 
 			<content>
-				<form action="" method="">
-					<input type="" name="" value="">
-					<button>
-						<i class="fas fa-search-plus" style="font-size: 22px; 	color: #fff"></i>
+				<form action="/secondProject/kr/co/tripadvisor/board/searchList" method="get" id="searchForm">
+					<input type="text" name="searchWord">
+					<button type="submit" id='submit'>
+						<i class="fas fa-search-plus" style="font-size: 22px; color: #fff"></i>
 					</button>
 				</form>
 			</content>
@@ -233,9 +233,24 @@
 					</c:if>
 					<c:forEach var='board' items="${list}" end="5" step="1">
 						<li>
-							<a href='board/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}'>
-								<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
-							</a>
+						
+						
+						<c:choose>
+								<c:when test = "${board.codeNo == 3001}">
+									<a href='board/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}' >
+											<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
+									</a>
+								</c:when>
+								
+								<c:when test = "${board.codeNo == 3002}">
+								<a href='gallery/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}' >
+										<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
+								</a>
+								</c:when>
+							</c:choose>
+<%-- 							<a href='board/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}'> --%>
+<%-- 								<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' /> --%>
+<!-- 							</a> -->
 							<div>
 								<h5>${board.title}</h5>
 								<span id="sel2_${board.boardNo}">주제 : ${board.attract} </span>
@@ -283,6 +298,14 @@
 
 	</div><!-- main_wrap END -->
 
-
+<script type="text/javascript">
+	$("#submit").click(function() {
+		console.log($("input[name='searchWord']").val());
+	});
+	
+	$("input[name='searchWord']").blur(function() {
+		console.log($(this).val());
+	})
+</script>
 </body>
 </html>

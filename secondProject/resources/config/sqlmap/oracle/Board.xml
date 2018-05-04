@@ -117,6 +117,7 @@
 		from tb_board
 		where board_no = #{boardNo}
 	</delete>
+	
 	<!-- 첨부파일 파트 -->
 
 	<resultMap id="boardImageMap" type="boardImage">
@@ -147,12 +148,15 @@
 		)
 	</insert>
 
-
-	<!-- 자유게시판 수정 -->
-	<!-- <update id="updateBoard" parameterType="board"> update board set title 
-		= #{title} content = #{content} area = #{area} attract = #{attract} where 
-		board_no = #{board_no} </update> <delete id="deleteBoard" parameterType="int"> 
-		delete from board where board_no = #{board_no} </delete> <update id="uddateBoardViewCnt" 
-		parameterType="int"> update board set view_cnt = view_cnt + 1 where board_no 
-		= #{board_no} </update> -->
+	
+	<!-- index search -->
+	<select id="searchList" resultMap="boardMap" parameterType="string">
+<!-- 		select * -->
+<!-- 		from (select * from tb_board) -->
+<!-- 		where title like '%' || #{searchWord} || '%' -->
+		select *
+		from tb_board
+		where title like '%' || #{searchWord} || '%'
+	</select>
+	
 </mapper>

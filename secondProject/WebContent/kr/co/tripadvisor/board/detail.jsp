@@ -85,11 +85,15 @@
 				<button type="submit" class="b_write_but btn" id="scrap_btn">SCRAP</button>
 				
 				
-				<a href="UpdateFormBoard?boardNo=${board.boardNo}"><input type="submit" value="UPDATE"
-					class="b_write_but btn" /> </a> 
-					<a
-					href='delete?boardNo=${board.boardNo}'><input type="submit"
-					value="DELETE" class="b_write_but btn" id="delbtn" /> </a>
+				<a href="UpdateFormBoard?boardNo=${board.boardNo}">
+					<input type="submit" value="UPDATE" class="b_write_but btn" /> 
+				</a> 
+				<a href='delete?boardNo=${board.boardNo}'>
+					<input type="submit" value="DELETE" class="b_write_but btn" id="delbtn" /> 
+				</a>
+				<a href="list">
+					<input value="LIST" type="button" class="b_write_but btn" >
+				</a>												
 			</div>
 			<!-- btn_div END -->
 
@@ -156,7 +160,7 @@
 											<a href="DeleteBoardComment?commentNo=${comment.commentNo}&boardNo=${comment.boardNo}">
 												<input value="delete" type="button" class="c_write_but btn" >
 											</a>
-												
+
 											</td>
 										</tr>
 									</c:otherwise>

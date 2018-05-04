@@ -38,7 +38,7 @@
 					</ul>
 				</div>
 				<h3 id="menuScrap">
-					<a href="/secondProject/kr/co/tripadvisor/member/scrap/scrapList"> <i
+					<a href="/secondProject/kr/co/tripadvisor/user/scrap/scrapList"> <i
 						class="fas fa-tags"></i> 스크랩
 					</a>
 				</h3>
@@ -223,6 +223,12 @@
 					</c:forEach>
 				</ul>
 			</div>
+			<!-- 버튼 영역 -->
+							<div>
+								<a href="/secondProject/kr/co/tripadvisor/board/writeform">
+									<input value="WRITE" type="button" class="c_write_but btn" >
+								</a>							
+							</div>
 			<div>
 				<c:if test="${paging.totalCount != 0 }">
 					<nav class="paging_area">
