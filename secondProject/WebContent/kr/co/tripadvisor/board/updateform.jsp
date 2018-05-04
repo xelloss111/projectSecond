@@ -33,18 +33,6 @@
 						<li><a href="#">- 사진 올리기</a></li>
 					</ul>
 				</div>
-				<h3>
-					<a href="/secondProject/kr/co/tripadvisor/member/scrap/scrapList">
-						<i class="fas fa-tags"></i>
-						스크랩
-					</a>
-				</h3>
-				<h3>
-					<a href="#">
-						<i class="far fa-smile"></i>
-						회원정보
-					</a>
-				</h3>
 			</div>
 			<!-- accordion_navi 끝 -->
 		</aside>

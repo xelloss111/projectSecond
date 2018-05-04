@@ -35,18 +35,6 @@
 						<li><a href="#">- 사진 올리기</a></li>
 					</ul>
 				</div>
-				<h3>
-					<a href="#">
-						<i class="fas fa-tags"></i>
-						스크랩
-					</a>
-				</h3>
-				<h3>
-					<a href="#">
-						<i class="far fa-smile"></i>
-						회원정보
-					</a>
-				</h3>
 			</div>
 			<!-- accordion_navi 끝 -->
 		</aside>
@@ -82,15 +70,19 @@
 			</div>
 
 			<div class="btn_div">
-				<button type="submit" class="b_write_but btn" id="scrap_btn">SCRAP</button>
+			
+			
+				<c:if test="${sessionScope.user.id==board.id}">	
+					<button type="submit" class="b_write_but btn" id="scrap_btn">SCRAP</button>
+						<a href="UpdateFormBoard?boardNo=${board.boardNo}">
+							<input type="submit" value="UPDATE" class="b_write_but btn" /> 
+						</a> 
+						<a href='delete?boardNo=${board.boardNo}'>
+							<input type="submit" value="DELETE" class="b_write_but btn" id="delbtn" /> 
+						</a>
+				</c:if>
 				
 				
-				<a href="UpdateFormBoard?boardNo=${board.boardNo}">
-					<input type="submit" value="UPDATE" class="b_write_but btn" /> 
-				</a> 
-				<a href='delete?boardNo=${board.boardNo}'>
-					<input type="submit" value="DELETE" class="b_write_but btn" id="delbtn" /> 
-				</a>
 				<a href="list">
 					<input value="LIST" type="button" class="b_write_but btn" >
 				</a>												
@@ -113,7 +105,7 @@
 							<td id="content_tdView">
 								<textarea name="content" rows="4" cols="60" placeholder="내용을 입력하세요" class="content_view" ></textarea>
 							</td>
-							<td id="btn_view"><input type="submit" value="submit" class="b_write_but btn"></td>
+							<td id="btn_view"><input type="submit" value="submit" class="b_write_but btn logincheck"></td>
 						</tr>
 					</table>
 				</form>
@@ -150,17 +142,17 @@
 											</td>
 												
 											<td class="td_btn">
-											
-											<a
-												href="detail?commentNo=${comment.commentNo}&boardNo=${comment.boardNo}">
-												<input value="update" type="button" class="c_write_but btn" >
-												
-											</a>
-												
-											<a href="DeleteBoardComment?commentNo=${comment.commentNo}&boardNo=${comment.boardNo}">
-												<input value="delete" type="button" class="c_write_but btn" >
-											</a>
-
+											<c:if test="${sessionScope.user.id==comment.id}">	
+												<a
+													href="detail?commentNo=${comment.commentNo}&boardNo=${comment.boardNo}">
+													<input value="update" type="button" class="c_write_but btn" >
+													
+												</a>
+													
+												<a href="DeleteBoardComment?commentNo=${comment.commentNo}&boardNo=${comment.boardNo}">
+													<input value="delete" type="button" class="c_write_but btn" >
+												</a>
+											</c:if>
 											</td>
 										</tr>
 									</c:otherwise>
@@ -193,7 +185,8 @@
 				}
 			})
 
-		}); //jQuery 종결
+		}); 
+		
 		/* 댓글영역 */
 			var c = document.cForm;
 			function isEmpty(obj, msg) {
@@ -203,16 +196,21 @@
 					return true;
 				}
 				return false;
-			}
+			};
+			
 		function commentCkeck() {
-			if(isEmpty(c.content, "댓글을 등록해주세요,")) return false;
+			if(isEmpty(c.content, "댓글을 등록해주세요.")) return false;
+			
+			if('${empty sessionScope.user}'==true){
+				alert("로그인 후 코멘트 등록이 가능합니다.") 
+			} return false;
 			
 			c.content.value = c.content.value.replace(/^\s/gm, '');
 			c.content.value = c.content.value.replace(/\r\n$/g, '');
 		alert("코멘트가 등록되었습니다.")
 		return true;
-		}
-	
+		};
+		
 
 		$(function() {
 			switch("${board.area}") {
@@ -249,6 +247,7 @@
 	    	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 	    }
 		
+		
 		$("#scrap_btn").click(function(){
 			//console.log(id);
 			$.ajax({
@@ -261,6 +260,7 @@
 				  }
 				});
 			});
+		
 	</script>
 </body>
 </html>

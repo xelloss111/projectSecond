@@ -56,19 +56,41 @@
 					<c:forEach var='b' items="${list}">
 						<li>
 							<figure>
-								<a
-									href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'>
-									<div class="fi_div">
-										<img
-											src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' />
-									</div>
-								</a>
+								<c:choose>
+									<c:when test = "${b.codeNo == 3001}">
+										<a href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}' >
+												<img src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' />
+										</a>
+									</c:when>
+									
+									<c:when test = "${b.codeNo == 3002}">
+										<a href='/secondProject/kr/co/tripadvisor/gallery/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}' >
+											<img src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' />
+										</a>
+									</c:when>
+							</c:choose>
+<!-- 								<a -->
+<%-- 									href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'> --%>
+<!-- 									<div class="fi_div"> -->
+<!-- 										<img -->
+<%-- 											src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' /> --%>
+<!-- 									</div> -->
+<!-- 								</a> -->
 							</figure>
 							<div>
-
 								<h5>
-									<a
-										href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'>${b.board.title}</a>
+								
+									<c:choose>
+										<c:when test = "${b.codeNo == 3001}">
+											<a href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}' >${b.board.title}
+											</a>
+										</c:when>
+										
+										<c:when test = "${b.codeNo == 3002}">
+											<a href='/secondProject/kr/co/tripadvisor/gallery/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}' >${b.board.title}
+											</a>
+										</c:when>
+									</c:choose>
 								</h5>
 								<span id="sel_${b.boardNo}">지역 : ${b.board.area} </span>
 
@@ -144,7 +166,7 @@
 										pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>${b.board.id}</span>
 							</div>
 							<div>
-								<a href="/secondProject/kr/co/tripadvisor/member/scrap/deleteScrap?ScrapNo=${b.scrapNo}">
+								<a href="/secondProject/kr/co/tripadvisor/user/scrap/deleteScrap?ScrapNo=${b.scrapNo}">
 									<input value="DELETE" type="button" class="c_write_but btn"  id="scrapdelbtn">
 								</a>							
 							</div>

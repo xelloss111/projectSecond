@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.tripadvisor.common.db.MyAppSqlConfig;
 import kr.co.tripadvisor.repository.mapper.ScrapMapper;
 
-@WebServlet("/kr/co/tripadvisor/member/scrap/deleteScrap")
+@WebServlet("/kr/co/tripadvisor/user/scrap/deleteScrap")
 public class DeleteScrapController extends HttpServlet {
 
 	@Override
@@ -22,7 +22,7 @@ public class DeleteScrapController extends HttpServlet {
 	
 	mapper.deleteScrap(scrapNo);
 	
-	response.sendRedirect("/secondProject/kr/co/tripadvisor/member/scrap/scrapList");
+	response.sendRedirect("/secondProject/kr/co/tripadvisor/user/scrap/scrapList");
 		
 	}
 
