@@ -127,8 +127,20 @@
 								<a
 									href='detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}'>
 									<div class="fi_div">
+									
+									<c:choose>
+									<c:when test = "${b.boardImage.path == null}">
+											<img src="/secondProject/images/notimage.png">
+									</c:when>
+									
+									<c:when test = "${b.boardImage.path != null}">
 										<img
-											src='/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}' />
+											src="/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}"/>
+									</c:when>
+							</c:choose>
+
+<!-- 										<img -->
+<%-- 											src="/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}" onerror="javascript.this.src='/images/notimage.png'"/> --%>
 									</div>
 								</a>
 							</figure>
@@ -274,7 +286,15 @@
 				}
 			})
 
-		}); //jQuery 종결
+		}); 
+		
+		$(window).load(function() {
+			  $('img').each(function() {
+			    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+			      this.src = 'http://www.tranism.com/weblog/images/broken_ipod.gif';
+			    }
+			  });
+			});
 	</script>
 </body>
 </html>
