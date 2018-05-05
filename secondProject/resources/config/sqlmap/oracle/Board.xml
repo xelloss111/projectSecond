@@ -63,13 +63,6 @@
 		reg_date desc
 	</select>
 
-	<!-- 게시판/갤러리 리스트 -->
-	<select id="selectBoardByCode" parameterType="string" resultMap="boardMap">
-		select *
-		from tb_board
-		where code_no = #{codeNo}
-		order by board_no desc
-	</select>
 
 	<!-- 게시물 쓰기 -->
 	<insert id="insertBoard" parameterType="board">
@@ -201,6 +194,34 @@
 			</choose>
 		</where>
 	</select>
+	
+	<select id="gallerySearchList" resultMap="boardMap" parameterType="BoardSearch">
+		select *
+		from (select * from tb_board where code_no='3002' order by board_no desc)
+		<where>
+		
+			<if test="attrList != null">
+					attract in <foreach item="att" collection="attrList" open="(" close=")" separator="," >
+						#{att}
+					</foreach>
+			</if>
+			<if test="areaList != null">
+					and area in <foreach item="ar" collection="areaList" open="(" close=")" separator="," >
+						#{ar}
+					</foreach>
+			</if>
+			
+			<choose>
+				<when test="searchType == 'id'">
+					and id like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'title'">
+					and title like '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+		</where>
+	</select>
+
 
 
 </mapper>

@@ -2,6 +2,8 @@ package kr.co.tripadvisor.repository.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import kr.co.tripadvisor.repository.domain.Board;
 import kr.co.tripadvisor.repository.domain.BoardImage;
 import kr.co.tripadvisor.repository.domain.BoardSearch;
@@ -12,7 +14,6 @@ public interface BoardMapper {
 
 	List<Board> selectBoard();
 //	List<Board> selectBoard(BoardSearch search);
-	List<Board> selectBoardByCode(String codeNo);
 	void insertBoard (Board board);
 	Board selectBoardByNo(int boardNo);
 	int updateBoard(Board board);
@@ -33,5 +34,10 @@ public interface BoardMapper {
 	 
 	 // board search
 	 List<Board> boardSearchList(BoardSearch searchWord);
+	 
+	 // gallery search
+	 List<Board> gallerySearchList(BoardSearch searchWord);
+//	 List<Board> gallerySearchList(@Param("searchWord")Object BoardSearch, @Param("paging")Object Paging);
+
 
 }
