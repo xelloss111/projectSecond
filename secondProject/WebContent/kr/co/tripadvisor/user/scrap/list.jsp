@@ -6,8 +6,8 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <title>tripadvisor</title>
-	<!-- member_scrapList css -->
-	<link rel="stylesheet" type="text/css"
+<!-- member_scrapList css -->
+<link rel="stylesheet" type="text/css"
 	href="/secondProject/css/client/member_scrapList.css" media="all">
 <meta charset="UTF-8">
 </head>
@@ -57,37 +57,63 @@
 						<li>
 							<figure>
 								<c:choose>
-									<c:when test = "${b.codeNo == 3001}">
-										<a href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}' >
-												<img src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' />
+									<c:when test="${b.codeNo == 3001}">
+										<a
+											href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'>
+
+
+
+											<c:choose>
+												<c:when test="${b.board.boardImage.path == null}">
+													<img src="/secondProject/images/notimage.png">
+												</c:when>
+
+												<c:when test="${b.board.boardImage.path != null}">
+													<img
+														src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' />
+												</c:when>
+											</c:choose>
+											 <%-- 	<img src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' /> --%>
 										</a>
 									</c:when>
-									
-									<c:when test = "${b.codeNo == 3002}">
-										<a href='/secondProject/kr/co/tripadvisor/gallery/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}' >
-											<img src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' />
+
+									<c:when test="${b.codeNo == 3002}">
+										<a
+											href='/secondProject/kr/co/tripadvisor/gallery/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'>
+											<c:choose>
+												<c:when test="${b.board.boardImage.path == null}">
+													<img src="/secondProject/images/notimage.png">
+												</c:when>
+
+												<c:when test="${b.board.boardImage.path != null}">
+													<img
+														src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' />
+												</c:when>
+											</c:choose> <%-- <img src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' /> --%>
 										</a>
 									</c:when>
-							</c:choose>
-<!-- 								<a -->
-<%-- 									href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'> --%>
-<!-- 									<div class="fi_div"> -->
-<!-- 										<img -->
-<%-- 											src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' /> --%>
-<!-- 									</div> -->
-<!-- 								</a> -->
+								</c:choose>
+								<!-- 								<a -->
+								<%-- 									href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'> --%>
+								<!-- 									<div class="fi_div"> -->
+								<!-- 										<img -->
+								<%-- 											src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' /> --%>
+								<!-- 									</div> -->
+								<!-- 								</a> -->
 							</figure>
 							<div>
 								<h5>
-								
+
 									<c:choose>
-										<c:when test = "${b.codeNo == 3001}">
-											<a href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}' >${b.board.title}
+										<c:when test="${b.codeNo == 3001}">
+											<a
+												href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'>${b.board.title}
 											</a>
 										</c:when>
-										
-										<c:when test = "${b.codeNo == 3002}">
-											<a href='/secondProject/kr/co/tripadvisor/gallery/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}' >${b.board.title}
+
+										<c:when test="${b.codeNo == 3002}">
+											<a
+												href='/secondProject/kr/co/tripadvisor/gallery/detail?boardNo=${b.boardNo}&area=${b.board.area}&attract=${b.board.attract}'>${b.board.title}
 											</a>
 										</c:when>
 									</c:choose>
@@ -166,9 +192,11 @@
 										pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>${b.board.id}</span>
 							</div>
 							<div>
-								<a href="/secondProject/kr/co/tripadvisor/user/scrap/deleteScrap?ScrapNo=${b.scrapNo}">
-									<input value="DELETE" type="button" class="c_write_but btn"  id="scrapdelbtn">
-								</a>							
+								<a
+									href="/secondProject/kr/co/tripadvisor/user/scrap/deleteScrap?ScrapNo=${b.scrapNo}">
+									<input value="DELETE" type="button" class="c_write_but btn"
+									id="scrapdelbtn">
+								</a>
 							</div>
 						</li>
 					</c:forEach>
@@ -189,9 +217,9 @@
 			})
 
 		}); //jQuery 종결
-		
+
 		$("#scrapdelbtn").click(function() {
-			 alert("스크랩 삭제가 완료되었습니다.")
+			alert("스크랩 삭제가 완료되었습니다.")
 		});
 	</script>
 </body>
