@@ -364,14 +364,31 @@ h1{ font-size: xx-large;}
 			         + date.getHours() + ":"
 			         + date.getMinutes() + ":"
 			         + date.getSeconds();
-			html += '	<td id=\'time\'>' + time + '</td>';  
+			html += '	<td id="time">' + time + '</td>';  
 			html += '	<td>';    
-			console.log(${sessionScope.user.id}, comment.id);
+			
+			var userId = '${sessionScope.user.id}'
+			console.log(userId, comment.id);
+			console.log(userId == comment.id)
+			
+			if(userId == comment.id) {
 			html += '		<a href="javascript:commentUpdateForm(' + comment.commentNo + ')" class="btn btn-success btn-sm" role="button">수정</a>';    
-			html += '		<a href="javascript:commentDelete(' + comment.commentNo + ')" class="btn btn-danger btn-sm" role="button">삭제</a>';    
+			html += '		<a href="javascript:commentDelete(' + comment.commentNo + ')" class="btn btn-danger btn-sm" role="button">삭제</a>'; 
+			} else {
+				html += '-'
+// 				$("#time").attr("colspan", "2");
+			}
+			
 			html += '	</td>';    
+			
 			html += '</tr>';
 		}
+
+		
+		
+		
+		
+		
 		if (result.length == 0) {
 			html += '<tr><td colspan="4">댓글이 존재하지 않습니다.</td></tr>';
 		}
