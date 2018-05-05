@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.tripadvisor.repository.domain.Admin;
 import kr.co.tripadvisor.repository.domain.Board;
+import kr.co.tripadvisor.repository.domain.BoardSearch;
 import kr.co.tripadvisor.repository.domain.Notice;
 import kr.co.tripadvisor.repository.domain.Paging;
 import kr.co.tripadvisor.repository.domain.Scrap;
@@ -24,7 +25,9 @@ public interface PagingMapper {
 	
 	int totalGalleryCount();
 	List<Board> galleryListUp(Paging paging);
+	int GalleryCountByCategory(BoardSearch search);
 	
 	int totalScrapCount();
 	List<Scrap> scrapListUp(Paging paging);
+	
 }

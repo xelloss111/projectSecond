@@ -155,6 +155,32 @@
 		  from tb_board
 		 where code_no = '3002'
 	</select>
+	<!-- 갤러리 카테고리 검색용 페이징 쿼리 -->
+	<select id="GalleryCountByCategory" resultType="int" parameterType="BoardSearch">
+		select count(*)
+		  from tb_board
+		 <where>
+				    code_no = '3002'
+			<if test="attrList != null">
+					and attract in <foreach item="att" collection="attrList" open="(" close=")" separator="," >
+						#{att}
+					</foreach>
+			</if>
+			<if test="areaList != null">
+					and area in <foreach item="ar" collection="areaList" open="(" close=")" separator="," >
+						#{ar}
+					</foreach>
+			</if>
+			<choose>
+				<when test="searchType == 'id'">
+					and id like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'title'">
+					and title like '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+		</where>
+	</select>
 	  
 	<select id="galleryListUp" parameterType="paging" resultMap="boardMap">
 		select X.*
@@ -170,7 +196,8 @@
                 ) X
          where <![CDATA[X.rnum >= #{startCount}]]>
 	</select>
-			
+
+	
 <!-- 스크랩 페이징 쿼리 -->
 	<select id="totalScrapCount" resultType="int">
 		select count(*)

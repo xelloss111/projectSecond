@@ -35,12 +35,12 @@ public class ListGalleryController extends HttpServlet {
 		//검색영역
 		BoardSearch search = new BoardSearch();
 		
-		String[] areas = request.getParameterValues("area");
-		String[] attracts = request.getParameterValues("attract");
+		String[] areaList = request.getParameterValues("area");
+		String[] attrList = request.getParameterValues("attract");
 		String searchType = request.getParameter("searchType");
 		String searchWord = request.getParameter("searchWord");
-		search.setAreaList(areas);
-		search.setAttrList(attracts);
+		search.setAreaList(areaList);
+		search.setAttrList(attrList);
 		search.setSearchType(searchType);
 		search.setSearchWord(searchWord);
 	
@@ -48,18 +48,23 @@ public class ListGalleryController extends HttpServlet {
 		PagingMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(PagingMapper.class);
 		String no = request.getParameter("pageNo");
 		int pageNo = (no != null) ? Integer.parseInt(no) : 1; 
-		int totalCnt = mapper.totalBoardCount();
+		
+		int totalCnt = 0;
+		if(areaList==null & attrList==null & searchType==null & searchWord==null) {
+		totalCnt = mapper.totalBoardCount();
 		Paging paging = new Paging(totalCnt, pageNo, 9, 5);
 		request.setAttribute("paging", paging);
-		
-		if( areas==null & attracts==null & searchType==null & searchWord==null) {
 		List<Board> boardList = mapper.galleryListUp(paging);
 		request.setAttribute("boardList", boardList);
-		}else {
-			BoardMapper boardMapper = MyAppSqlConfig.getSqlSession().getMapper(BoardMapper.class);
-			List<Board> boardList = boardMapper.gallerySearchList(search);
-			request.setAttribute("boardList", boardList);
+		} else {
+		totalCnt = mapper.GalleryCountByCategory(search);
+		Paging paging = new Paging(totalCnt, pageNo, 9, 5);
+		request.setAttribute("paging", paging);
+		BoardMapper boardMapper = MyAppSqlConfig.getSqlSession().getMapper(BoardMapper.class);
+		List<Board> boardList = boardMapper.gallerySearchList(search);
+		request.setAttribute("boardList", boardList);
 		}
+		
 
 		RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
 		rd.forward(request, response);
