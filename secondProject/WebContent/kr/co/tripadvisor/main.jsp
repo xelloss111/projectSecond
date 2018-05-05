@@ -22,6 +22,11 @@
 		    border-width: 2px;
 		    border-color: #ccc;
 		} 
+		.over{
+			white-space : nowrap;
+			overflow : hidden;
+			text-overflow: ellipsis;
+		}
 		.main_wrap { width: 100%; height: auto; }
 
 		.vid {width: 100%; height: 100%; position:fixed; left: 0px; opacity: 0.5; }
@@ -271,7 +276,7 @@
 <%-- 								<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' /> --%>
 <!-- 							</a> -->
 							<div>
-								<h5>${board.title}</h5>
+								<h5 class="over">${board.title}</h5>
 								<span id="sel2_${board.boardNo}">주제 : ${board.attract} </span>
 								<span id="sel_${board.boardNo}">지역 : ${board.area} </span>
 								<script type="text/javascript">
@@ -318,13 +323,13 @@
 	</div><!-- main_wrap END -->
 
 <script type="text/javascript">
-	$("#submit").click(function() {
-		console.log($("input[name='searchWord']").val());
-	});
+// 	$("#submit").click(function() {
+// 		console.log($("input[name='searchWord']").val());
+// 	});
 	
-	$("input[name='searchWord']").blur(function() {
-		console.log($(this).val());
-	})
+// 	$("input[name='searchWord']").blur(function() {
+// 		console.log($(this).val());
+// 	})
 </script>
 </body>
 </html>

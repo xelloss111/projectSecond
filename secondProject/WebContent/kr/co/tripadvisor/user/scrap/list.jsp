@@ -102,7 +102,7 @@
 								<!-- 								</a> -->
 							</figure>
 							<div>
-								<h5>
+								<h5 class="over">
 
 									<c:choose>
 										<c:when test="${b.codeNo == 3001}">

@@ -127,27 +127,27 @@
 								<a
 									href='detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}'>
 									<div class="fi_div">
-									
-									<c:choose>
-									<c:when test = "${b.boardImage.path == null}">
-											<img src="/secondProject/images/notimage.png">
-									</c:when>
-									
-									<c:when test = "${b.boardImage.path != null}">
-										<img
-											src="/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}"/>
-									</c:when>
-							</c:choose>
 
-<!-- 										<img -->
+										<c:choose>
+											<c:when test="${b.boardImage.path == null}">
+												<img src="/secondProject/images/notimage.png">
+											</c:when>
+
+											<c:when test="${b.boardImage.path != null}">
+												<img
+													src="/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}" />
+											</c:when>
+										</c:choose>
+
+										<!-- 										<img -->
 <%-- 											src="/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}" onerror="javascript.this.src='/images/notimage.png'"/> --%>
 									</div>
 								</a>
 							</figure>
 							<div>
 
-								<h5>
-									<a
+								<h5 class="over">
+								<a
 										href='detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}'>${b.title}</a>
 								</h5>
 								<span id="sel_${b.boardNo}">지역 : ${b.area} </span>

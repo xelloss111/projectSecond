@@ -194,10 +194,14 @@ article {
 	-o-transform: scale(1.2);
 }
 
-.board_list li h5 {
+.board_list  li  h5 {
 	margin: 5% 2%;
+	white-space : nowrap;
+	overflow : hidden;
 }
-
+.over{
+	text-overflow: ellipsis;
+}
 .board_list li span {
 	display: block;
 	box-sizing: border-box;
