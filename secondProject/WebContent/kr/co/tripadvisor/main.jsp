@@ -238,13 +238,32 @@
 						<c:choose>
 								<c:when test = "${board.codeNo == 3001}">
 									<a href='board/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}' >
-											<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
+									<c:choose>
+									<c:when test = "${b.boardImage.path == null}">
+											<img src="/secondProject/images/notimage.png">
+									</c:when>
+									
+									<c:when test = "${b.boardImage.path != null}">
+										<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
+									</c:when>
+							</c:choose>
+<%-- 											<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' /> --%>
 									</a>
 								</c:when>
 								
 								<c:when test = "${board.codeNo == 3002}">
 								<a href='gallery/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}' >
+								
+								<c:choose>
+									<c:when test = "${b.boardImage.path == null}">
+											<img src="/secondProject/images/notimage.png">
+									</c:when>
+									
+									<c:when test = "${b.boardImage.path != null}">
 										<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
+									</c:when>
+							</c:choose>
+<%-- 										<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' /> --%>
 								</a>
 								</c:when>
 							</c:choose>

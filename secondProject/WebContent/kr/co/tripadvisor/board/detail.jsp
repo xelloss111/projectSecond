@@ -72,8 +72,9 @@
 			<div class="btn_div">
 			
 			
-				<c:if test="${sessionScope.user.id==board.id}">	
+				
 					<button type="submit" class="b_write_but btn" id="scrap_btn">SCRAP</button>
+					<c:if test="${sessionScope.user.id==board.id}">	
 						<a href="UpdateFormBoard?boardNo=${board.boardNo}">
 							<input type="submit" value="UPDATE" class="b_write_but btn" /> 
 						</a> 
@@ -270,14 +271,8 @@
 		});
 
 		/* 스크랩 영역 */
-		var codeNo = $
-		{
-			board.codeNo
-		};
-		var boardNo = $
-		{
-			board.boardNo
-		};
+		var codeNo = ${board.codeNo};
+		var boardNo = ${board.boardNo};
 		var id = '${sessionScope.user.id}';
 
 		var contextPath = getContextPath();
@@ -287,9 +282,13 @@
 			return location.href.substring(hostIndex, location.href.indexOf(
 					'/', hostIndex + 1));
 		}
-
+	
+		
 		$("#scrap_btn").click(function() {
-			//console.log(id);
+			if (${empty sessionScope.user.id} == true) {
+				alert("로그인 후 스크랩이 가능합니다.")
+			return false;
+			}
 			$.ajax({
 				type : "POST",
 				url : contextPath + "/kr/co/tripadvisor/client/scrap",

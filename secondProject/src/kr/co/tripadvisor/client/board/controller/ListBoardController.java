@@ -44,31 +44,18 @@ public class ListBoardController extends HttpServlet{
 		bs.setSearchType(request.getParameter("searchType"));
 		bs.setSearchWord(request.getParameter("searchWord"));
 		
-		try {
-			System.out.println("몇 개?: "+ attrList.length);
-			for (String s : attrList) {
-				System.out.println(s);
-			}
-		} catch (Exception e) {
-			
-		}
-		
-		
 		int pageNo = (no != null) ? Integer.parseInt(no) : 1; 
 		
 		int totalCnt = mapper.totalBoardCount();
 		Paging paging = new Paging(totalCnt, pageNo, 10, 5);
 		
-//		List<Board> list = mapper.boardListUp(paging);
 		
 		List<Board> searchList = sMapper.boardSearchList(bs);
+					searchList = mapper.boardListUp(paging);
 					
 		request.setAttribute("searchList", searchList);
 		request.setAttribute("paging", paging);
 
-		System.out.println("검색 결과 : " + searchList);
-		
-		
 		RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
 		rd.forward(request, response);
 	}
