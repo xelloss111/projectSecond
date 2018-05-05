@@ -126,3 +126,8 @@ article>h1 {
 	font-size: 12px;
 	margin: 2%;
 }
+.over {
+	text-overflow: ellipsis;
+	white-space : nowrap;
+	overflow : hidden;
+}
