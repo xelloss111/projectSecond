@@ -189,78 +189,120 @@
 		
 		/* 댓글영역 */
 			var c = document.cForm;
-			function isEmpty(obj, msg) {
-				if(obj.value=="") {
-					alert(msg);
-					obj.focus();
-					return true;
-				}
-				return false;
-			};
-			
-		function commentCkeck() {
-			if(isEmpty(c.content, "댓글을 등록해주세요.")) return false;
-			
-			if('${empty sessionScope.user}'==true){
-				alert("로그인 후 코멘트 등록이 가능합니다.") 
-			} return false;
-			
-			c.content.value = c.content.value.replace(/^\s/gm, '');
-			c.content.value = c.content.value.replace(/\r\n$/g, '');
-		alert("코멘트가 등록되었습니다.")
-		return true;
-		};
-		
 
-		$(function() {
-			switch("${board.area}") {
-			case "2001" : $(".sel_1").text("지역 : 서울"); break;
-			case "2002" : $(".sel_1").text("지역 : 광주"); break;
-			case "2003" : $(".sel_1").text("지역 : 경기"); break;
-			case "2004" : $(".sel_1").text("지역 : 호남"); break;
-			case "2005" : $(".sel_1").text("지역 : 인천"); break;
-			case "2006" : $(".sel_1").text("지역 : 부산"); break;
-			case "2007" : $(".sel_1").text("지역 : 강원"); break;
-			case "2008" : $(".sel_1").text("지역 : 영남"); break;
-			case "2009" : $(".sel_1").text("지역 : 대전"); break;
-			case "2010" : $(".sel_1").text("지역 : 대구"); break;
-			case "2011" : $(".sel_1").text("지역 : 충청"); break;
-			case "2012" : $(".sel_1").text("지역 : 제주"); break;
+		function isEmpty(obj, msg) {
+			if (obj.value == "") {
+				alert(msg);
+				obj.focus();
+				return true;
 			}
-		});
-		$(function() {
-			switch("${board.attract}") {
-			case "1001" : $(".sel_2").text("주제 : 맛집"); break;
-			case "1002" : $(".sel_2").text("주제 : 명소"); break;
-			case "1003" : $(".sel_2").text("지역 : 숙소"); break;
-			}
-		});
+			return false;
+		};
+
+		function commentCkeck() {
+			if (isEmpty(c.content, "댓글을 등록해주세요."))
+				return false;
+
+			alert("코멘트가 등록되었습니다.")
+			return true;
+		};
 	
+		$(".logincheck").click(function() {
+			if (${empty sessionScope.user.id} == true) {
+				alert("로그인 후 코멘트 등록이 가능합니다.")
+			return false;
+			}
+		});
+		
+		
+		$(function() {
+			switch ("${board.area}") {
+			case "2001":
+				$(".sel_1").text("지역 : 서울");
+				break;
+			case "2002":
+				$(".sel_1").text("지역 : 광주");
+				break;
+			case "2003":
+				$(".sel_1").text("지역 : 경기");
+				break;
+			case "2004":
+				$(".sel_1").text("지역 : 호남");
+				break;
+			case "2005":
+				$(".sel_1").text("지역 : 인천");
+				break;
+			case "2006":
+				$(".sel_1").text("지역 : 부산");
+				break;
+			case "2007":
+				$(".sel_1").text("지역 : 강원");
+				break;
+			case "2008":
+				$(".sel_1").text("지역 : 영남");
+				break;
+			case "2009":
+				$(".sel_1").text("지역 : 대전");
+				break;
+			case "2010":
+				$(".sel_1").text("지역 : 대구");
+				break;
+			case "2011":
+				$(".sel_1").text("지역 : 충청");
+				break;
+			case "2012":
+				$(".sel_1").text("지역 : 제주");
+				break;
+			}
+		});
+		$(function() {
+			switch ("${board.attract}") {
+			case "1001":
+				$(".sel_2").text("주제 : 맛집");
+				break;
+			case "1002":
+				$(".sel_2").text("주제 : 명소");
+				break;
+			case "1003":
+				$(".sel_2").text("지역 : 숙소");
+				break;
+			}
+		});
+
 		/* 스크랩 영역 */
-		var codeNo = ${board.codeNo};
-		var boardNo = ${board.boardNo};
+		var codeNo = $
+		{
+			board.codeNo
+		};
+		var boardNo = $
+		{
+			board.boardNo
+		};
 		var id = '${sessionScope.user.id}';
 
 		var contextPath = getContextPath();
 		function getContextPath() { // contextPath 가져오는 방법
-	    	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-	    	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-	    }
-		
-		
-		$("#scrap_btn").click(function(){
+			var hostIndex = location.href.indexOf(location.host)
+					+ location.host.length;
+			return location.href.substring(hostIndex, location.href.indexOf(
+					'/', hostIndex + 1));
+		}
+
+		$("#scrap_btn").click(function() {
 			//console.log(id);
 			$.ajax({
-				  type: "POST",
-				  url: contextPath + "/kr/co/tripadvisor/client/scrap",
-				  data: {id:id, boardNo:boardNo, codeNo:codeNo},
-				  success: 
-					  function(){
-					  alert("스크랩이 완료되었습니다.")
-				  }
-				});
+				type : "POST",
+				url : contextPath + "/kr/co/tripadvisor/client/scrap",
+				data : {
+					id : id,
+					boardNo : boardNo,
+					codeNo : codeNo
+				},
+				success : function() {
+					alert("스크랩이 완료되었습니다.")
+				}
 			});
-		
+		});
 	</script>
 </body>
 </html>
