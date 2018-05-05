@@ -99,7 +99,58 @@ h1{ font-size: xx-large;}
 	margin-right: 2%;
 }
 
-<!-- 댓글 부트스트랩  -->
+<!-- 댓글 -->
+
+.row {
+     margin-right: -15px; 
+    margin-left: -15px;
+}
+
+.form-group {
+	display : inline-block;
+	margin-right: 3px;
+	margin-bottom: 15px;
+	height: 30px;
+	padding: 5px 10px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px
+}
+
+.form-control {
+    border-color: #d2d6de;
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+
+.table {
+	width: 1030px;
+	margin-left: 325px;
+ /* margin-right: auto;  */
+}
+
+.btn {
+	display: inline-block; 
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
 
 </style>
 </head>
@@ -131,8 +182,8 @@ h1{ font-size: xx-large;}
 		</aside>
 		 
 		<!-- 본문 -->
-		<article>
 			
+		<article>
 			<div class="content_box">
 			<p align="left" style="color:gray">${area}>${attract}</p>
 			
@@ -163,8 +214,8 @@ h1{ font-size: xx-large;}
 		
 			<c:if test="${sessionScope.user.id==board.id}">
 		    <div class="sc_submit">
-			  <button onclick="location.href ='delete?boardNo=${board.boardNo}'">DELETE</button>
 			  <button onclick="location.href ='updateform?boardNo=${board.boardNo}'">UPDATE</button>
+			  <button onclick="location.href ='delete?boardNo=${board.boardNo}'">DELETE</button>
 		    </div>
 			</c:if>
 
@@ -206,8 +257,8 @@ h1{ font-size: xx-large;}
 						<button class="btn btn-primary">등록</button>
 					</div>
 				</form>
-				<p>
-			</div>
+	
+		
 		</div>	
       	
 		<div class="row">
@@ -413,9 +464,8 @@ h1{ font-size: xx-large;}
 	
 	</script>	
 			
-		</article>
+	</article>
  
-	
-	</div><!-- wrap END -->
+</div><!-- wrap END -->
 </body>
 </html>
