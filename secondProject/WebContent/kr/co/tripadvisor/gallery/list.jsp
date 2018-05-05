@@ -54,7 +54,7 @@
 		<article>
 
 			<div class="search_area">
-				<form action="" method="post">
+				<form action="/secondProject/kr/co/tripadvisor/gallery/index" method="post">
 					<div class="search_ctn">
 						<div class="search_div1">
 							<ul>
@@ -122,21 +122,20 @@
 			</div>
 			<!-- search_area END -->
 
-
-
-
 <div class="container gallery-container">
 	<div class="tz-gallery">
 		<div class="row">
+<%-- 		<c:forEach var='board' items="${searchList}"> --%>
 		<c:forEach var="board" items="${boardList}">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                
                 <c:set var="loop_flag" value="false" />
                 <c:forEach var="image" items="${imageList}">
                 <c:if test="${not loop_flag }">
                 <c:if test="${board.boardNo == image.boardNo}">
-                        <img src="${pageContext.request.contextPath}/galleryImg${image.path}/thumb_${image.sysName}""/> 
+                		<div id="thumbImg">
+                        <img src="${pageContext.request.contextPath}/galleryImg${image.path}/thumb_${image.sysName}"/> 
+                		</div>
                      <c:set var="loop_flag" value="true" />
                 </c:if>
                    </c:if>
