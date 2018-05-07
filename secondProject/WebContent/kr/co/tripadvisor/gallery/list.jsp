@@ -125,7 +125,6 @@
 <div class="container gallery-container">
 	<div class="tz-gallery">
 		<div class="row">
-<%-- 		<c:forEach var='board' items="${searchList}"> --%>
 		<c:forEach var="board" items="${boardList}">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
@@ -154,23 +153,33 @@
 </div>
 
 <div class="sc_submit">
-	<button onclick="location.href ='writeform'">WRITE</button>
+<!-- onclick="location.href ='writeform'" -->
+	<button  id="write_but">WRITE</button>
 </div>
 
+<script type="text/javascript">
+$("#write_but").click(function (e) {
+	
+	if(${empty sessionScope.user} == true) {
+		alert("글쓰기 기능은 로그인 후 이용가능 합니다.");
+	}else {
+		location.href= "writeform"; 
+	}
+	
+});
+</script>
 
-
-<div>
+<div id="page">
 				<c:if test="${paging.totalCount != 0 }">
 					<nav class="paging_area">
 						<ul class="pagination">
 							<li class="<c:if test='${paging.prev eq false }'>disabled</c:if>">
 								<a
-								href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.startPage - 1}"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.startPage - 1}" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
 							</a>
 							</li>
-							<c:forEach var="iContent" begin="${paging.startPage}"
-								end="${paging.endPage}">
+							<c:forEach var="iContent" begin="${paging.startPage}" end="${paging.endPage}">
 								<c:choose>
 									<c:when test="${iContent == paging.pageNo}">
 										<li class="active"><a
@@ -186,8 +195,8 @@
 							</c:forEach>
 							<li class="<c:if test='${paging.next eq false}'>disabled</c:if>">
 								<a
-								href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.endPage + 1}"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.endPage + 1}" aria-label="Next"> 
+								<span aria-hidden="true">&raquo;</span>
 							</a>
 							</li>
 						</ul>

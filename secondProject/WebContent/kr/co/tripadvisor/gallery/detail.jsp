@@ -210,41 +210,72 @@ h1{ font-size: xx-large;}
 			 </div><!-- content_box END -->
 			 <div class="sc_submit">
 		      <button type="submit" class="b_write_but btn" id="scrap_btn">SCRAP</button>
+		      <a href="index">
+		      <button type="submit" class="b_write_but btn" >LIST</button>
+		      </a>
 			 </div>
 		
 			<c:if test="${sessionScope.user.id==board.id}">
 		    <div class="sc_submit">
 			  <button onclick="location.href ='updateform?boardNo=${board.boardNo}'">UPDATE</button>
-			  <button onclick="location.href ='delete?boardNo=${board.boardNo}'">DELETE</button>
+			  <button  id="delete_but">DELETE</button>
+<%-- 			  onclick="location.href ='delete?boardNo=${board.boardNo}'" --%>
 		    </div>
 			</c:if>
-
-			 <script>
-			 		/* 스크랩 영역 */
-		var codeNo = ${board.codeNo};
-		var boardNo = ${board.boardNo};
-		var id = '${sessionScope.user.id}';
-
-		var contextPath = getContextPath();
-		function getContextPath() { // contextPath 가져오는 방법
-	    	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-	    	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-	    }
-		
-		$("#scrap_btn").click(function(){
-			//console.log(id);
-			$.ajax({
-				  type: "POST",
-				  url: contextPath + "/kr/co/tripadvisor/client/scrap",
-				  data: {id:id, boardNo:boardNo, codeNo:codeNo},
-				  success: 
-					  function(){
-					  alert("스크랩이 완료되었습니다.")
-				  }
-				});
+						
+						
+						
+			<script type="text/javascript">
+			$("#delete_but").click(function (e) {
+				if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+					location.href= "${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/delete?boardNo=${board.boardNo}"; 
+				}else{   //취소
+				    return;
+				}
 			});
-			 </script>
+			</script>
+						
+						
+						
+			
+						 <script>
+			 
+			 /* 스크랩 영역 */
+				var codeNo = ${board.codeNo};
+				var boardNo = ${board.boardNo};
+				var id = '${sessionScope.user.id}';
 
+				var contextPath = getContextPath();
+				function getContextPath() { // contextPath 가져오는 방법
+					var hostIndex = location.href.indexOf(location.host)
+							+ location.host.length;
+					return location.href.substring(hostIndex, location.href.indexOf(
+							'/', hostIndex + 1));
+				}
+			
+				
+				$("#scrap_btn").click(function() {
+					if (${empty sessionScope.user.id} == true) {
+						alert("로그인 후 스크랩이 가능합니다.")
+					return false;
+					}
+					$.ajax({
+						type : "POST",
+						url : contextPath + "/kr/co/tripadvisor/client/scrap",
+						data : {
+							id : id,
+							boardNo : boardNo,
+							codeNo : codeNo
+						},
+						success : function() {
+							alert("스크랩이 완료되었습니다.")
+						}
+					});
+				});
+			</script>
+			 
+			 
+			 
 				<%-- 댓글 관련 파트 시작 --%>
 				<form id="rForm" class="form-inline">
 					<div id="comment">
