@@ -117,7 +117,15 @@
 		where
 		board_no = #{boardNo}
 	</delete>
-
+	
+	<!-- 게시글 삭제 시 스크랩 정보도 삭제 -->
+	<delete id="deleteBoardandScrap" parameterType="int">
+		delete
+		from tb_scrap
+		where
+		board_no = #{boardNo}
+	</delete>
+	
 	<!-- 첨부파일 파트 -->
 
 	<resultMap id="boardImageMap" type="boardImage">

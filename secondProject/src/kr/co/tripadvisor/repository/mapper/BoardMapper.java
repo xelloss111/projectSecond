@@ -21,7 +21,6 @@ public interface BoardMapper {
 	int deleteBoardByNo(int boardNo);
 	
 	//min
-	void deleteBoard(int no);
 	
 	void updateBoardViewCnt(int boardno);
 	
@@ -37,7 +36,13 @@ public interface BoardMapper {
 	 
 	 // gallery search
 	 List<Board> gallerySearchList(BoardSearch searchWord);
-//	 List<Board> gallerySearchList(@Param("searchWord")Object BoardSearch, @Param("paging")Object Paging);
 
+	 //board Delete
+	 void deleteBoard(int no);
+	 
+	 // 게시글 삭제 시 스크랩 DB 삭제
+	 void deleteBoardandScrap(int no);
+	 
+	 
 
 }

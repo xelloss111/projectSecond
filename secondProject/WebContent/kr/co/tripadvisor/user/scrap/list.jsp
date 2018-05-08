@@ -189,7 +189,7 @@
 											"주제 : " + result);
 								</script>
 
-								<span><fmt:formatDate value="${b.board.regDate}"
+								<span><fmt:formatDate value="${b.regDate}"
 										pattern="yyyy-MM-dd HH:mm:ss" /></span> <span>${b.board.id}</span>
 							</div>
 							<div>
