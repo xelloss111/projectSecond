@@ -158,13 +158,13 @@
         <div class="col-md-8" align="center">
        	  <nav>
 			<ul class="pagination">
-  	          <c:if test="${paging.pageNo > 1}">
-			    <li>
-			      <a href="${pageContext.request.contextPath}/net/admin/management/index?pageNo=${paging.pageNo - 1}" aria-label="Previous">
+  	          <li class="<c:if test='${paging.prev eq false }'>disabled</c:if>">
+			    <c:if test="${paging.prev eq true}">
+			      <a href="${pageContext.request.contextPath}/net/admin/management/user?pageNo=${paging.pageNo - 1}" aria-label="Previous">
 			        <span aria-hidden="true">&laquo;</span>
 			      </a>
+				  </c:if>
 			    </li>
-			  </c:if>
 			  <c:forEach var="iContent" begin="${paging.startPage}" end="${paging.endPage}">
         		<c:choose>
         			<c:when test="${iContent == paging.pageNo}">
@@ -179,13 +179,13 @@
         			</c:otherwise>
         		</c:choose>
         	</c:forEach>
-        	<c:if test="${paging.pageNo < paging.totalPage}">
-        	  <li>
+        	<li class="<c:if test='${paging.next eq false }'>disabled</c:if>">
+			<c:if test="${paging.next eq true }">  
 			    <a href="${pageContext.request.contextPath}/net/admin/management/user?pageNo=${paging.pageNo + 1}" aria-label="Next">
 			      <span aria-hidden="true">&raquo;</span>
 			    </a>
-			  </li>
 			 </c:if>
+			  </li>
 			</ul>
 		 </nav>
         </div>
