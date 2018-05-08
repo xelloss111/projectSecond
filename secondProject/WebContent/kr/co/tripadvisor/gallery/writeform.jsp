@@ -197,10 +197,11 @@ border-radius: 4px;
 		</aside>
 		<!-- 본문 -->
 		<article>
-			<form method="post" action="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/write" enctype="multipart/form-data">
+			<form method="post" action="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/write" 
+			enctype="multipart/form-data" onsubmit="return submitCheck()">
 				<div class='top_sel'>
 					<div class='sel_1'>
-						<select class='round' name="area">
+						<select class='round' name="area" id="area">
 							<option value="">지역</option>
 							<option value="2001">서울</option>
 							<option value="2002">광주</option>
@@ -217,7 +218,7 @@ border-radius: 4px;
 						</select>
 					</div><!-- sel_1 END -->
 					<div class='sel_2'>
-						<select class='round' name="attract">
+						<select class='round' name="attract" id="attract">
 							<option value="">주제</option>
 							<option value="1001">맛집</option>
 							<option value="1002">명소</option>
@@ -227,11 +228,11 @@ border-radius: 4px;
 					<input type="hidden" name="codeNo" value="3002" />
 					<div class="b_title">
 						<h2>제목 : </h2>
-						<input type="text" name="title" class="b_title_input" />
+						<input type="text" name="title" id="title" class="b_title_input" />
 					</div> <!-- b_title END -->
 				</div><!-- top_sel END -->
 				<div>
-						<textarea id="textcontent" name="editordata" maxlength="50" placeholder="갤러리게시판 본문은 50자까지만 등록 할 수 있습니다." ></textarea>
+						<textarea id="textcontent" id="editordata" name="editordata" maxlength="50" placeholder="갤러리게시판 본문은 50자까지만 등록 할 수 있습니다." ></textarea>
 						
 						<input type="file" name="attatch1"><br>
 						<input type="file" name="attatch2"><br>
@@ -243,5 +244,25 @@ border-radius: 4px;
 		</article>	
 
 	</div><!-- wrap END -->
+<script>
+	function submitCheck() {
+		if ($('#area option:selected').text() === "지역") {
+			alert("지역을 선택해주세요.");
+			return false;
+		} else if($('#attract option:selected').text() === "주제") {
+			alert("주제를 선택해주세요.");
+			return false;
+		} else if(!$('#title').val()) {
+			alert("제목을 입력해주세요.");
+			return false;
+		} else if(!$('.editordata').val()) {
+			alert("내용을 입력해주세요.");
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+</script>
 </body>
 </html>

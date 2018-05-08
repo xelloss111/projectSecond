@@ -39,13 +39,13 @@
 		</aside>
 		<!-- 본문 -->
 		<article>
-			<form action="writeboard" name="postForm" id="postForm" method="post"
-				onsubmit="return submitCheck(this)" >
+			<form action="" name="postForm" id="postForm" method="post"
+				onsubmit="return submitCheck()" >
 				<input type="hidden" name="id" value="${sessionScope.user.id}" /> <input
 					type="hidden" name="codeNo" value="3001" />
 				<div class='top_sel'>
 					<div class='sel_1'>
-						<select class='round' name="area">
+						<select class='round' name="area" id="area">
 							<option>지역</option>
 							<option value="2001">서울</option>
 							<option value="2002">광주</option>
@@ -63,7 +63,7 @@
 					</div>
 					<!-- sel_1 END -->
 					<div class='sel_2'>
-						<select class='round' name="attract">
+						<select class='round' name="attract" id="attract">
 							<option>주제</option>
 							<option value="1001">맛집</option>
 							<option value="1002">명소</option>
@@ -73,7 +73,7 @@
 					<!-- sel_2 END -->
 					<div class="b_title">
 						<h2>제목 :</h2>
-						<input type="text" name="title" class="b_title_input" />
+						<input type="text" id="title" name="title" class="b_title_input" />
 					</div>
 					<!-- b_title END -->
 				</div>
@@ -183,6 +183,20 @@
 			$("#submit").click(function () {
 				var formData = $("#postForm").serializeArray();
 				
+				if ($('#area option:selected').text() === "지역") {
+					alert("지역을 선택해주세요.");
+					return;
+				} else if($('#attract option:selected').text() === "주제") {
+					alert("주제를 선택해주세요.");
+					return;
+				} else if(!$('#title').val()) {
+					alert("제목을 입력해주세요.");
+					return;
+				} else if(!$('.editordata').val()) {
+					alert("내용을 입력해주세요.");
+					return;
+				}
+				
 				for (let i = 0; i < fileName.length; i++) {
 					formData.push({ name : 'file', value : fileName[i]});
 				}		
@@ -211,30 +225,6 @@
 				})
 
 			}); 
-			
-			// 글등록 체크 사항
-			function submitCheck() {
-				var pf = document.postForm;
-				
-				if (pf.area.selectedIndex == 0) {
-					alert("지역을 선택해주세요.");
-					return false;
-				} else if(pf.attract.selectedIndex == 0) {
-					alert("주제를 선택해주세요.");
-					return false;
-				} else if(pf.title.value == "") {
-					alert("제목을 입력해주세요.");
-					return false;
-				} else if(pf.title.editordata == "") {
-					alert("내용을 입력해주세요.");
-					return false;
-				} else {
-					return true;
-				};
-
-			}	
-			 
-	
 	</script>
 </body>
 </html>
