@@ -21,7 +21,8 @@
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 글쓰기</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
 					</ul>
 				</div>
 				<h3>
@@ -29,15 +30,16 @@
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 사진 올리기</a></li>
+						<li><a href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/writeform">- 사진 올리기</a></li>
 					</ul>
 				</div>
-				<h3>
-					<a href="#"> <i class="fas fa-tags"></i> 스크랩
+				<h3 id="menuScrap">
+					<a href="${pageContext.request.contextPath}/kr/co/tripadvisor/user/scrap/scrapList"> <i
+						class="fas fa-tags"></i> 스크랩
 					</a>
 				</h3>
 				<h3>
-					<a href="#"> <i class="far fa-smile"></i> 회원정보
+					<a href="${pageContext.request.contextPath}/kr/co/tripadvisor/user/info"> <i class="far fa-smile"></i> 회원정보
 					</a>
 				</h3>
 			</div>
@@ -86,8 +88,7 @@
 												</c:when>
 
 												<c:when test="${b.board.boardImage.path != null}">
-													<img
-														src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' />
+													<img src='/secondProject/galleryImg/${b.board.boardImage.path}/${b.board.boardImage.sysName}' />
 												</c:when>
 											</c:choose> <%-- <img src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' /> --%>
 										</a>

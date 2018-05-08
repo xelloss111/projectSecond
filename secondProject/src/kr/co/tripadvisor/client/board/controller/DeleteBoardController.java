@@ -42,6 +42,7 @@ public class DeleteBoardController extends HttpServlet {
 				}
 				
 		mapper.deleteBoard(BoardNo);
+		mapper.deleteBoardandScrap(BoardNo);
 		
 		response.sendRedirect("list");
 	}
