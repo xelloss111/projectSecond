@@ -12,7 +12,12 @@
 	text-align: left;
 }
 #infoauth {
-	border: 1px #aaa;
+	color: white;
+	border: 1.5px solid #aaa;
+	border-radius: 12px;
+	background-color: gray;
+	padding: 1px;
+	
 }
 </style>
 </head>
@@ -56,7 +61,7 @@
 <!-- 스크랩 페이지 틀 -->
 <div id="upform">
 
-<h1>My Info Upadte</h1><br>
+<h1>My Info Update</h1><br>
 
 <form id="info" method="post" action="${pageContext.request.contextPath}/kr/co/tripadvisor/user/update">
 		<p><label>ID</label><input type="text" name="id" value="${sessionScope.user.id}" readonly /></p>

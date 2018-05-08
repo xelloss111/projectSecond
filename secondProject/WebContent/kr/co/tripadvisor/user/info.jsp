@@ -95,7 +95,7 @@ $("#infopasscheck").click(function (e) {
 		success: function (data) {
 			console.log(data.result);
 			if( data.result == "true") {
-				window.location = "${pageContext.request.contextPath}/kr/co/tripadvisor/user/updateform.jsp";
+				window.location = "${pageContext.request.contextPath}/kr/co/tripadvisor/user/updateform";
 			} else {
 				alert("비밀번호가 틀렸습니다.");
 			}
