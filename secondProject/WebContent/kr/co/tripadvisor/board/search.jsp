@@ -64,8 +64,17 @@
 								<c:when test = "${b.codeNo == 3001}">
 									<a href='/secondProject/kr/co/tripadvisor/board/detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}' >
 																			<div class="fi_div">
-											<img
-												src='/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}' />
+<%-- 											<img src='/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}' /> --%>
+											<c:choose>
+												<c:when test="${b.boardImage.path == null}">
+													<img src="/secondProject/images/notimage.png">
+												</c:when>
+
+												<c:when test="${b.boardImage.path != null}">
+													<img
+														src='/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}' />
+												</c:when>
+											</c:choose>	
 										</div>	
 									</a>
 								</c:when>
@@ -73,8 +82,18 @@
 								<c:when test = "${b.codeNo == 3002}">
 								<a href='/secondProject/kr/co/tripadvisor/gallery/detail?boardNo=${b.boardNo}&area=${b.area}&attract=${b.attract}' >
 																		<div class="fi_div">
-										<img
-											src='/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}' />
+																		
+																		<c:choose>
+												<c:when test="${b.boardImage.path == null}">
+													<img src="/secondProject/images/notimage.png">
+												</c:when>
+
+												<c:when test="${b.boardImage.path != null}">
+													<img src='/secondProject/galleryImg/${b.boardImage.path}/${b.boardImage.sysName}' />
+												</c:when>
+											</c:choose> <%-- <img src='/secondProject/down?path=${b.board.boardImage.path}&sName=${b.board.boardImage.sysName}' /> --%>
+										
+<%-- 										<img src='/secondProject/down?path=${b.boardImage.path}&sName=${b.boardImage.sysName}' /> --%>
 									</div>	
 								</a>
 								</c:when>
