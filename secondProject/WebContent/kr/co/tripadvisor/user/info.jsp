@@ -29,7 +29,7 @@ padding: 3.5px;
 				<div>
 					<ul>
 						<li><a
-							href="/secondProject/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
+							href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
 					</ul>
 				</div>
 				<h3>
@@ -37,16 +37,16 @@ padding: 3.5px;
 				</h3>
 				<div>
 					<ul>
-						<li><a href="#">- 사진 올리기</a></li>
+						<li><a href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/writeform">- 사진 올리기</a></li>
 					</ul>
 				</div>
 				<h3 id="menuScrap">
-					<a href="/secondProject/kr/co/tripadvisor/member/scrap/scrapList"> <i
+					<a href="${pageContext.request.contextPath}/kr/co/tripadvisor/user/scrap/scrapList"> <i
 						class="fas fa-tags"></i> 스크랩
 					</a>
 				</h3>
 				<h3>
-					<a href="#"> <i class="far fa-smile"></i> 회원정보
+					<a href="${pageContext.request.contextPath}/kr/co/tripadvisor/user/info"> <i class="far fa-smile"></i> 회원정보
 					</a>
 				</h3>
 			</div>
