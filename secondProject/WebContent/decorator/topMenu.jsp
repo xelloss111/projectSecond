@@ -166,7 +166,7 @@
 		$("#id").keyup(function (e) {
 			
 			$.ajax({
-				url: "/secondProject/signajax",
+				url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/signajax",
 				type: "post",
 				data: {
 				id :  $("#id").val()
@@ -199,7 +199,7 @@
 		$("#passcheck").keyup(function (e) {
 			
 			$.ajax({
-				url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/singajax",
+				url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/signajax",
 				type: "post",
 				data: {
 				pass : $("#pass").val(),
@@ -300,7 +300,7 @@
 					}, //sucsess
 					
 					error: function(request,status,error){
-				        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+or);
 					}
 				}); //ajax
 			}); // $auth
