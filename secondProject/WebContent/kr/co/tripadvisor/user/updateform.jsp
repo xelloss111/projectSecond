@@ -78,7 +78,7 @@
 			$("#infopasscheck").keyup(function (e) {
 				
 				$.ajax({
-					url: "/${sessionScope.user.email}/kr/co/tripadvisor/user/signajax",
+					url: "${pageContext.request.contextPath}/kr/co/tripadvisor/user/signajax",
 					type: "post",
 					data: {
 					pass : $("#infopass").val(),
