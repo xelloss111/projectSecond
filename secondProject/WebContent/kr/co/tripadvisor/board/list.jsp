@@ -25,8 +25,21 @@
 				</h3>
 				<div>
 					<ul>
-						<li><a
-							href="/secondProject/kr/co/tripadvisor/board/writeform">- 글쓰기</a></li>
+						<li><a class="write_but"
+							href="#">- 글쓰기</a>
+						
+						<script type="text/javascript">
+                     $(".write_but").click(function (e) {
+                        if(${empty sessionScope.user} == true) {
+                           alert("글쓰기 기능은 로그인 후 이용가능 합니다.");
+                        }else {
+                           location.href= "writeform"; 
+                        }
+                        
+                     });
+                     </script>	
+						</li>
+
 					</ul>
 				</div>
 				<h3>
@@ -229,11 +242,24 @@
 				</ul>
 			</div>
 			<!-- 버튼 영역 -->
-							<div>
-								<a href="/secondProject/kr/co/tripadvisor/board/writeform">
-									<input value="WRITE" type="button" class="c_write_but btn" >
-								</a>							
-							</div>
+<!-- 							<div> -->
+<!-- 								<a href="/secondProject/kr/co/tripadvisor/board/writeform"> -->
+<!-- 									<input value="WRITE" type="button" class="c_write_but btn" > -->
+<!-- 								</a>							 -->
+<!-- 							</div> -->
+<div>
+                           <input value="WRITE" type="button" class="c_write_but btn" id="write_but">   
+                     </div>
+                     <script type="text/javascript">
+                     $("#write_but").click(function (e) {
+                        if(${empty sessionScope.user} == true) {
+                           alert("글쓰기 기능은 로그인 후 이용가능 합니다.");
+                        }else {
+                           location.href= "writeform"; 
+                        }
+                        
+                     });
+                     </script>
 			<div>
 				<c:if test="${paging.totalCount != 0 }">
 					<nav class="paging_area">
@@ -289,14 +315,6 @@
 			})
 
 		}); 
-		
-		$(window).load(function() {
-			  $('img').each(function() {
-			    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
-			      this.src = 'http://www.tranism.com/weblog/images/broken_ipod.gif';
-			    }
-			  });
-			});
 	</script>
 </body>
 </html>

@@ -141,14 +141,42 @@
                 ) X
          where <![CDATA[X.rnum >= #{startCount}]]>
 	</select>
-			
-			
+	
 	<select id="selectImageByNo" parameterType="int" resultMap="bImageMap">
 		select *
 		from tb_image
 		where board_no = #{boardNo}
 		and rownum = 1
 	</select>
+	
+		<!-- 게시판 카테고리 검색용 페이징 쿼리 -->
+	<select id="BoardCountByCategory" resultType="int" parameterType="BoardSearch">
+		select count(*)
+		  from tb_board
+		 <where>
+				    code_no = '3001'
+			<if test="attrList != null">
+					and attract in <foreach item="att" collection="attrList" open="(" close=")" separator="," >
+						#{att}
+					</foreach>
+			</if>
+			<if test="areaList != null">
+					and area in <foreach item="ar" collection="areaList" open="(" close=")" separator="," >
+						#{ar}
+					</foreach>
+			</if>
+			<choose>
+				<when test="searchType == 'id'">
+					and id like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'title'">
+					and title like '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	
 <!-- 갤러리 페이징 쿼리 -->
 	<select id="totalGalleryCount" resultType="int">
 		select count(*)

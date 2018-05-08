@@ -28,33 +28,42 @@ public class ListBoardController extends HttpServlet{
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 
-		PagingMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(PagingMapper.class);
 		BoardMapper sMapper = MyAppSqlConfig.getSqlSession().getMapper(BoardMapper.class);
 		
-		String no = request.getParameter("pageNo");
-		
+		//검색
 		BoardSearch bs = new BoardSearch();
 		
 		String [] attrList = request.getParameterValues("attract");
 		String [] areaList = request.getParameterValues("area");
+		String searchType = request.getParameter("searchType");
+		String searchWord = request.getParameter("searchWord");
 		
-		bs.setAttrList(attrList);
 		bs.setAreaList(areaList);
+		bs.setAttrList(attrList);
+		bs.setSearchType(searchType);
+		bs.setSearchWord(searchWord);
 		
-		bs.setSearchType(request.getParameter("searchType"));
-		bs.setSearchWord(request.getParameter("searchWord"));
-		
+		//페이징
+		PagingMapper mapper = MyAppSqlConfig.getSqlSession().getMapper(PagingMapper.class);
+		String no = request.getParameter("pageNo");
 		int pageNo = (no != null) ? Integer.parseInt(no) : 1; 
 		
-		int totalCnt = mapper.totalBoardCount();
+		int totalCnt = 0;
+		if(areaList==null & attrList==null & searchType==null & searchWord==null) {
+		totalCnt = mapper.totalBoardCount();
 		Paging paging = new Paging(totalCnt, pageNo, 10, 5);
-		
-		
-		List<Board> searchList = sMapper.boardSearchList(bs);
-					searchList = mapper.boardListUp(paging);
-					
-		request.setAttribute("searchList", searchList);
 		request.setAttribute("paging", paging);
+		List<Board> searchList = mapper.boardListUp(paging);
+		request.setAttribute("searchList", searchList);
+		
+		} else {
+			
+		totalCnt = mapper.BoardCountByCategory(bs);
+		Paging paging = new Paging(totalCnt, pageNo, 10, 5);
+		request.setAttribute("paging", paging);
+		List<Board> searchList = sMapper.boardSearchList(bs);
+		request.setAttribute("searchList", searchList);
+		}		
 
 		RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
 		rd.forward(request, response);

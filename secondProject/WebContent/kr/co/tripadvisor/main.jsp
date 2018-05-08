@@ -181,7 +181,7 @@
 				<H3>여행 정보를 공유하고 스크랩해보세요!</H3><br>
 				<hr><br>
 				<h5>좋았거나 혹은 그렇지 않았던 <br>
-				숙박, 식당 등의 추억을 기록해주셈 </h5>
+				숙박, 식당 등의 추억을 기록해주세요. </h5>
 
 				<div class="cnt">
 					<div class="cnt_view" style="margin-left: 14%; ">
@@ -189,10 +189,9 @@
 						<span>Tip Board</span><br>
 						<hr><br><br>
 						<p>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
+							여행지에서 경험한<br>
+							맛집, 숙소, 명소 정보를<br>
+							공유해보세요.<br>
 						</p>
 					</div>
 					<div class="cnt_view">
@@ -200,10 +199,10 @@
 						<span>Trip Gallery</span><br>
 						<hr><br><br>
 						<p>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
+							행복했던 순간을 찍어<br>
+							갤러리에 공유하고<br>
+							다른 여행자들의 사진을<br>
+							함께 즐겨요!<br>
 						</p>
 					</div>
 					<div class="cnt_view" style="margin-right: 2%;">
@@ -211,10 +210,10 @@
 						<span>Tip Scrap</span><br>
 						<hr><br><br>
 						<p>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
-							여행지에서 블라블라<br>
+							다른 여행자들의 <br>
+							여행정보를 스크랩하고<br>
+							다음 여행계획 때<br>
+							활용해보세요!<br>
 						</p>						
 
 					</div>	
@@ -244,11 +243,11 @@
 								<c:when test = "${board.codeNo == 3001}">
 									<a href='board/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}' >
 									<c:choose>
-									<c:when test = "${b.boardImage.path == null}">
+									<c:when test = "${board.boardImage.path == null}">
 											<img src="/secondProject/images/notimage.png">
 									</c:when>
 									
-									<c:when test = "${b.boardImage.path != null}">
+									<c:when test = "${board.boardImage.path != null}">
 										<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
 									</c:when>
 							</c:choose>
@@ -260,12 +259,12 @@
 								<a href='gallery/detail?boardNo=${board.boardNo}&area=${board.area}&attract=${board.attract}' >
 								
 								<c:choose>
-									<c:when test = "${b.boardImage.path == null}">
+									<c:when test = "${board.boardImage.path == null}">
 											<img src="/secondProject/images/notimage.png">
 									</c:when>
 									
-									<c:when test = "${b.boardImage.path != null}">
-										<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' />
+									<c:when test = "${board.boardImage.path != null}">
+										<img src='/secondProject/galleryImg/${board.boardImage.path}/${board.boardImage.sysName}' />
 									</c:when>
 							</c:choose>
 <%-- 										<img src='/secondProject/down?path=${board.boardImage.path}&sName=${board.boardImage.sysName}' /> --%>

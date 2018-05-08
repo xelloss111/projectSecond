@@ -20,12 +20,15 @@ public interface PagingMapper {
 	int totalUserCount();
 	List<User> userListUp(Paging paging);
 	
-	int totalBoardCount();
-	List<Board> boardListUp(Paging paging);
-	
 	int totalGalleryCount();
 	List<Board> galleryListUp(Paging paging);
 	int GalleryCountByCategory(BoardSearch search);
+	
+	// Board
+	int BoardCountByCategory(BoardSearch search);
+	int totalBoardCount();
+	List<Board> boardListUp(Paging paging);
+	
 	
 	int totalScrapCount();
 	List<Scrap> scrapListUp(Paging paging);
