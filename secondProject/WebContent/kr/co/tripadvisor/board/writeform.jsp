@@ -192,7 +192,7 @@
 				} else if(!$('#title').val()) {
 					alert("제목을 입력해주세요.");
 					return;
-				} else if(!$('.editordata').val()) {
+				} else if(!$('#summernote').val()) {
 					alert("내용을 입력해주세요.");
 					return;
 				}
