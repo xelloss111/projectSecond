@@ -71,9 +71,13 @@ public class StasticsController extends HttpServlet {
 		stastics.setScrapCount(scrapCount);
 		stastics.setStasticsDate(targetDate);
 		
+		int check = mapper.selectStasticsCheck(date);
+		System.out.println("날짜 체크 값 : " + check);
+		
+		
 		if (mapper.selectStasticsCheck(date) == 0) {
 			mapper.insertStastics(stastics);
-		} else {
+		} else if (mapper.selectStasticsCheck(date) >= 1){
 			mapper.updateStastics(stastics);
 		}
 		

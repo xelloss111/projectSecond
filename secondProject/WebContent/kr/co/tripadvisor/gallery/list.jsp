@@ -160,7 +160,7 @@
 <script type="text/javascript">
 $("#write_but").click(function (e) {
 	
-	if(${empty sessionScope.user} == true) {
+	if(${empty sessionScope.user.id} == true) {
 		alert("글쓰기 기능은 로그인 후 이용가능 합니다.");
 	}else {
 		location.href= "writeform"; 
@@ -174,10 +174,11 @@ $("#write_but").click(function (e) {
 					<nav class="paging_area">
 						<ul class="pagination">
 							<li class="<c:if test='${paging.prev eq false }'>disabled</c:if>">
-								<a
-								href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.startPage - 1}" aria-label="Previous">
+							<c:if test="${paging.prev eq true }">
+								<a href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.startPage - 1}" aria-label="Previous">
 								<span aria-hidden="true">&laquo;</span>
-							</a>
+								</a>
+							</c:if>
 							</li>
 							<c:forEach var="iContent" begin="${paging.startPage}" end="${paging.endPage}">
 								<c:choose>
@@ -194,10 +195,11 @@ $("#write_but").click(function (e) {
 								</c:choose>
 							</c:forEach>
 							<li class="<c:if test='${paging.next eq false}'>disabled</c:if>">
-								<a
-								href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.endPage + 1}" aria-label="Next"> 
+								<c:if test='${paging.next eq true}'>
+								<a href="${pageContext.request.contextPath}/kr/co/tripadvisor/gallery/index?pageNo=${paging.endPage + 1}" data-page="${paging.endPage + 1}" aria-label="Next"> 
 								<span aria-hidden="true">&raquo;</span>
-							</a>
+								</a>
+								</c:if>
 							</li>
 						</ul>
 					</nav>

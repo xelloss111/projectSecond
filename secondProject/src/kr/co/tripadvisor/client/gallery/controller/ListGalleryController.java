@@ -51,7 +51,7 @@ public class ListGalleryController extends HttpServlet {
 		
 		int totalCnt = 0;
 		if(areaList==null & attrList==null & searchType==null & searchWord==null) {
-		totalCnt = mapper.totalBoardCount();
+		totalCnt = mapper.totalGalleryCount();
 		Paging paging = new Paging(totalCnt, pageNo, 9, 5);
 		request.setAttribute("paging", paging);
 		List<Board> boardList = mapper.galleryListUp(paging);

@@ -239,10 +239,11 @@
 					<nav class="paging_area">
 						<ul class="pagination">
 							<li class="<c:if test='${paging.prev eq false }'>disabled</c:if>">
-								<a
-								href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list?pageNo=${paging.startPage - 1}"
+								<c:if test="${paging.prev eq true }">
+								<a href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list?pageNo=${paging.startPage - 1}"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a>
+								</a>
+								</c:if>
 							</li>
 							<c:forEach var="iContent" begin="${paging.startPage}"
 								end="${paging.endPage}">
@@ -260,10 +261,11 @@
 								</c:choose>
 							</c:forEach>
 							<li class="<c:if test='${paging.next eq false}'>disabled</c:if>">
-								<a
-								href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list?pageNo=${paging.endPage + 1}"
+								<c:if test="${paging.next eq true}">
+								<a href="${pageContext.request.contextPath}/kr/co/tripadvisor/board/list?pageNo=${paging.endPage + 1}"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a>
+								</a>
+								</c:if>
 							</li>
 						</ul>
 					</nav>
