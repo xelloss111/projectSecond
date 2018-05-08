@@ -240,7 +240,7 @@
 	// 댓글 처리	
 	function commentDelete(commentNo) {
 		$.ajax({
-			url: "<c:url value='/gallery/deleteComment'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/deleteComment'/>",
 			data: {
 				boardNo : "${board.boardNo}", 
 				commentNo: commentNo
@@ -277,7 +277,7 @@
 	
 	function commentUpdate(commentNo) {
 		$.ajax({
-			url: "<c:url value='/gallery/updateComment'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/updateComment'/>",
 			type: "POST",
 			data: {
 				boardNo: "${board.boardNo}", 
@@ -301,7 +301,7 @@
 		e.preventDefault();
 		
 		$.ajax({
-			url: "<c:url value='/gallery/writeComment'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/writeComment'/>",
 			type: "POST",
 			data: {
 				boardNo: "${board.boardNo}", 
@@ -369,7 +369,7 @@
 	// 댓글 목록 조회
 	function commentList() {
 		$.ajax({
-			url: "<c:url value='/gallery/commentList'/>",
+			url: "<c:url value='/kr/co/tripadvisor/gallery/commentList'/>",
 			data: {boardNo: "${board.boardNo}"},
 			dataType: "json", 
 			success: makeCommentList

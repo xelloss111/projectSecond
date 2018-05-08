@@ -115,7 +115,11 @@
       <div class="row">
       	<div class="col-md-1"></div>
       	<div class="col-md-10" id="content">
-      		<c:out value="${board.editordata}"/>
+      		<c:forEach var="image" items="${imgList}">
+				<a href="<c:url value='/galleryImg${image.path}/${image.sysName}'/>" >
+				<img src="<c:url value='/galleryImg${image.path}/${image.sysName}'/>"  title="원본사진보기" width="80%" />
+				</a>
+			</c:forEach>
       	</div>
       </div>
       <p>
