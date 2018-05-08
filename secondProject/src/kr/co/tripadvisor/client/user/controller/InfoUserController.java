@@ -29,14 +29,14 @@ public class InfoUserController extends HttpServlet {
 		//네이버 로그인 유저는 접근 불가능
 		User user = (User) request.getSession().getAttribute("user");
 		PrintWriter out = response.getWriter();
-	    if (user.getPass().equals(" ")) {
-			out.println("<script language='javascript'>");
-			out.println("alert(\"네이버로그인 사용자는 이용할 수 없습니다.\")");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.flush();
-			return;
-	    }
+//	    if (user.getPass().equals(" ")) {
+//			out.println("<script language='javascript'>");
+//			out.println("alert(\"네이버로그인 사용자는 이용할 수 없습니다.\")");
+//			out.println("history.go(-1);");
+//			out.println("</script>");
+//			out.flush();
+//			return;
+//	    }
 		
 		//info.jsp로 연결시켜준다.
 		RequestDispatcher rd = request.getRequestDispatcher("info.jsp");

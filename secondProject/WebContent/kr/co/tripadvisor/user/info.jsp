@@ -59,11 +59,29 @@ padding: 3.5px;
 <!-- 비밀번호 재확인  : MypageController + mypage.jsp
 세션에 있는 id랑 비밀번호가 일치하면 info.jsp 페이지(infouser controller타고)
 -->
+
 <div id="d1">
 <h2>비밀번호를 입력하십시오.</h2>
 <input type="password" name="infopass" id="infopass"/>
 <button id="infopasscheck" type="button" class="passbut">확인</button>
+<br><br><br>
+<p>*네이버로그인회원은 탈퇴만 가능합니다.</p>
+<button type="button" id="withdraw" style="color:red">네이버로그인 정보삭제</button>
 </div>
+
+<script type="text/javascript">
+$("#withdraw").click(function (e) {
+	if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
+		location.href= "${pageContext.request.contextPath}/kr/co/tripadvisor/user/delete"; 
+	}else{   //취소
+	    return;
+	}
+});
+</script>
+
+
+
+
 <script>
 
 $("#infopasscheck").click(function (e) {
