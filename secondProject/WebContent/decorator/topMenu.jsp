@@ -146,7 +146,7 @@
 		var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "TFVjBEkov7Mxr3z9S3wC",
-				callbackUrl: "http://localhost:80/secondProject/kr/co/tripadvisor/user/naverlogin.jsp",
+				callbackUrl: "http://192.168.0.4/secondProject/kr/co/tripadvisor/user/naverlogin.jsp",
 				isPopup: false, /* 팝업을 통한 연동처리 여부 */
 				loginButton: {color: "white", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
 			}
