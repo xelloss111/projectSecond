@@ -232,9 +232,9 @@ border-radius: 4px;
 					</div> <!-- b_title END -->
 				</div><!-- top_sel END -->
 				<div>
-						<textarea id="textcontent" id="editordata" name="editordata" maxlength="50" placeholder="갤러리게시판 본문은 50자까지만 등록 할 수 있습니다." ></textarea>
+						<textarea id="textcontent" name="editordata" maxlength="50" placeholder="갤러리게시판 본문은 50자까지만 등록 할 수 있습니다." ></textarea>
 						
-						<input type="file" name="attatch1"><br>
+						<input type="file" name="attatch1" id="img_file"><br>
 						<input type="file" name="attatch2"><br>
 						<input type="file" name="attatch3">
 						
@@ -255,8 +255,11 @@ border-radius: 4px;
 		} else if(!$('#title').val()) {
 			alert("제목을 입력해주세요.");
 			return false;
-		} else if(!$('.editordata').val()) {
+		} else if(!$('#textcontent').val()) {
 			alert("내용을 입력해주세요.");
+			return false;
+		} else if(!$('#img_file').val()) {
+			alert("이미지 1장이상 필수첨부");
 			return false;
 		} else {
 			return true;
